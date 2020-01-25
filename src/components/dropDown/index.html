@@ -1,0 +1,20 @@
+<div class="eui-drop-down {{props.theme}}" em:style="this.state.style" class.eui-drop-down-disabled="this.props.disabled" tabindex="{{props.tabIndex}}" et:click="handleOnClick" class.eui-drop-down-focus="this.state.hasFocus" et:blur="handleOnBlur">
+    <div>
+        <input type="hidden" id="{{props.id}}" name="{{props.name}}" value="{{this.state.selectedData.value}}"/>
+        <div>
+            <span em:show="!this.state.titleVisible">{{props.placeholder}}</span>
+            <label show="{{this.state.titleVisible}}">{{state.title}}</label>
+        </div>
+        <eui-icon type="fa-caret-down"></eui-icon>
+    </div>
+    <div class="eui-drop-down-list aniDropDownShow" et:click="handleOnListClick" em:show="this.state.dropListVisible">
+        <ul>
+            <li em:for="let item in this.state.dataList" class.eui-drop-down-item-disabled="{{item.disabled}}" class.eui-drop-down-item-active="item.value eq this.state.selectedData.value">
+                <div et:click="handleOnListItemClick" title="{{item.title}}">
+                    <eui-icon type="{{item.icon}}" theme="{{checkIconVisible(item)}}"/>
+                    <span>{{item.title}}</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

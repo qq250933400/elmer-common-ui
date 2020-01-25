@@ -1,0 +1,35 @@
+<eui-layout>
+    <eui-layout-row height="60" style="overflow: visible;">
+        <eui-admin-top-menu em:data="this.data"/>
+    </eui-layout-row>
+    <eui-layout-row height="*" data-width="{{menuWidth}}">
+        <eui-layout-col width="{{menuWidth}}" >
+            <eui-admin-menu
+                help="{{true}}"
+                isExpand="{{false}}"
+                et:onModeChange="onModeChange"
+                em:data="this.data"
+            />
+        </eui-layout-col>
+        <eui-layout-col width="*">
+            <div style="display: block;width:100%;height: 100%;overflow:auto;">
+                <eui-form action="http://127.0.0.1/index.php?updatemethod" title="testting" showBack="{{true}}">
+                    <eui-form-item type="Input" title="名称" name="title"/>
+                    <eui-form-item type="DatePeriod" title="时间选择" data="{{calendarData}}" name="dateRange"/>
+                    <eui-form-item type="Date" title="时间测试" data="{{calendarData}}" name="createDate"/>
+                    <eui-form-item type="Upload" title="时间测试" data="{{calendarData}}" name="createDate"/>
+                    <eui-form-item type="PcRegion" title="选择地区"  name="createDate"/>
+                </eui-form>
+                <eui-panel showBottomProps="{{true}}" title="cross component event" style="margin:10px;" em:props="this.bottomProps" bottom="{{bottomHtml}}">
+                    <input type="text" bind="state.dataLength|props.props.handleOnSetValue"/>
+                    <input type="button" value="更新数据" et:click="handleUpdateData"/>
+                    <eui-pc-region-picker em:defaultValue="this.region"/>
+                    <eui-drop-down data="{{this.tableData}}"/>
+                    <hr/>
+                    <eui-table em:owner="this" em:columns="this.tableColumns" em:data="this.tableData"/>
+                </eui-panel>
+            </div>
+        </eui-layout-col>
+    </eui-layout-row>
+</eui-layout>
+

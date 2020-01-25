@@ -1,0 +1,12 @@
+{
+    "status" : 200,
+    "message": "ok",
+    "body": {
+        "dataList": [
+            {
+                "title": "activity",
+                "url": "./assets/wallper/background.jpg"
+            }
+        ]
+    }
+}

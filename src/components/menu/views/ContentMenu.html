@@ -1,0 +1,11 @@
+<div class="eui-content-menu" em:style="this.props.style" em:show="this.visible" et:click="handleOnContextClick">
+    <ul et:click="handleOnMouseDown" passive="{{true}}">
+        <eui-content-menu-item et:click="handleOnMenuItemClick" em:for="let item in this.props.data" 
+            title="{{item.title}}" 
+            icon="{{item.icon}}" 
+            type="{{item.type}}" 
+            value="{{item.value}}" 
+            data="{{item}}"
+            />
+    </ul>
+</div>

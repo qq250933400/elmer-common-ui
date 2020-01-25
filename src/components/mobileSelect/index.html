@@ -1,0 +1,31 @@
+<div id="{{domID}}" class="eui-mobile-select" et:animationEnd="handleOnMaskAnimationEnd">
+    <div et:click="handleOnMaskClick">
+        <div et:click="handleOnContentClick"  id="{{contentID}}" class="eui-mobile-select-content">
+            <div class="eui-mobile-select-header">
+                <a et:click="handleOnCancelClick" et:touchstart="handleOnCancelClick" class="eui-mobile-select-cancel" href="javascript:void(0);">{{cancelText}}</a>
+                <span em:show="!this.showSearch" >{{title}}</span>
+                <div class="eui-mobile-select-search" et:touchstart="handleOnSearchTouch">
+                    <input et:touchstart="handleOnSearchInputTouch" et:click="handleOnSearchClick" et:change="handleSearch" et:keypress="handleOnSearchKeyPress" aria-placeholder="{{searchPlaceHolder}}" placeholder="{{searchPlaceHolder}}" em:if="this.showSearch" type="search" />
+                </div>
+                <a et:click="handleOnOkClick" et:touchstart="handleOnOkClick" class="eui-mobile-select-ok" href="javascript:void(0);">{{okText}}</a>
+            </div>
+            <div class="eui-mobile-select-conent-area" passive="passive" et:touchstart="handleOnContentTouchStart" et:touchend="handleOnContentTouchStart">
+                <div id="{{listID}}">
+                    <ul et:touchstart="handleOnListPress" et:mousedown="handleOnListMouseDown"
+                        et:touchmove="handleOnListTouchMove" et:mousemove="handleOnListMouseMove"
+                        et:touchend="handleOnListTouchEnd" et:mouseup="handleOnListMouseUp"
+                        data-key="{{listData.key}}"
+                        em:for="let listData in this.data"
+                        passive="passive"
+                        style="opacity:0;"
+                        >
+                        <li em:for="let tmpOption in listData" data-value="{{tmpOption.value}}" data-key="{{tmpOption.key}}" class.disabled="{{tmpOption.disabled}}">{{tmpOption.title}}</li>
+                    </ul>
+                </div>
+                <div id="{{focustID}}" class="eui-mobile-select-focus"></div>
+                <div class="eui-mobile-select-mask-top"></div>
+                <div class="eui-mobile-select-mask-bottom"></div>
+            </div>
+        </div>
+    </div>
+</div>

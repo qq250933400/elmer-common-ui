@@ -1,0 +1,111 @@
+@import "../../style/common.less";
+
+.eui-form {
+    @euiFormRadius: 4px;
+    @titleShadow: 1px 1px 3px #e0e0e0;
+    display: block;
+    margin: 10px;
+    border: 1px solid #c7e6ef;
+    border-radius: @euiFormRadius;
+    -webkit-border-radius: @euiFormRadius;
+    -moz-border-radius: @euiFormRadius;
+    -ms-border-radius: @euiFormRadius;
+    overflow: hidden;
+    background: rgba(255,255,255,0.8);
+    .eui-form-no-title {
+        padding-top:16px;
+    }
+    >div {
+        display: block;
+        position: relative;
+        header {
+            display: block;
+            padding: 8px 10px;
+            border-bottom: 1px solid #d9ecfd;
+            span {
+                display: inline-block;
+                font-size: 14px;
+                border-left: 4px solid #5fb6f0;
+                padding-left: 3px;
+                color:#333;
+                text-shadow: @titleShadow;
+                -webkit-text-shadow: @titleShadow;
+                -moz-text-shadow: @titleShadow;
+                -ms-text-shadow: @titleShadow;
+            }
+        }
+        footer {
+            display: block;
+            padding: 10px 25px;
+            border-top: 1px solid #def7ff;
+            background: #f7fcff;
+        }
+        >div {
+            display: block;
+            padding: 10px 0;
+            .eui-form-item {
+                display: block;
+                padding: 5px 25px;
+                >div {
+                    position: relative;
+                    min-height: 35px;
+                    >label {
+                        height: 35px;
+                        line-height: 35px;
+                        text-overflow: ellipsis;
+                        font-size: 14px;
+                        color:#666;
+                        .SetTextShadow(@titleShadow);
+                    }
+                    .eui-form-date-period {
+                        display: inline-block;
+                        height: 35px;
+                        line-height: 35px;
+                        >input[type=text],>span {
+                            display: inline-block;
+                            vertical-align: middle;
+                        }
+                        >input[type=text] {
+                            width: 150px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.eui-form-inline {
+    .eui-form-item>div {
+        >label {
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+}
+.eui-input {
+    display: block;
+    padding: 8px 10px;
+    -webkit-appearance: none;
+    border: 1px solid #ebebeb;
+    outline: none;
+    width: 250px;
+    border-radius: 3px;
+    background: #fff;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    .SetBoxShadow(0 1px 6px rgba(238, 237, 237, 0.4) inset);
+    &:hover {
+        border-color:#5fb6f0;
+        .SetBoxShadow(~'1px 1px 3px rgba(95, 182, 240, 0.4) inset,0 0 3px rgb(221, 220, 220)');
+    }
+    &:focus {
+        border-color:#58b5f3;
+        .SetBoxShadow(1px 1px 3px rgba(95, 182, 240, 0.5) inset);
+    }
+    &:disabled{
+        background: #ebebeb;
+        color:#999;
+    }
+}

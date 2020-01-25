@@ -1,0 +1,22 @@
+<div class="eui-form-item {{layoutTheme}} {{props.theme}}">
+    <div em:style="this.itemPaddingLeft">
+        <label em:style="this.labelWidth"><span>{{props.title}}</span></label>
+        <input attach="{{true}}" autocomplete="off" id="{{domID}}" class="eui-input eui-validate-theme" bind="state.value|beforeInputChange" em:disabled="this.ajaxLoading" placeholder="{{props.placeholder}}" em:if="this.props.type eq 'Input'" type="text" value="{{props.value}}"  name="{{props.name}}" tabindex="{{props.tabIndex}}"/>
+        <input attach="{{true}}" autocomplete="off" id="{{domID}}" class="eui-input eui-validate-theme" bind="state.value|beforeInputChange" em:disabled="this.ajaxLoading" placeholder="{{props.placeholder}}" em:if="this.props.type eq 'Password'" type="password" value="{{props.value}}"  name="{{props.name}}" tabindex="{{props.tabIndex}}"/>
+        <textarea attach="{{true}}" id="{{domID}}" class="eui-input eui-validate-theme" bind="state.value|beforeInputChange" em:disabled="this.ajaxLoading" placeholder="{{props.placeholder}}" em:if="this.props.type eq 'TextArea'"  tabindex="{{props.tabIndex}}" name="{{props.name}}">{{props.value}}</textarea>
+        <div em:if="this.props.type eq 'Editor'" attach="{{true}}" id="{{domID}}" data-type="html" style="height:250x;">{{props.value}}</div>
+        <eui-drop-down attach="{{true}}" id="{{domID}}" theme="eui-validate-theme" name="{{props.name}}" em:disabled="this.ajaxLoading" placeholder="{{props.placeholder}}" em:if="this.props.type eq 'DropDown'" value="{{props.value}}" data="{{props.data}}" tabIndex="{{props.tabIndex}}" et:onChanged="handleOnDropdownChanged"/>
+        <eui-upload attach="{{true}}" id="{{domID}}" fileList="{{props.value}}" valueKey="{{props.valueKey}}" em:style="this.props.style" em:if="this.props.type eq 'Upload'" et:handleSuccess="props.data.success" et:handleFail="props.data.fail" listType="{{props.data.listType}}" domain="{{props.data.domain}}" theme="{{props.data.theme}}" formName="{{props.data.name}}" accept="{{props.data.accept}}" mutil="{{props.data.mutil}}" action="{{props.data.action}}" />
+        <eui-pc-region-picker attach="{{true}}" id="{{domID}}" name="{{props.name}}" placeholder="{{props.placeholder}}" theme="{{props.data.theme}}" defaultValue="{{props.value}}" et:onChanged="handleOnPcRegionChange" em:if="this.props.type eq 'PcRegion'" em:data="this.props.data.data"/>
+        <div class="eui-form-date-period" em:if="this.props.type eq 'DatePeriod'" tabindex="{{props.tabIndex}}">
+            <input attach="{{true}}" autocomplete="off" value="{{state.startDate}}" et:click="handleOnStartDateClick" readonly="readonly" type="text" class="eui-input eui-validate-theme"/>
+            <span>-</span>
+            <input attach="{{true}}" autocomplete="off" value="{{state.endDate}}" et:click="handleOnEndDateClick" readonly="readonly" type="text" class="eui-input eui-validate-theme"/>
+            <eui-calendar attach="{{true}}" et:onChange="handleOnCalendarChange" et:onOutClick="handleOnCalendarOutClick" em:style="this.state.calendarStyle" showTimePicker="{{props.data.showTimePicker}}"/>
+        </div>
+        <div em:if="this.props.type eq 'Date'">
+            <input autocomplete="off" value="{{state.startDate}}" et:click="handleOnStartDateClick" readonly="readonly" type="text" class="eui-input"/>
+            <eui-calendar et:onChange="handleOnCalendarChange" et:onOutClick="handleOnCalendarOutClick" em:style="this.state.calendarStyle" showTimePicker="{{props.data.showTimePicker}}"/>
+        </div>
+    </div>
+</div>

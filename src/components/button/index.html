@@ -1,0 +1,5 @@
+<button et:click="handleOnClick" em:disabled="this.props.disabled" type="{{state.buttonType}}" class="eui-button {{props.theme}}" em:style="this.props.style">
+    <eui-icon em:if="props.hasIcon && !props.loading" type="{{props.icon}}"></eui-icon>
+    <eui-loading-icon em:if="props.loading && !props.hasIcon" type="style2"></eui-loading-icon>
+    <span em:if="this.state.hasTitle" class.eui-button-hasIcon="props.hasIcon && !props.loading">{{props.title}}</span>
+</button>

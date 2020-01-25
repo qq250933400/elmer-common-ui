@@ -1,0 +1,318 @@
+@import "common.less";
+@keyframes dropDownFrames {
+    0%{
+        opacity: 0.2;
+        transform: scaleY(0.4);
+    }
+    100%{
+        opacity: 1;
+        transform: scaleY(1.0);
+    }
+}
+
+@-webkit-keyframes dropDownFrames {
+    0%{
+        opacity: 0.2;
+        -webkit-transform: scaleY(0.4);
+    }
+    100%{
+        opacity: 1;
+        -webkit-transform: scaleY(1.0);
+    }
+}
+@-ms-keyframes dropDownFrames {
+    0%{
+        opacity: 0.2;
+        -ms-transform: scaleY(0.4);
+    }
+    100%{
+        opacity: 1;
+        -ms-transform: scaleY(1.0);
+    }
+}
+.AniDropDown6ms,.anidropdown6ms {
+    .SetTransformOrigin(top center);
+    .SetAnimation(dropDownFrames 0.6s ease forwards);
+}
+//-----------------------------------
+@keyframes zoomInFrames {
+    from {
+        opacity: 0.1;
+        transform: scale(0.2,0.2);
+    }
+    to{
+        opacity: 1;
+        transform: scale(1,1);
+    }
+}
+
+@-webkit-keyframes zoomInFrames {
+    from {
+        opacity: 0.1;
+        -webkit-transform: scale(0.2,0.2);
+    }
+    to{
+        opacity: 1;
+        -webkit-transform: scale(1,1);
+    }
+}
+@-moz-keyframes zoomInFrames {
+    from {
+        opacity: 0.1;
+        -moz-transform: scale(0.2,0.2);
+    }
+    to{
+        opacity: 1;
+        -moz-transform: scale(1,1);
+    }
+}
+@-ms-keyframes zoomInFrames {
+    from {
+        opacity: 0.1;
+        -ms-transform: scale(0.2,0.2);
+    }
+    to{
+        opacity: 1;
+        -ms-transform: scale(1,1);
+    }
+}
+.AniZoomIn{
+    .SetTransformOrigin(center);
+    .SetAnimation(zoomInFrames 0.6s ease forwards);
+}
+
+@keyframes zoomOutFrames {
+    from {
+        opacity: 1;
+        transform: scale(1,1);
+    }
+    to{
+        opacity: 0.1;
+        transform: scale(0.1,0.1);
+    }
+}
+
+@-webkit-keyframes zoomOutFrames {
+    from {
+        opacity: 1;
+        -webkit-transform: scale(1,1);
+    }
+    to{
+        opacity: 0.1;
+        -webkit-transform: scale(0.1,0.1);
+    }
+}
+@-moz-keyframes zoomOutFrames {
+    from {
+        opacity: 1;
+        -moz-transform: scale(2,2);
+    }
+    to{
+        opacity: 0.1;
+        -moz-transform: scale(0.1,0.1);
+    }
+}
+@-ms-keyframes zoomOutFrames {
+    from {
+        opacity: 1;
+        -ms-transform: scale(1,1);
+    }
+    to{
+        opacity: 0.1;
+        -ms-transform: scale(0.1,0.1);
+    }
+}
+
+@keyframes slideDownOutFrames {
+    from{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to{
+        opacity: 0; 
+        transform: translateY(30px);
+    }
+}
+
+
+@-webkit-keyframes slideDownOutFrames {
+    from{
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+    to{
+        opacity: 0; 
+        -webkit-transform: translateY(30px);
+    }
+}
+
+@-moz-keyframes slideDownOutFrames {
+    from{
+        opacity: 1;
+        -moz-transform: translateY(0);
+    }
+    to{
+        opacity: 0; 
+        -moz-transform: translateY(30px);
+    }
+}
+
+@-ms-keyframes slideDownOutFrames {
+    from{
+        opacity: 1;
+        -ms-transform: translateY(0);
+    }
+    to{
+        opacity: 0; 
+        -ms-transform: translateY(30px);
+    }
+}
+
+@-o-keyframes slideDownOutFrames {
+    from{
+        opacity: 1;
+        -o-transform: translateY(0);
+    }
+    to{
+        opacity: 0; 
+        -o-transform: translateY(30px);
+    }
+}
+
+@keyframes slideDownInFrames {
+    from{
+        opacity: 0.1;
+        transform: translateY(-100%);
+    }
+    to{
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+
+@-webkit-keyframes slideDownInFrames {
+    from{
+        opacity: 0.1;
+        -webkit-transform: translateY(-100%);
+    }
+    to{
+        opacity: 1; 
+        -webkit-transform: translateY(0);
+    }
+}
+
+@-moz-keyframes slideDownInFrames {
+    from{
+        opacity: 0.1;
+        -moz-transform: translateY(-100%);
+    }
+    to{
+        opacity: 1; 
+        -moz-transform: translateY(0);
+    }
+}
+
+@-ms-keyframes slideDownInFrames {
+    from{
+        opacity: 0.1;
+        -ms-transform: translateY(100%);
+    }
+    to{
+        opacity: 1; 
+        -ms-transform: translateY(0);
+    }
+}
+
+@-o-keyframes slideDownInFrames {
+    from{
+        opacity: 0.1;
+        -o-transform: translateY(100%);
+    }
+    to{
+        opacity: 1; 
+        -o-transform: translateY(0);
+    }
+}
+
+@keyframes KeyFramesOpacityUpIn {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@-webkit-keyframes KeyFramesOpacityUpIn {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(50px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+
+
+@keyframes KeyFramesOpacityIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@-webkit-keyframes KeyFramesOpacityIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/*----------Circle Loading*/
+@keyframes KeyFrameCircle {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes KeyFrameCircle {
+    from {
+        -webkit-transform: rotateZ(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.AnimationCircle {
+    .SetTransformOrigin(center);
+    .SetAnimation(KeyFrameCircle 1s linear infinite);
+}
+
+.AnislideDownOut{
+    .SetTransformOrigin(center);
+    .SetAnimation(slideDownOutFrames 0.6s ease forwards);
+}
+.AnislideDownIn{
+    .SetTransformOrigin(center);
+    .SetAnimation(slideDownInFrames 0.6s ease forwards);
+}
+.AnimationOpacityUpIn {
+    .SetTransformOrigin(center);
+    .SetAnimation(KeyFramesOpacityUpIn 0.4s ease forwards);
+}
+.AnimationOpacityIn{
+    .SetAnimation(KeyFramesOpacityIn 0.4s ease forwards);
+}
+
+.AniZoomOut{
+    .SetTransformOrigin(center);
+    .SetAnimation(zoomOutFrames 0.6s ease forwards);
+}

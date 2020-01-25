@@ -1,0 +1,26 @@
+<div class="online_qq_layer {{props}}" class.show_online_qq="{{showList}}">
+    <div class="online_qq_tab" et:click="handleOnTabClick">
+        <div class="online_icon">
+            <a style="display: block;" href="javascript:void(0);" data-type="html">&nbsp;</a>
+            <a style="display: none;" href="javascript:void(0);" data-type="html">&nbsp;</a>
+        </div>
+    </div>
+    <div class="onlineService">
+        <div class="online_windows overz">
+            <div class="online_w_top"></div>
+            <div class="online_w_c overz">
+                <div class="online_bar" class.collapse="this.selectGroup.key neq item.key" class.expand="this.selectGroup.key eq item.key" em:for="let item in this.data" et:click="handleOnGroupClick">
+                    <h2><a href="javascript:void(0)">{{item.title}}</a></h2>
+                    <div class="online_content overz">
+                        <ul class="overz">
+                            <li em:for="let tmpItem in item.items">
+                                <a et:click="handleOnItemClick" href="javascript:void(0);" class="qq_icon" title="{{tmpItem.tipTitle}}{{tmpItem.value}}"><span>{{tmpItem.title}}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="online_w_bottom"><span>{{props.workTitle}}{{props.workTime}}</span></div>
+        </div>
+    </div>
+</div>

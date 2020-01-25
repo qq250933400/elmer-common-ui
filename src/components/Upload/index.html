@@ -1,0 +1,23 @@
+<div em:style='this.props.style' class='eui-upload {{theme}}'>
+    <input multiple="true" et:change='handleOnFileChanged' type='file' accept="{{props.accept}}" id='{{fileID}}' />
+    <div class="eui-upload-files" class.eui-upload-file-list="props.listType eq 'list'">
+        <div>
+            <div if="{{state.showAdd}}" class="eui-upload-file-item eui-upload-file-add" et:click="handleOnUploadClick">
+                <eui-icon type="fa-plus-square-o" />
+            </div>
+            <div class="eui-upload-file-item" em:for="let myFile in this.state.fileList">
+                <div class="eui-upload-file-item-icon">
+                    <img src="{{myFile.header}}" />
+                </div>
+                <div class="eui-upload-file-content">
+                    <h5>{{myFile.name}}</h5>
+                    <i>Size: {{myFile.size}}</i>
+                    <span>{{myFile.url}}</span>
+                </div>
+                <div class="eui-upload-progress" if="{{myFile.showProg}}">
+                    <div style="width:{{myFile.percent}};"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+            <tr>
+                <th em:for="let header in this.state.columns.header" style="{{header.style}}" class="{{header.className}}" width="{{header.width}}">
+                    <span em:if="header.autoDefined neq true">{{header.title}}</span>
+                    <eui-run-code em:if="header.autoDefined eq true" data="{{rowItemData.dataSource}}" ex:props="header.props" code="{{header.title}}"/>
+                </th>
+            </tr>
+        </thead>
+        <tbody em:if="this.state.allCount gt 0">
+            <tr em:for="let rowData in this.state.bodyData">
+                <td em:for="let rowItemData in rowData.items" style="{{rowItemData.style}}" class="{{rowItemData.className}}">
+                    <eui-run-code em:if="rowItemData.dataType eq 'code'" em:owner="this.props.owner" data="{{rowItemData.dataSource}}" ex:props="rowItemData.props" code="{{rowItemData.code}}"/>
+                    <span em:if="rowItemData.dataType neq 'code'">{{rowItemData.data}}</span>
+                </td>
+            </tr>
+        </tbody>
+        <tbody em:if="this.state.allCount eq 0" >
+            <tr>
+                <td colspan="{{this.state.columnsLength}}">
+                    <label class="eui-table-no-data"><span class="fa fa-bitbucket">{{props.noDataText}}</span></label>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

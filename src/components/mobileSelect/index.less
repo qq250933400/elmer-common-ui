@@ -1,0 +1,348 @@
+@import "../../style/common.less";
+@showAnimationTime: 0.5s;
+@hiddenAnimationTime: 0.5s;
+@mobileSelectBarHeight: 45px;
+@mobileSelectItemHeight: 35px;
+@mobileSelectBarBtnWidth: 60px;
+.eui-mobile-select,
+.eui-mobile-select>div {
+    left:0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.eui-mobile-select-conent-area,
+.eui-mobile-select-conent-area .eui-mobile-select-focus,
+.eui-mobile-select-conent-area ul li {
+    .SetBoxSizing(border-box);
+}
+.eui-mobile-select * {
+    -webkit-tap-highlight-color: transparent;
+}
+.eui-mobile-select {
+    display: none;
+    position: fixed;
+    background: rgba(10,10,10,0.2);
+    opacity: 0;
+    .SetTransition(all ease 0.6s);
+    >div {
+        position: relative;
+        .eui-mobile-select-content {
+            display: block;
+            height: 260px;
+            width: 100%;
+            background: #fff;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            // .SetTransition(all ease 0.4s);
+            .SetBoxShadow(0 -2px 8px rgba(10,10,10,0.2));
+            .eui-mobile-select-header {
+                display: block;
+                height: @mobileSelectBarHeight;
+                border-bottom:1px solid #dcdcdc;
+                position: relative;
+                padding: 0 @mobileSelectBarBtnWidth;
+                .SetBoxSizing(border-box);
+                a {
+                    display: block;
+                    height: @mobileSelectBarHeight;
+                    line-height: @mobileSelectBarHeight;
+                    text-align: center;
+                    width: @mobileSelectBarBtnWidth;
+                    position: absolute;
+                    top: 0;
+                    font-size: 14px;
+                    text-decoration: none;
+                }
+                .eui-mobile-select-cancel {
+                    left: 0;
+                    color:#666;
+                }
+                .eui-mobile-select-ok {
+                    right: 0;
+                    color:#0f5fc9;
+                }
+                span {
+                    display: block;
+                    height: @mobileSelectBarHeight;
+                    line-height: @mobileSelectBarHeight;
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-size: 15px;
+                    color:#333;
+                }
+                .eui-mobile-select-search {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    >input[type=search] {
+                        display: block;
+                        width: 95%;
+                        margin: 0 auto;
+                        height: 30px;
+                        position: absolute;
+                        left: 2.5%;
+                        top: 50%;
+                        margin-top: -15px;
+                        -webkit-appearance: none;
+                        border: 1px solid #dcdcdc;
+                        outline:none;
+                        padding: 2px 4px;
+                        font-size: 14px;
+                        background:#f9f9f9;
+                        .SetBoxSizing(border-box);
+                        .SetBoxShadow(1px 1px 3px rgba(10,10,10,0.2) inset);
+                        .SetRadius(3px);
+                        &:focus{
+                            border-color:#0f5fc9;
+                        }
+                    }
+                }
+            }
+            .eui-mobile-select-conent-area {
+                display: block;
+                position: relative;
+                overflow:hidden;
+                height: calc(100% - @mobileSelectBarHeight);
+                height: -webkit-calc(100% - @mobileSelectBarHeight);
+                height: -moz-calc(100% - @mobileSelectBarHeight);
+                height: -ms-calc(100% - @mobileSelectBarHeight);
+                height: -o-calc(100% - @mobileSelectBarHeight);
+                >div {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: relative;
+                    overflow:hidden;
+                    .SetNoneSelect();
+                    >ul,>ul li {
+                        list-style:none;
+                        margin: 0;
+                        padding: 0;
+                        display: block;
+                        perspective: 100px;
+                        -webkit-perspective: 100px;
+                        transform-style: preserve-3d;
+                    }
+                    >ul {
+                        .SetTransform(translate3d(0,2px,0));
+                        .SetTransition(all 0.2s ease);
+                        display:inline-block;
+                        font-size:0;
+                        vertical-align: text-top;
+                        li {
+                            text-align: center;
+                            height: @mobileSelectItemHeight;
+                            line-height: @mobileSelectItemHeight;
+                            -webkit-perspective-origin: 50% 50%;
+                            perspective-origin: 50% 50%;
+                            font-size: 15px;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                        }
+                        .disabled {
+                            color:#b4b4b4;
+                        }
+                    }
+                }
+                .eui-mobile-select-focus {
+                    display: block;
+                    height: @mobileSelectItemHeight;
+                    width: 100%;
+                    border-style: solid;
+                    border-width: 1px 0;
+                    border-color:#dcdcdc;
+                    position: absolute;
+                    z-index: 2;
+                    left: 0;
+                    top: 50%;
+                    margin-top: -17px;
+                    pointer-events: none;
+                }
+                .eui-mobile-select-mask-top,
+                .eui-mobile-select-mask-bottom {
+                    display: block;
+                    height: 40%;
+                    width: 100%;
+                    position: absolute;
+                    left: 0;
+                    pointer-events: none;
+                    .SetTransition(none);
+                }
+                .eui-mobile-select-mask-top {
+                    top: 0;
+                    background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+                    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+                }
+                .eui-mobile-select-mask-bottom {
+                    bottom: 0;
+                    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+                    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+                }
+            }
+        }
+    }
+}
+
+.elmerTheme {
+    .eui-mobile-select {
+        background: rgba(10,10,10,0.2);
+    }
+}
+
+// 加载动画
+@keyframes euiMobileSelectShowFrame {
+    0% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+@-webkit-keyframes euiMobileSelectShowFrame {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
+@-moz-keyframes euiMobileSelectShowFrame {
+    0% {
+        opacity: 0;
+        -moz-transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: translateY(0%);
+    }
+}
+@-ms-keyframes euiMobileSelectShowFrame {
+    0% {
+        opacity: 0;
+        -ms-transform: translateY(100%);
+    }
+    100% {
+        opacity: 1;
+        -ms-transform: translateY(0%);
+    }
+}
+
+// mask加载动画
+@keyframes euiMobileSelectMaskShowFrame {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@-webkit-keyframes euiMobileSelectMaskShowFrame {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@-moz-keyframes euiMobileSelectMaskShowFrame {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+@-ms-keyframes euiMobileSelectMaskShowFrame {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.euiMobileSelectMaskShowAni {
+    display: block;
+    animation: euiMobileSelectMaskShowFrame @showAnimationTime ease forwards;
+    -webkit-animation: euiMobileSelectMaskShowFrame @showAnimationTime ease forwards;
+    -moz-animation: euiMobileSelectMaskShowFrame @showAnimationTime ease forwards;
+    -ms-animation: euiMobileSelectMaskShowFrame @showAnimationTime ease forwards;
+}
+.euiMobileSelectShowAni {
+    animation: euiMobileSelectShowFrame @showAnimationTime ease forwards;
+    -webkit-animation: euiMobileSelectShowFrame @showAnimationTime ease forwards;
+    -moz-animation: euiMobileSelectShowFrame @showAnimationTime ease forwards;
+    -ms-animation: euiMobileSelectShowFrame @showAnimationTime ease forwards;
+}
+
+// 隐藏动画
+
+// 加载动画
+@keyframes euiMobileSelectHiddenFrame {
+    0% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
+@-webkit-keyframes euiMobileSelectHiddenFrame {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+}
+@-moz-keyframes euiMobileSelectHiddenFrame {
+    0% {
+        opacity: 1;
+        -moz-transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        -moz-transform: translateY(100%);
+    }
+}
+@-ms-keyframes euiMobileSelectHiddenFrame {
+    0% {
+        opacity: 1;
+        -ms-transform: translateY(0%);
+    }
+    100% {
+        opacity: 0;
+        -ms-transform: translateY(100%);
+    }
+}
+
+// mask加载动画
+@keyframes euiMobileSelectMaskHiddenFrame {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-webkit-keyframes euiMobileSelectMaskHiddenFrame {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-moz-keyframes euiMobileSelectMaskHiddenFrame {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+@-ms-keyframes euiMobileSelectMaskHiddenFrame {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+.euiMobileSelectMaskHiddenAni {
+    display: block;
+    animation: euiMobileSelectMaskHiddenFrame @hiddenAnimationTime ease forwards;
+    -webkit-animation: euiMobileSelectMaskHiddenFrame @hiddenAnimationTime ease forwards;
+    -moz-animation: euiMobileSelectMaskHiddenFrame @hiddenAnimationTime ease forwards;
+    -ms-animation: euiMobileSelectMaskHiddenFrame @hiddenAnimationTime ease forwards;
+}
+.euiMobileSelectHiddenAni {
+    animation: euiMobileSelectHiddenFrame @hiddenAnimationTime ease forwards;
+    -webkit-animation: euiMobileSelectHiddenFrame @hiddenAnimationTime ease forwards;
+    -moz-animation: euiMobileSelectHiddenFrame @hiddenAnimationTime ease forwards;
+    -ms-animation: euiMobileSelectHiddenFrame @hiddenAnimationTime ease forwards;
+}

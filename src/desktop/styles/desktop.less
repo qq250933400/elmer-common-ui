@@ -1,0 +1,187 @@
+@backgroundImage: #3a3c61;
+
+body{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+}
+.themeDesktop {
+    background-image: url("http://localhost:9000/assets/wallper/background.jpg");
+    .eui-desktop,.eui-desktop>.eui-desktop-background {
+        background-image: url("http://localhost:9000/assets/wallper/background.jpg") !important;
+        background-size: cover;
+    }
+}
+.themeNoBackground {
+    background:@backgroundImage;
+    .eui-desktop,.eui-desktop>.eui-desktop-background {
+        background:@backgroundImage;
+    }
+    .eui-desktop-background {
+        filter: none !important;
+        -webkit-filter: none !important;
+    }
+}
+.eui-desktop,
+.eui-desktop .eui-desktop-background,
+.eui-desktop .eui-desktop-layout {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.eui-desktop{
+    position: relative;
+    background: @backgroundImage cover;
+    -webkit-touch-callout:none;  
+    -webkit-user-select:none;  
+    -khtml-user-select:none;  
+    -moz-user-select:none;  
+    -ms-user-select:none;  
+    user-select:none;  
+    .eui-desktop-background {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 0;
+        background: @backgroundImage;
+        background-size: cover;
+        filter: blur(5px);
+        -webkit-filter:blur(5px);
+    }
+    .eui-desktop-layout {
+        z-index: 1;
+        position: absolute;
+        left: 0;
+        top: 0;
+        overflow: hidden;
+    }
+}
+
+// setting page 
+.desktop-setting-title {
+    margin: 0;
+    padding: 0 10px;
+    display: block;
+    height: 60px;
+    line-height: 60px;
+    font-size: 20px;
+    color:#616161;
+}
+.desktop-setting-menuarea {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background: #fbfbfb;
+    border-right: 1px solid #c9c9c9;
+    height: 100%;
+    .eui-setting-menu {
+        background: transparent !important;
+        width: 100% !important;
+        >label {
+            display: none !important;
+        }
+        >ul {
+            height: 100% !important;
+            background: transparent !important;
+            >li {
+                background: transparent;
+                >label {
+                    border-left: 0;
+                    border-right: 4px solid transparent;
+                    color: #616161;
+                    span {
+                        color: #616161;
+                        &::before{
+                            font-size: 15px !important;
+                        }
+                    }
+                    &:hover {
+                        background:  rgba(180, 243, 247, 0.3);
+                    }
+                }
+                >.active {
+                    background:  rgba(180, 243, 247, 0.5);
+                    span {
+                        color: #1b8eb1;
+                    }
+                }
+            }
+        }
+    }
+}
+.DesktopSettingConfig {
+    height: 100%;
+    .desktopSettingTitle {
+        display: block;
+        margin: 0;
+        padding: 0 15px;
+        height: 60px;
+        line-height: 60px;
+        color: #616161;
+        >i{
+            display: inline-block;
+            vertical-align: text-bottom;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        >span {
+            display: inline-block;
+            vertical-align: text-bottom;
+            height: 60px;
+            font-size: 24px;
+            padding-left: 10px;
+            line-height: 80px;
+        }
+    }
+    >div {
+        display: block;
+        height: calc(~'100% - 60px');
+        height: -webkit-calc(~'100% - 60px');
+        height: -moz-calc(~'100% - 60px');
+        height: -ms-calc(~'100% - 60px');
+        overflow: hidden;
+        .eui-form {
+            margin: 0 !important;
+            border: 0 !important;
+        }
+    }
+}
+
+.eui-app-login {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: url("../../image/background.jpg");
+    background-size: cover;
+    >div, .eui-app-back {
+        display: block;
+        width: 100%;
+        height: 100%;
+       
+    }
+    .eui-app-back {
+        background: url("../../image/background.jpg");
+        background-size: cover;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+    }
+}
+.eui-app-login-copyRight {
+    display: block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    left:0;
+    bottom: 0;
+    color:rgba(255, 255, 255, 0.7);
+    text-shadow: 0 0 3px rgba(10,10,10,0.2);
+    -webkit-text-shadow: 0 0 3px rgba(10,10,10,0.2);
+    -moz-text-shadow: 0 0 3px rgba(10,10,10,0.2);
+    -ms-text-shadow: 0 0 3px rgba(10,10,10,0.2);
+}

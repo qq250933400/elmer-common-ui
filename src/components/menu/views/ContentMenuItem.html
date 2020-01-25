@@ -1,0 +1,15 @@
+<!--TemplateLoader=Text-->
+<li class="{{typeTheme}}"
+    class.eui-content-menu-title="this.props.type eq 'Title'"
+    class.eui-content-menu-item ="this.props.type eq 'NormalText'"
+    class.eui-content-menu-text ="this.props.type eq 'NormalText'"
+    class.eui-content-menu-item-has-children = "this.data.children.length gt 0"
+    class.eui-content-menu-line = "this.props.type eq 'SplitLine'"
+>
+    <label em:if="this.props.type eq 'Title'">{{props.title}}</label>
+    <label em:if="this.props.type eq 'NormalText'" et:click='onItemClick' passive='{{true}}'>
+        <i class='fa {{props.icon}}'></i><span>{{props.title}}</span>
+    </label>
+    <label em:if="this.props.type eq 'SplitLine'"></label>
+    <eui-content-menu em:if="this.data.children.length gt 0" isChildren='{{true}}' et:onItemClick='props.click' em:data='this.data.children'/>
+</li>

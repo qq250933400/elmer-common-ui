@@ -1,0 +1,35 @@
+<div class="eui-desktop-win10">
+    <div class="eui-desktop-win10-content" id="appContent" et:mouseup="handleOnDesktopMouseUp">
+        <div class="eui-desktop-win10-content-app-list" et:dblclick="handleOnAppItemClick">
+            <ul data-type="AppList">
+                <li em:for="let item in this.state.desktopApp" title="{{item.title}} {{item.description | ''}}" data-key="{{item.key}}">
+                    <div>
+                        <eui-icon type="{{item.icon}}"/>
+                        <span>{{item.title}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div id="container" style="display:block;width:0;height:0;"></div>
+        <!-- <eui-icon-demo /> -->
+        <eui-calendar if="{{state.showCalendar}}" theme="AnimationOpacityUpIn" et:onOutClick="handleOnAppTimeOutClick" style="position:absolute;right:4px;bottom:4px;z-index:4;"/>
+        <eui-win10-startmenu visible="{{state.showStartMenu}}" showAnimation="AnimationOpacityUpIn" et:onClick="handleOnStartMenuClick" et:onOutClick="handleOnStartMenuOutClick"/>
+        <menu et:onItemClick="handleOnDesktopMenuClick" visible="{{state.desktopMenuVisible}}" em:style="this.state.desktopMenuStyle" data="{{desktopMenu}}"/>
+    </div>
+    <div class="eui-desktop-win10-toolbar">
+        <a href="javascript:void(0);" class="eui-desktop-win10-toolbar-start" et:click="handleOnStartButtonClick">
+            <eui-icon type="fa-windows"/>
+        </a>
+        <div class="eui-desktop-win10-toolbar-tabs">
+            <eui-win10-toolbar activeId="{{state.activeAppId}}" data="{{state.openWindows}}" et:onClick="handleOnToolBarClick"/>
+        </div>
+        <div class="eui-desktop-win10-toolbar-notify">
+            <eui-icon type="fa-angle-up" />
+        </div>
+        <div class="eui-desktop-win10-toolbar-time" et:click="handleOnAppTimeClick">
+            <span>{{state.windowTime}}</span>
+            <span>{{state.windowDate}}</span>
+        </div>
+        <div class="eui-desktop-win10-toolbar-desktop"></div>
+    </div>
+</div>

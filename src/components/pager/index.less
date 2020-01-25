@@ -1,0 +1,38 @@
+.nj_page_bar i {font-style: normal;}
+.nj_page_bar ul {display: block;height: 28px;line-height: 28px;}
+.nj_page_bar {font-size: 0;text-align: center;}
+.nj_page_bar > span {display: inline-block;font-size: 14px;color: #333;height: 28px;line-height: 28px;vertical-align: middle;}
+.nj_page_bar > span > i {color: #2387DD;}
+.nj_page_bar ul {display: inline-block;vertical-align: middle;}
+.nj_page_bar ul li,.nj_page_next,.nj_page_prev {display: inline-block;cursor: pointer;height:28px;vertical-align: middle;}
+.nj_page_bar ul li a,.nj_page_next,.nj_page_prev {color: #666;border: 1px solid #ddd;display: inline-block;font-size: 14px;min-width: 26px;height: 26px;line-height: 26px !important;margin-left: 4px;text-decoration: none;background:#fff;}
+.nj_page_bar ul .active > a {border-color: #2387DD;color: #fff !important;background: #2387DD;}
+.nj_page_prev a,.nj_page_next,.nj_page_prev {width: 80px;position: relative;height:28px;}
+.nj_page_bar .nj_page_prev::before,
+.nj_page_bar .nj_page_next::before{
+    font-size: 14px;
+    display: block;
+    height:28px;
+    line-height: 28px;
+}
+.nj_page_prev::before{
+    content: "上一页";
+}
+.nj_page_next::before{
+    content: "下一页";
+}
+.nj_page_bar * {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -moz-user-select: none;
+}
+.nj_page_disabled {
+    border-color:#e8e8e8;
+    color: #d8d7d7;
+}
+.nj_page_bar .disabledItem {
+    border-color: transparent;
+    color:#b9b9b9;
+    cursor: default;
+}

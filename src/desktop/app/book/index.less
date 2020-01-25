@@ -1,0 +1,159 @@
+.eui-book {
+    display: block;
+    height: 100%;
+    position: relative;
+    .eui-book-bottom .eui-book-index-search,
+    .eui-book-bottom .eui-book-index-search>div>input[type=text],
+    .eui-book-head {
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+    }
+    .eui-book-head {
+        display: block;
+        height: 50px;
+        padding: 0 15px;
+        border-bottom: 1px solid #DDDDDD;
+        >h5 {
+            margin: 0;
+            height: 50px;
+            line-height: 50px;
+            font-size: 18px;
+        }
+    }
+    .eui-book-bottom {
+        display: block;
+        height: calc(~'100% - 50px');
+        height: -webkit-calc(~'100% - 50px');
+        height: -moz-calc(~'100% - 50px');
+        height: -ms-calc(~'100% - 50px');
+        position: relative;
+        font-size: 0;
+        .eui-book-index {
+            display: inline-block;
+            vertical-align: text-top;
+            width: 200px;
+            height: 100%;
+            background-color:#FAFAFA;
+            .eui-book-index-search {
+                display: block;
+                height: 60px;
+                padding: 14px 15px;
+                border-bottom: 1px solid #DDDDDD;
+                >div {
+                    display: block;
+                    height: 100%;
+                    position: relative;
+                    color:rgba(0,0,0,.87);
+                    >i {
+                        display: block;
+                        width: 26px;
+                        height: 26px;
+                        line-height: 26px;
+                        text-align: center;
+                        font-size: 18px;
+                        z-index: 2;
+                        position: absolute;
+                        right: 5px;
+                        top: 50%;
+                        margin-top: -13px;
+                        &::before {
+                            color:rgba(230, 230, 230, 0.87);
+                        }
+                    }
+                    >input {
+                        width: 100%;
+                        height: 100%;
+                        background:#fff;
+                        border: 1px solid rgba(34,36,38,.15);
+                        border-radius: 3px;
+                        transition: box-shadow .1s ease,border-color .1s ease;
+                        -webkit-transition: box-shadow .1s ease,border-color .1s ease;
+                        -moz-transition: box-shadow .1s ease,border-color .1s ease;
+                        -ms-transition: box-shadow .1s ease,border-color .1s ease;
+                        box-shadow: none;
+                        padding: 0 5px;
+                        padding-right: 30px;
+                        position: absolute;
+                        font-size: 14px;
+                        left:0;
+                        top: 0;
+                        z-index: 1;
+                        &:hover{
+                            border-color:rgba(34,36,38,.4);
+                        }
+                        &:hover+i::before{
+                            color:rgba(34,36,38,.4);
+                        }
+                    }
+                }
+            }
+            .eui-book-index-list {
+                display: block;
+                height: calc(~'100% - 60px');
+                height: -webkit-calc(~'100% - 60px');
+                height: -moz-calc(~'100% - 60px');
+                height: -ms-calc(~'100% - 60px');
+                position: relative;
+                overflow: auto;
+            }
+        }
+        .eui-book-content {
+            display: inline-block;
+            vertical-align: text-top;
+            height: 100%;
+            width: calc(~'100% - 200px');
+            width: -webkit-calc(~'100% - 200px');
+            width: -moz-calc(~'100% - 200px');
+            width: -ms-calc(~'100% - 200px');
+            .eui-boot-content-header {
+                display: block;
+                height: 40px;
+                line-height: 40px;
+                position: relative;
+                padding: 0 25px;
+                >i {
+                    font-size: 15px;
+                    width: 26px;
+                    height: 26px;
+                    line-height: 26px;
+                    text-align: center;
+                    position: absolute;
+                    top: 50%;
+                    margin-top: -13px;
+                    &::before {
+                        color: #aaaaaa;
+                    }
+                }
+                >i:nth-child(1) {
+                    left: 0;
+                }
+                >i:nth-child(3) {
+                    right: 0;
+                }
+                >h5 {
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    margin: 0;
+                    font-size: 18px;
+                    color:#9c9c9c;
+                    font-weight: normal;
+                }
+            }
+            .eui-boot-content-web {
+                display: block;
+                height: calc(~"100% - 40px");
+                height: -webkit-calc(~"100% - 40px");
+                height: -moz-calc(~"100% - 40px");
+                height: -ms-calc(~"100% - 40px");
+                iframe {
+                    width: 100%;
+                    height: 100%;
+                    border: 0;
+                }
+            }
+        }
+    }
+}

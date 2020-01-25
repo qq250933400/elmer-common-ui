@@ -1,0 +1,16 @@
+<eui-dialog hasIcon='{{true}}'
+    icon='fa {{options.icon}}'
+    title='{{options.title}}'
+    maskStyle="{{maskStyle}}"
+    formStyle="position:absolute;"
+    zIndex="{{zIndex}}"
+    et:onClose='onClose'
+    et:onMin="onMin"
+    visible="{{visible}}"
+    hasMask="{{true}}"
+    ...="{{options.data}}"
+>
+    <div>
+        <eui-run-code code="{{options.component}}" ex:props='this.props.data'/>
+    </div>
+</eui-dialog>

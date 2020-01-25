@@ -1,0 +1,250 @@
+@loginBackBorderColor: rgba(255, 255, 255, 0.726);
+@loginBackBoxShadow: 0 0 5px rgba(51, 51, 51, 0.568);
+@loginBackground: rgba(255, 255, 255, 0.2);
+@loginLogoSize: 80px;
+@loginInputHeight: 36px;
+@loginInputBk: rgba(255, 255, 255, 0.2);
+@loginInputBkHover: rgba(255, 255, 255, 0.3);
+@loginInputBkFocus: rgba(255, 255, 255, 0.5);
+@loginInputBDHover: rgba(255, 255, 255, 0.8);
+@loginInputBDFocus: rgba(255, 255, 255, 1);
+@loginButtonBk: rgba(255, 255, 255, 0.6);
+@loginButtonBkHover: rgba(255, 255, 255, 0.8);
+@loginButtonBkActive: rgba(255, 255, 255, 0.9);
+@loginButtonBD: rgba(255, 255, 255, 0.7);
+@loginButtonBDHover: rgba(255, 255, 255, 0.9);
+@loginButtonBDActive: rgba(255, 255, 255, 1);
+.eui-login {
+    display: block;
+    position: absolute;
+    width: 300px;
+    height: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.726);
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -200px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    overflow: hidden;
+    box-shadow: @loginBackBoxShadow;
+    -webkit-box-shadow: @loginBackBoxShadow;
+    -moz-box-shadow: @loginBackBoxShadow;
+    -ms-box-shadow: @loginBackBoxShadow;
+    >div {
+        display: block;
+        height: 100%;
+        position: relative;
+        .eui-login-background {
+            display: block;
+            height: 100%;
+            background: @loginBackground;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+        }
+        .eui-login-form {
+            display: block;
+            position: absolute;
+            left:0;
+            top:0;
+            width: 100%;
+            height: 100%;
+            >label,.eui-login-form-area {
+                transition: all 0.6s ease;
+                -webkit-transition: all 0.6s ease;
+                -moz-transition: all 0.6s ease;
+                -ms-transition: all 0.6s ease;
+                transform-origin: center center;
+                -webkit-transform-origin: center center;
+                -moz-transform-origin: center center;
+                -ms-transform-origin: center center;
+            }
+            >label {
+                display: block;
+                height: 120px;
+                text-align: center;
+                position: relative;
+
+               >div{
+                   display: inline-block;
+                    background: #fff;
+                    width: @loginLogoSize;
+                    height: @loginLogoSize;
+                    border-radius: 100%;
+                    -webkit-border-radius: 100%;
+                    -moz-border-radius: 100%;
+                    -ms-border-radius: 100%;
+                    overflow: hidden;
+                    position: absolute;
+                    left: 50%;
+                    top:50%;
+                    margin-left: -(@loginLogoSize / 2);
+                    margin-top: -(@loginLogoSize / 2);
+                    i {
+                        width: @loginLogoSize;
+                        height: @loginLogoSize;
+                        display: inline-block;
+                        background: url("../../../image/icon/user.png");
+                        background-size: 100% 100%;
+                    }
+               }
+            }
+            .eui-login-input {
+                display: block;
+                height: @loginInputHeight;
+                margin-top: 15px;
+                padding: 0 20px;
+                >div {
+                    display:block;
+                    height: 100%;
+                    position: relative;
+                    input{
+                        appearance: none;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        padding-left: @loginInputHeight;
+                        padding-right:10px;
+                        border-radius: @loginInputHeight / 2;
+                        -webkit-border-radius: @loginInputHeight / 2;
+                        -moz-border-radius: @loginInputHeight / 2;
+                        -ms-border-radius: @loginInputHeight / 2;
+                        border: 1px solid @loginBackBorderColor;
+                        background: @loginInputBk;
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        -ms-box-sizing: border-box;
+                        height: 100%;
+                        width: 100%;
+                        color:#333;
+                        &:hover {
+                            background: @loginInputBkHover;
+                            border-color: @loginInputBDHover;
+                        }
+                        &:active,&:focus {
+                            background: @loginInputBkFocus;
+                            border-color: @loginInputBDFocus;
+                        }
+                    }
+                    &::before {
+                        display: block;
+                        width: 20px;
+                        height: 20px;
+                        line-height: 20px;
+                        position: absolute;
+                        left: 14px;
+                        top: 50%;
+                        margin-top: -10px;
+                        color:#fff;
+                    }
+                }
+            }
+            .eui-login-button {
+                display: block;
+                padding: 0 20px;
+                height: 36px;
+                margin-top: 30px;
+                button {
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    border: 1px solid @loginButtonBD;
+                    background: @loginButtonBk;
+                    border-radius: 18px;
+                    -webkit-border-radius: 18px;
+                    -moz-border-radius: 18px;
+                    -ms-border-radius: 18px;
+                    height: 36px;
+                    width: 100%;
+                    font-size: 18px;
+                    color:#fff;
+                    text-shadow: 0 0 1px rgba(51, 51, 51, 0.397);
+                    -webkit-text-shadow: 0 0 1px rgba(51, 51, 51, 0.397);
+                    &:hover {
+                        border-color:@loginButtonBDHover;
+                        background: @loginButtonBkHover;
+                    }
+                    &:active {
+                        border-color: @loginButtonBDActive;
+                        background: @loginButtonBkActive;
+                    }
+                }
+            }
+            .eui-login-link {
+                display: block;
+                margin-top: 65px;
+                padding: 0 20px;
+                a {
+                    text-decoration: none;
+                    font-size: 14px;
+                    color:#fff;
+                    display: block;
+                    text-shadow: 0 0 1px rgba(51, 51, 51, 0.356);
+                    -webkit-text-shadow: 0 0 1px rgba(51, 51, 51, 0.356);
+                    -moz-text-shadow: 0 0 1px rgba(51, 51, 51, 0.356);
+                    -ms-text-shadow: 0 0 1px rgba(51, 51, 51, 0.356);
+                    &:hover {
+                        text-shadow: 0 0 1px rgba(243, 7, 7, 0.356);
+                        -webkit-text-shadow: 0 0 1px rgba(240, 12, 12, 0.356);
+                        -moz-text-shadow: 0 0 1px rgba(245, 10, 10, 0.356);
+                        -ms-text-shadow: 0 0 1px rgba(247, 4, 4, 0.356);
+                        color:rgb(255, 238, 238);
+                    }
+                }
+                .eui-login-link-reg {
+                    float: left;
+                }
+                .eui-login-link-reset {
+                    float: right;
+                }
+            }
+        }
+        .eui-login-loading-layout {
+            .eui-login-form-area {
+                transform: scale(0.1,0.1);
+                -webkit-transform: scale(0.1,0.1);
+                -moz-transform: scale(0.1,0.1);
+                -ms-transform: scale(0.1,0.1);
+                opacity: 0;
+            }
+            >label {
+                height: 100%;
+            }
+        }
+        .eui-login-loading-form {
+            >label {
+                &::before, &::after {
+                    content: "";
+                    display: block;
+                    width: @loginLogoSize;
+                    height: @loginLogoSize;
+                    border: 4px solid rgba(255,255,255,0.2);
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    margin-left: -(@loginLogoSize / 2 + 4);
+                    margin-top: -(@loginLogoSize / 2 + 4);
+                    border-radius: 100%;
+                    -webkit-border-radius: 100%;
+                    -moz-border-radius: 100%;
+                    -ms-border-radius: 100%;
+                }
+                &::after {
+                    border-color: rgba(242, 32, 32, 0.8);
+                    border-style: dashed;
+                    stroke-dasharray: 15px 30px;
+                    transform-origin: center center;
+                    -webkit-transform-origin: center center;
+                    -moz-transform-origin: center center;
+                    -ms-transform-origin: center center;
+                    animation: KeyFrameCircle 2s linear infinite;
+                    -webkit-animation: KeyFrameCircle 2s linear infinite;
+                    -moz-animation: KeyFrameCircle 2s linear infinite;
+                    -ms-animation: KeyFrameCircle 2s linear infinite;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,156 @@
+@scrollBarBk: rgba(250,250,250,0.4);
+@scrollBtnColor: rgba(255,255,255,0.6);
+@scrollBtnBk: transparent;
+@scrollBtnHoverBk: rgba(255,255,255,0.6);
+@scrollBtnHoverColor: rgba(199, 199, 199, 0.9);
+@scrollBtnActiveBk: rgba(255,255,255,0.8);
+@scrollBtnActiveColor: rgb(175, 175, 175);
+@scrollThumbBk: rgba(255,255,255,0.3);
+@scrollThumbHoverBk: rgba(255,255,255,0.6);
+@scrollThumbActiveBk: rgba(255,255,255,0.9);
+.eui-scrollbar {
+    display: block;
+    position: absolute;
+    &:hover {
+        background: @scrollBarBk;
+    }
+}
+.eui-scrollbar.scrollY {
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 10px;
+    >div {
+        display: block;
+        height: 100%;
+        position: relative;
+        .eui-scrollbar-decrease,
+        .eui-scrollbar-increase {
+            display: block;
+            height: 15px;
+            font-size: 12px;
+            &::before {
+                display: block;
+                height: 15px;
+                line-height: 15px;
+                text-align: center;
+                font-size: 12px;
+                background: @scrollBtnBk;
+                color: @scrollBtnColor;
+            }
+            &:hover {
+                background: @scrollBtnHoverBk;
+                &::before {
+                    color: @scrollBtnHoverColor;
+                }
+            }
+            &:active {
+                background: @scrollBtnActiveBk;
+                &::before {
+                    color: @scrollBtnActiveColor;
+                }
+            }
+        }
+        .eui-scrollbar-thumb {
+            display: block;
+            height: calc(~'100% - 30px');
+            height: -webkit-calc(~'100% - 30px');
+            height: -moz-calc(~'100% - 30px');
+            height: -ms-calc(~'100% - 30px');
+            position: relative;
+            >div {
+                display: block;
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 0;
+                background: @scrollThumbBk;
+                &:hover {
+                    background: @scrollThumbHoverBk;
+                }
+                &:active {
+                    background: @scrollThumbActiveBk;
+                }
+            }
+        }
+        .eui-scrollbar-decrease::before {
+            content: "\F106";
+        }
+        .eui-scrollbar-increase::before {
+            content: "\F107";
+        }
+    }
+}
+.eui-scrollbar.scrollX {
+    left: 0;
+    bottom: 0;
+    height: 10px;
+    width: 100%;
+    >div {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        font-size: 0;
+        .eui-scrollbar-decrease,
+        .eui-scrollbar-increase {
+            display: inline-block;
+            width: 15px;
+            font-size: 12px;
+            height: 100%;
+            vertical-align: text-top;
+            &::before {
+                display: block;
+                width: 15px;
+                height: 100%;
+                line-height: 10px;
+                text-align: center;
+                font-size: 12px;
+                background: @scrollBarBk;
+                color: @scrollBtnColor;
+            }
+            &:hover {
+                background: @scrollBtnHoverBk;
+                &::before {
+                    color: @scrollBtnHoverColor;
+                }
+            }
+            &:active {
+                background: @scrollBtnActiveBk;
+                &::before {
+                    color: @scrollBtnActiveColor;
+                }
+            }
+        }
+        .eui-scrollbar-thumb {
+            display: inline-block;
+            width: calc(~'100% - 30px');
+            width: -webkit-calc(~'100% - 30px');
+            width: -moz-calc(~'100% - 30px');
+            width: -ms-calc(~'100% - 30px');
+            position: relative;
+            height: 100%;
+            vertical-align: text-top;
+            >div {
+                display: block;
+                position: absolute;
+                height: 100%;
+                left: 0;
+                top: 0;
+                background: @scrollThumbBk;
+                &:hover {
+                    background: @scrollThumbHoverBk;
+                }
+                &:active {
+                    background: @scrollThumbActiveBk;
+                }
+            }
+        }
+        .eui-scrollbar-decrease::before {
+            content: "\F104";
+        }
+        .eui-scrollbar-increase::before {
+            content: "\F105";
+        }
+    }
+}

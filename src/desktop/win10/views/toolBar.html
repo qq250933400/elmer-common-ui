@@ -1,0 +1,15 @@
+<div class="eui-win10-toolbar eui-win10-toolbar-overflow">
+    <div class="eui-win10-toolbar-items">
+        <ul et:click="handleOnTabClick">
+            <li em:for="let item in this.state.tabs" title="{{item.title}}" data-id="{{item.id}}" class.active="state.activeId eq item.id">
+                <div>
+                    <eui-icon type="{{item.icon}}"/>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="eui-win10-toolbar-buttons">
+        <a href="javascript:void(0);"><eui-icon type="fa-chevron-up"/></a>
+        <a href="javascript:void(0);"><eui-icon type="fa-chevron-down"/></a>
+    </div>
+</div>

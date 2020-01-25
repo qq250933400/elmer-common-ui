@@ -1,0 +1,159 @@
+.eui-upload {
+    display: block;
+    input[type=file] {
+        display: none;
+    }
+    .eui-upload-files {
+         display: block;
+        position: relative;
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        border-radius: 3px;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        padding: 10px;
+        border: 1px solid #f1f0f0;
+        background: #fff;
+        height: auto;
+        >div {
+            margin-left: -10px;
+            margin-top: -10px;
+            &::after {
+                display: block;
+                clear: both;
+                content: "";
+            }
+            .eui-upload-file-item {
+                display: block;
+                position: relative;
+                float: left;
+                margin-left: 10px;
+                margin-top: 10px;
+                width: 80px;
+                height: 100px;
+                border: 1px solid #ddd;
+                background: #fbfafa;
+                border-radius: 3px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                overflow:hidden;
+                .eui-upload-file-item-icon {
+                    display: block;
+                    width: 80px;
+                    height: 80px;
+                    border: none;
+                    border-color: transparent;
+                    img {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .eui-upload-file-content {
+                    display: block;
+                    height: 20px;
+                    text-align: center;
+                    h5 {
+                        display: inline-block;
+                        margin: 0;
+                        padding: 0;
+                        line-height: 20px;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        font-weight: normal;
+                        color:#666;
+                        margin: 0 auto;
+                    }
+                    span, i {
+                        display: none;
+                    }
+                }
+                .eui-upload-progress {
+                    display: block;
+                    width: 100%;
+                    height:4px;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    background: #e2e2e2;
+                    opacity: 0.6;
+                    z-index:25;
+                    >div{
+                        display: block;
+                        height: 4px;
+                        background: #39bbe2;
+                    }
+                }
+            }
+            .eui-upload-file-add i{
+                font-size: 30px;
+                width: 25px;
+                height: 25px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -12px;
+                margin-top: -12px;
+                color: #ddd;
+            }
+        }
+    }
+    .eui-upload-file-list {
+        >div {
+            margin-left: 0;
+            margin-top: 0;
+            .eui-upload-file-item {
+                display: block;
+                height: 80px;
+                width: 100%;
+                float: initial;
+                margin-left: 0;
+                position: relative;
+                padding-left: 90px;
+                box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                -moz-box-sizing: border-box;
+                -ms-box-sizing: border-box;
+                .eui-upload-file-item-icon {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                }
+                .eui-upload-file-content {
+                    height: 80px;
+                    text-align: left;
+                    h5 {
+                        font-size: 16px;
+                        display: block;
+                        padding: 8px 0;
+                    }
+                    span,i {
+                        display: block;
+                        font-style: normal;
+                        font-size: 14px;
+                        color:#d2d2d2;
+                        padding: 2px 0;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+                }
+            }
+            .eui-upload-file-add {
+                margin-top: 0;
+                i {
+                    font-size: 50px;
+                    width: 44px;
+                    height: 44px;
+                    margin-left: -22px;
+                    margin-top: -22px;
+                }
+            }
+        }
+    }
+}

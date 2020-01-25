@@ -1,0 +1,5 @@
+<ul data-width="{{width}}" style="width:{{fixedWidth}};">
+    <li em:for="let itemData in this.data" data-width="{{width}}">
+        <eui-tree-view-item et:onUpdateChildren="handleOnUpdateChildren" index="{{itemData.key}}" valueKey="{{props.valueKey}}" et:onExpandClick="props.onExpandClick" selectedData="{{selectedData}}" width="{{width}}" level="{{level}}" theme="{{spaceTheme}}" em:dblClick="this.treeViewItemDblClick" em:click="this.treeViewItemClick" em:data="itemData"></eui-tree-view-item>
+    </li>
+</ul>

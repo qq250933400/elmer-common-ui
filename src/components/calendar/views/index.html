@@ -1,0 +1,74 @@
+<div class="eui-calendar {{props.theme}}" em:style="this.style" et:click="onCalendarClick">
+    <div>
+        <label>{{year}}</label>
+        <div class="eui-calendar-title">
+            <div class="eui-calendar-title-weekend">
+                <eui-icon et:onClick="handleOnToPrevMonth" type="fa-angle-left" theme="eui-calendar-left"/>
+                <eui-icon et:onClick="handleOnToNextMonth" type="fa-angle-right" theme="eui-calendar-right"/>
+                <b></b>
+                <div>
+                    <div>
+                        <i class="{{currentAnimation}}" em:style="this.currentStyle">{{month}}</i>
+                        <i class="{{nextAnimation}}" em:style="this.nextStyle">{{nextMonthText}}</i>
+                    </div>
+                </div>
+            </div>
+            <div class="eui-calendar-week-title">
+                <span em:for="let wkTitle in this.allWeekTitle">{{wkTitle.title}}</span>
+            </div>
+        </div>
+        <div class="eui-calendar-ct">
+            <div>
+                <div et:animationEnd="handleOnCurrentAnimationEnd" class="eui-calendar-bar {{currentAnimation}}" em:style="this.currentStyle">
+                    <ul>
+                        <li em:for="let curWeek in this.currentMonthData">
+                            <ul>
+                                <li em:for="let curDate in curWeek.data" title="{{curDate.value}}" et:click="handleOnCalendarClick" class="{{curDate.theme}}" class.disabled="{{curDate.disabled}}">
+                                    <span>{{curDate.text}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div id="{{nextID}}" class="eui-calendar-bar {{nextAnimation}}" em:style="this.nextStyle">
+                    <ul>
+                        <li em:for="let nextWeek in this.nextMonthData">
+                            <ul>
+                                <li em:for="let nextDate in nextWeek.data" title="{{nextDate.value}}" class="{{nextDate.theme}}" class.disabled="{{nextDate.disabled}}">
+                                    <span>{{nextDate.text}}</span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="eui-calendar-bottom">
+            <span class="eui-calendar-tag-left eui-calendar-tag-taday"><i>{{todayText}}</i></span>
+            <div em:if="this.showTimePicker" class="eui-calendar-time">
+                <label class="eui-calendar-time-houre" et:click="handleOnTimeHourClick">
+                    <span>{{state.choseHour}}</span>
+                </label>
+                <label et:click="handleOnTimeMinuteClick">
+                    <span>{{state.choseMinute}}</span>
+                </label>
+            </div>
+            <span class="eui-calendar-tag-right eui-calendar-tag-select"><i>{{selectText}}</i></span>
+        </div>
+        <div em:if="this.showTimePicker" et:animationEnd="handleOnTimeDomAnimationEnd" class="eui-calendar-selector {{state.timeAnimation}}">
+            <div>
+                <span class="eui-calendar-selector-title">{{state.choseTimeTitle}}</span>
+                <ul class="eui-calendar-selector-list" id="{{timeHourID}}">
+                    <li em:for="let time in this.state.choseHourListData" et:click="handleOnTimeHourListItemClick">
+                        <span class.active="time.value eq this.state.choseHour" data-key="{{time.key}}">{{time.value}}</span>
+                    </li>
+                </ul>
+                <ul class="eui-calendar-selector-list"  id="{{timeMinuteID}}">
+                    <li em:for="let time in this.state.choseMinuteListData" et:click="handleOnTimeMinuteListItemClick">
+                        <span class.active="time.value eq this.state.choseMinute" data-key="{{time.key}}">{{time.value}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

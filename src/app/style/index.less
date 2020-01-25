@@ -1,0 +1,45 @@
+.indexLayout {
+    display: block;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    li {
+        display: block;
+        height: 26px;
+        line-height: 26px;
+        padding-left: 34px;
+        border-radius: 3px;
+        -webkit-border-radius:3px;
+        overflow: hidden;
+        position: relative;
+        font-size: 14px;
+        background: #f7f7f7;
+        margin-top: 5px;
+        cursor: pointer;
+        &::before {
+            display: block;
+            content: "";
+            height: 26px;
+            width: 30px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #53bbdb;
+        }
+        a {
+            text-decoration: none;
+            height: 100%;
+            line-height: 26px;
+            display: block;
+        }
+        &:hover {
+            background: #8ac4fa;
+            a{
+                color: #fff;
+            }
+        }
+    }
+    li:nth-child(2n+1)::before {
+        background: #f90b0b;
+    }
+}

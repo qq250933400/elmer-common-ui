@@ -1,0 +1,13 @@
+<eui-layout data-width="{{state.menuWidth}}">
+    <eui-layout-col width="{{state.menuWidth}}" theme="desktop-setting-menuarea">
+        <eui-layout-row height="60">
+            <h5 class="desktop-setting-title text-nowrap">选项</h5>
+        </eui-layout-row>
+        <eui-layout-row height="*">
+            <eui-admin-menu et:onChange="handleOnMenuChange" selectedData="{{state.defaultMenuItem}}" theme="eui-setting-menu" data="{{state.menuList}}" isExpand="{{state.menuExpand}}" et:onModeChange="handleOnMenuExpandChange"/>
+        </eui-layout-row>
+    </eui-layout-col>
+    <eui-layout-col width="*">
+        <eui-run-code code="{{state.selectedMenuData.url}}" data="{{state.selectedMenuData}}"/>
+    </eui-layout-col>
+</eui-layout>

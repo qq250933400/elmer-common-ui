@@ -1,0 +1,62 @@
+.eui-icon-demo,
+.eui-icon-demo li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.eui-icon-demo {
+  display: block;
+}
+.eui-icon-demo li {
+  display: inline-block;
+  vertical-align: text-top;
+  margin-left: 5px !important;
+  margin-top: 5px !important;
+  padding: 4px !important;
+  width: 100px;
+  transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+}
+.eui-icon-demo li i {
+  display: block;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  margin: 0 auto;
+  text-align: center;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transform-origin: center center;
+  -webkit-transform-origin: center center;
+  -moz-transform-origin: center center;
+  -ms-transform-origin: center center;
+  -o-transform-origin: center center;
+}
+.eui-icon-demo li span {
+  display: block;
+  line-height: 24px;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+}
+.eui-icon-demo li:hover {
+  background: #58b6f5;
+  color: #fff;
+}
+.eui-icon-demo li:hover i {
+  transform: scale(1.4);
+  -webkit-transform: scale(1.4);
+  -moz-transform: scale(1.4);
+  -ms-transform: scale(1.4);
+  -o-transform: scale(1.4);
+}

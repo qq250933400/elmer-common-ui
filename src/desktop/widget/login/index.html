@@ -1,0 +1,29 @@
+<div class="eui-login {{state.theme}}" em:style="this.state.style">
+    <div>
+        <div class="eui-login-background"></div>
+        <div class="eui-login-form {{state.formTheme}}">
+            <label id="{{logoId}}" et:transitionEnd="onLogoTransitionEnd">
+                <div>
+                    <i></i>
+                </div>
+            </label>
+            <div class="eui-login-form-area">
+                <div class="eui-login-input">
+                    <div class="fa fa-user">
+                        <input value="{{state.userName}}" bind="state.userName" type="text" placeholder="{{state.userNamePH}}"/>
+                    </div>
+                </div>
+                <div class="eui-login-input">
+                    <div class="fa fa-eye">
+                        <input bind="state.password" type="password" placeholder="{{state.passwordPH}}"/>
+                    </div>
+                </div>
+                <div class="eui-login-button"><button et:click="onLoginClick">{{state.loginText}}</button></div>
+                <div class="eui-login-link">
+                    <a href="{{state.registeURL}}" class="eui-login-link-reg" et:click="onRegisteClick">{{state.registeText}}</a>
+                    <a href="{{state.forgetURL}}" class="eui-login-link-reset" et:click="onForgetClick">{{state.forgetText}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

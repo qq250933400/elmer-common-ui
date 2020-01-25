@@ -1,0 +1,14 @@
+<div class="eui-tab-bar">
+    <div class="eui-tab-head">
+        <ul >
+            <li em:for="let myTabTitle in this.tabTitle" et:click="handleOnTabClick" class.active="myTabTitle.key eq currentIndex">
+                <span>{{myTabTitle.title}}</span>
+            </li>
+        </ul>
+    </div>
+    <div class="eui-tab-content">
+        <div>
+            <content />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="eui-admin-menu {{props.theme}}" class.eui-admin-menu-collapse="!this.state.hasExpand">
+    <label et:click="handleOnExpandClick">
+        <a href="javascript:void(0);" class="fa {{state.icon}}"></a>
+    </label>
+    <ul>
+        <li em:for="let item in this.state.data" class.eui-admin-has-item="item.items.length gt 0" class.eui-admin-item-down="item.expand && this.state.hasExpand">
+            <label class.active="item.id eq this.state.selectedData.id" title="{{item.title}}" et:click="handleOnItemClick">
+                <span class="fa {{item.icon}}" class.eui-has-icon="{{item.hasIcon}}"><i>{{item.title}}</i></span>
+                <i em:if="item.items.length gt 0" class="fa" class.fa-angle-down="{{!item.expand}}" class.fa-angle-up="{{item.expand}}"></i>
+            </label>
+            <div>
+                <ul>
+                    <li em:for="let subItem in item.items">
+                        <label class.active="subItem.id eq this.state.selectedData.id" title="{{subItem.title}}" et:click="handleOnSubItemClick">
+                            <span class="fa {{subItem.icon}}"><i>{{subItem.title}}</i></span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

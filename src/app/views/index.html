@@ -1,0 +1,31 @@
+<ul id="testting" class="indexLayout">
+    <li><a href="javascript:void(0);" et:click="handleOnPageChange" data-url="/content/index">Home-Index</a></li>
+    <li><a href="javascript:void(0);" et:click="handleOnPageChange" data-url="/content/admin">Admin</a></li>
+    <li><a href="javascript:void(0);" et:click="handleOnPageChange" data-url="/content/desktop">Desktop</a></li>
+    <li><a href="javascript:void(0);" et:click="handleOnPageChange" data-url="/content/login">Login</a></li>
+    <li><a href="#/login" data-url="#/login">Login-Link</a></li>
+</ul>
+<div>
+    做个测试，测试Text Node解析
+    <textarea>
+        hahha, get an dom
+    </textarea>
+    做个测试，测试Text Node解析{{numCalc}}
+</div>
+<button et:click="handleOnOpenDialog">OpenDialog</button>
+<button et:click="handleOnInputDialog">InputDialog</button>
+<button et:click="handleOnAnimation">SlideIn</button>
+<button et:click="handleOnBackgroundAnimation">BackgroundAnimation</button>
+<button et:click="handleOnCalcClick">Num Count</button>
+<button et:click="handleOnServiceRequest">ServiceRequest</button>
+<div>
+    <button et:click="handleOnShowLoading">ShowLoading</button>
+</div>
+<div id="animation" style="display:none;width: 200px;height:300px;border: 1px solid #ddd;position: relative;background-color: pink;margin: 0 auto;overflow: hidden;">
+    <ul>
+        <li em:for="let item in this.listData"><span>{{item.title}}</span></li>
+    </ul>
+    <eui-scrollbar scrollSize="600" scrollViewSize="300"/>
+    <eui-scrollbar type="scrollX" scrollSize="600" scrollViewSize="300"/>
+</div>
+<eui-demo help="{{true}}"/>

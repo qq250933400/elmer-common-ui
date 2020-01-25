@@ -1,0 +1,527 @@
+@import "../../../style/common.less";
+.eui-calendar {
+    @calendarHeight: 50px;
+    @calendarTitleBk: #5d8191;
+    display: block;
+    width: 260px;
+    height: 380px;
+    overflow: hidden;
+    .SetRadius(6px);
+    .SetBoxShadow(0 0 8px rgba(10,10,10,0.2));
+    >div {
+        display: block;
+        height: 100%;
+        position: relative;
+        >label {
+            display: block;
+            height: @calendarHeight;
+            line-height: @calendarHeight;
+            text-align: center;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 25px;
+            background: rgba(214, 236, 249, 0.8);
+            color: #4f7a92;
+        }
+        .eui-calendar-title {
+            display: block;
+            height: 80px;
+            background: @calendarTitleBk;
+            .eui-calendar-title-weekend {
+                display: block;
+                height: 50px;
+                line-height: 50px;
+                position: relative;
+                .eui-calendar-left,
+                .eui-calendar-right {
+                    font-size: 40px;
+                    color:#fff;
+                    position: absolute;
+                    top: 3px;
+                    width: 30px;
+                    text-align: center;
+                    cursor: pointer;
+                    z-index: 3;
+                }
+                .eui-calendar-left {
+                    left: 0;
+                }
+                .eui-calendar-right {
+                    right: 0;
+                }
+                >div {
+                    display: block;
+                    height: 50px;
+                    line-height: 50px;
+                    text-align: center;
+                    font-size: 25px;
+                    color:#fff;
+                    z-index: 2;
+                    position: relative;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    padding: 0 40px;
+                    .SetBoxSizing(border-box);
+                    >div {
+                        display: block;
+                        height: 50px;
+                        position: relative;
+                        overflow: hidden;
+                        i {
+                            display: block;
+                            font-style: normal;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            height: 50px;
+                            line-height: 50px;
+                            width: 100%;
+                            text-align: center;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                        }
+                    }
+                }
+                >b {
+                    display: block;
+                    width: 40px;
+                    height: 40px;
+                    position: absolute;
+                    top: -5px;
+                    left: 50%;
+                    margin-left: -20px;
+                    background: @calendarTitleBk;
+                    z-index: 1;
+                    .SetRadius(10px);
+                    .SetTransform(rotateZ(45deg));
+                }
+            }
+            .eui-calendar-week-title {
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                font-size: 0;
+                margin: 0 10px;
+                position: relative;
+                overflow: hidden;
+                span {
+                    display: inline-block;
+                    font-size: 12px;
+                    width: 14.2%;
+                    height: 30px;
+                    line-height: 30px;
+                    text-align: center;
+                    color: #9fbac5;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                }
+            }
+        }
+        .eui-calendar-ct {
+            display: block;
+            position: relative;
+            padding: 10px;
+            background: rgba(41, 138, 168, 0.9);
+            .SetCalcHeight(~'100% - 160px');
+            .SetBoxSizing(border-box);
+            >div{
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                overflow: hidden;
+                .eui-calendar-bar ul,.eui-calendar-bar ul li {
+                    display: block;
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }
+                .eui-calendar-bar {
+                    position: absolute;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    >ul {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        position: relative;
+                        >li {
+                            display: block;
+                            height :16.5%;
+                            >ul {
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                line-height: 0 !important;
+                                position: relative;
+                                font-size: 0;
+                                >li {
+                                    display: inline-block;
+                                    height: 100%;
+                                    line-height: 32px;
+                                    width: 14.2%;
+                                    font-size: 14px;
+                                    text-align: center;
+                                    color:#fff;
+                                    cursor: pointer;
+                                    vertical-align: text-top;
+                                    border: 1px solid transparent;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    background: transparent;
+                                    .SetTextShadow(0 0 3px rgba(10,10,10,0.2));
+                                    .SetBoxSizing(border-box);
+                                    .SetRadius(100%);
+                                    &:hover {
+                                        border-color:#1a9ae1;
+                                    }
+                                }
+                                >li.disabled {
+                                    color: #adadad;
+                                    .SetTextShadow(none);
+                                    cursor:default;
+                                }
+                                .eui-calendar-today {
+                                    background: #e6575b;
+                                    border-color: #e6575b;
+                                    .SetRadius(100%);
+                                }
+                                .eui-calendar-checked {
+                                    background: #1a9ae1;
+                                    border-color: #1a9ae1;
+                                    font-size: 16px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .eui-calendar-bottom{
+            display: block;
+            height: 30px;
+            background: #678891;
+            text-align: center;
+            position: relative;
+            .eui-calendar-tag-taday,
+            .eui-calendar-tag-select {
+                display: block;
+                height: 24px;
+                line-height: 24px;
+                font-size: 12px;
+                color:#fff;
+                i {
+                    display: block;
+                    font-style: normal;
+                    padding-left: 20px;
+                    height: 24px;
+                    line-height: 24px;
+                    position: relative;
+                    &::after {
+                        display: block;
+                        content: "";
+                        width: 16px;
+                        height: 16px;
+                        position: absolute;
+                        left: 0;
+                        top: 4px;
+                        .SetRadius(100%);
+                    }
+                }
+            }
+            .eui-calendar-tag-left,
+            .eui-calendar-tag-right {
+                position: absolute;
+                top: 3px;
+            }
+            .eui-calendar-tag-left {
+                left: 5px;
+            }
+            .eui-calendar-tag-right {
+                right: 10px;
+            }
+            .eui-calendar-tag-taday i::after {
+                background: #e6575b;
+            }
+            .eui-calendar-tag-select i::after {
+                background: #1a9ae1;
+            }
+            .eui-calendar-time {
+                display: block;
+                height: 20px;
+                width: 64px;
+                background: #fff;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -32px;
+                margin-top: -10px;
+                font-size: 0;
+                >label {
+                    display: inline-block;
+                    width: 50%;
+                    height: 100%;
+                    line-height: 20px;
+                    text-align: center;
+                    font-size: 14px;
+                    position: relative;
+                    >span {
+                        display: block;
+                        height: 20px;
+                        text-align: center;
+                        cursor: pointer;
+                        &:hover {
+                            background: #96b5c2;
+                            color:#fff;
+                        }
+                    }
+                }
+                .eui-calendar-time-houre::after {
+                    content: ":";
+                    display: block;
+                    height: 20px;
+                    line-height: 20px;
+                    position:absolute;
+                    right: -2px;
+                    top: 0;
+                }
+            }
+        }
+        .eui-calendar-selector {
+            display: none;
+            position: absolute;
+            left:0;
+            top: 0;
+            width: 100%;
+            background-color:#fff;
+            z-index: 10;
+            .SetCalcHeight(~'100% - 40px');
+            .SetBoxShadow(0 2px 5px rgba(10,10,10,0.2));
+            >div {
+                display: block;
+                height:100%;
+                position: relative;
+                &::after {
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border: 8px solid #fff;
+                    border-left-color: transparent;
+                    border-right-color: transparent;
+                    border-bottom-color: transparent;
+                    position: absolute;
+                    left: 50%;
+                    bottom: -16px;
+                    margin-left: -8px;
+
+                }
+                .eui-calendar-selector-title {
+                    display: block;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    background: #4f7a92;
+                    color:#fff;
+                }
+                >ul {
+                    display: inline-block;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    -webkit-overflow-scrolling: touch;
+                    width:50%;
+                    .SetCalcHeight(~'100% - 40px');
+                    .SetBoxSizing(border-box);
+                    >li {
+                        display: block;
+                        text-align: center;
+                        height: 30px;
+                        line-height: 30px;
+                        cursor: default;
+                        &:hover {
+                            background: #9fbac5;
+                            color:#fff;
+                        }
+                        span {
+                            display: block;
+                            height: 30px;
+                            line-height: 30px;
+                        }
+                        span.active {
+                            background: #87a1ac;
+                            color:#fff; 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.aniCalendarTimeShow{
+    display: block !important;
+    .SetTransformOrigin(center bottom);
+    .SetAnimation(calendarTimeShowFrame 0.6s ease forwards);
+}
+@keyframes calendarTimeShowFrame {
+    0% {
+        opacity: 0.1;
+        transform: scale(0,0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1,1);
+    }
+}
+@-webkit-keyframes calendarTimeShowFrame {
+    0% {
+        opacity: 0.1;
+        -webkit-transform: scale(0,0);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale(1,1);
+    }
+}
+@-moz-keyframes calendarTimeShowFrame {
+    0% {
+        opacity: 0.1;
+        -moz-transform: scale(0,0);
+    }
+    100% {
+        opacity: 1;
+        -moz-transform: scale(1,1);
+    }
+}
+@-ms-keyframes calendarTimeShowFrame {
+    0% {
+        opacity: 0.1;
+        -ms-transform: scale(0,0);
+    }
+    100% {
+        opacity: 1;
+        -ms-transform: scale(1,1);
+    }
+}
+@keyframes calendarToNextKeyframe1 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@-webkit-keyframes calendarToNextKeyframe1 {
+    0% {
+        -webkit-transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+@-ms-keyframes calendarToNextKeyframe1 {
+    0% {
+        -ms-transform: translateX(0);
+    }
+    100% {
+        -ms-transform: translateX(-100%);
+    }
+}
+.aniCalendarToNext1 {
+    .SetAnimation(calendarToNextKeyframe1 0.8s ease forwards);
+}
+
+
+@keyframes calendarToNextKeyframe2 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+@-webkit-keyframes calendarToNextKeyframe2 {
+    0% {
+        -webkit-transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(-100%);
+    }
+}
+@-ms-keyframes calendarToNextKeyframe2 {
+    0% {
+        -ms-transform: translateX(0);
+    }
+    100% {
+        -ms-transform: translateX(-100%);
+    }
+}
+.aniCalendarToNext2 {
+    .SetAnimation(calendarToNextKeyframe2 0.8s ease forwards);
+}
+
+//---------------
+@keyframes calendarToPrevKeyframe1 {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+@-webkit-keyframes calendarToPrevKeyframe1 {
+    0% {
+        -webkit-transform: translateX(0);
+    }
+    100% {
+        -webkit-transform: translateX(100%);
+    }
+}
+@-ms-keyframes calendarToPrevKeyframe1 {
+    0% {
+        -ms-transform: translateX(0);
+    }
+    100% {
+        -ms-transform: translateX(100%);
+    }
+}
+.aniCalendarToPrev1 {
+    .SetAnimation(calendarToPrevKeyframe1 0.8s ease forwards);
+}
+
+
+@keyframes calendarToPrevKeyframe2 {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@-webkit-keyframes calendarToPrevKeyframe2 {
+    0% {
+        -webkit-transform: translateX(-100%);
+    }
+    100% {
+        -webkit-transform: translateX(0);
+    }
+}
+@-ms-keyframes calendarToPrevKeyframe2 {
+    0% {
+        -ms-transform: translateX(-100%);
+    }
+    100% {
+        -ms-transform: translateX(0);
+    }
+}
+.aniCalendarToPrev2 {
+    .SetAnimation(calendarToPrevKeyframe2 0.8s ease forwards);
+}

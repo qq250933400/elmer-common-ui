@@ -1,0 +1,34 @@
+<div class="DesktopSettingConfig">
+    <h5 class="desktopSettingTitle"><eui-icon type="{{state.data.icon}}"/><span>{{state.data.title}}</span></h5>
+    <div>
+        <eui-tab et:onChange="handleOnTabChange">
+            <eui-tab-item title="系统设置" currentIndex="{{state.tabIndex}}">
+                <eui-form help="{{true}}" hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
+                    <eui-form-item type="Input" title="网站LOGO"/>
+                    <eui-form-item type="Input" title="关注二维码"/>
+                    <eui-form-item type="Input" title="网站名称"/>
+                    <eui-form-item type="Input" title="网站关键词"/>
+                    <eui-form-item type="Input" title="网站描述"/>
+                    <eui-form-item type="Input" title="公司名称"/>
+                    <eui-form-item type="Input" title="域名"/>
+                    <eui-form-item type="Input" title="公司地址"/>
+                    <eui-form-item type="Input" title="详细地址"/>
+                    <eui-form-item type="Input" title="联系人"/>
+                    <eui-form-item type="Input" title="邮箱"/>
+                    <eui-form-item type="Input" title="联系方式"/>
+                    <eui-form-item type="Input" title="备案号"/>
+                </eui-form>
+            </eui-tab-item>
+            <eui-tab-item title="安全设置" currentIndex="{{state.tabIndex}}"></eui-tab-item>
+            <eui-tab-item title="菜单管理" currentIndex="{{state.tabIndex}}"></eui-tab-item>
+            <eui-tab-item title="其他" currentIndex="{{state.tabIndex}}">
+                <eui-form help="{{true}}" hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
+                    <eui-form-item type="Input" title="操作"/>
+                    <eui-form-item type="Input" title="版权"/>
+                    <eui-form-item type="TextArea" title="自定义全局CSS"/>
+                    <eui-form-item type="TextArea" title="统计代码Html"/>
+                </eui-form>
+            </eui-tab-item>
+        </eui-tab>
+    </div>
+</div>

@@ -1,0 +1,111 @@
+.eui-form {
+  display: block;
+  margin: 10px;
+  border: 1px solid #c7e6ef;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  overflow: hidden;
+}
+.eui-form > div {
+  display: block;
+  position: relative;
+}
+.eui-form > div header {
+  display: block;
+  padding: 8px 10px;
+  border-bottom: 1px solid #d9ecfd;
+}
+.eui-form > div header span {
+  display: inline-block;
+  font-size: 14px;
+  border-left: 4px solid #5fb6f0;
+  padding-left: 3px;
+  color: #333;
+  text-shadow: 1px 1px 3px #e0e0e0;
+  -webkit-text-shadow: 1px 1px 3px #e0e0e0;
+  -moz-text-shadow: 1px 1px 3px #e0e0e0;
+  -ms-text-shadow: 1px 1px 3px #e0e0e0;
+}
+.eui-form > div footer {
+  display: block;
+  padding: 10px 25px;
+  border-top: 1px solid #def7ff;
+  background: #f7fcff;
+}
+.eui-form > div > div {
+  display: block;
+  padding: 10px 0;
+}
+.eui-form > div > div .eui-form-item {
+  display: block;
+  padding: 5px 25px;
+}
+.eui-form > div > div .eui-form-item > div {
+  position: relative;
+  min-height: 35px;
+}
+.eui-form > div > div .eui-form-item > div > label {
+  height: 35px;
+  line-height: 35px;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #666;
+  text-shadow: 1px 1px 3px #e0e0e0;
+  -webkit-text-shadow: 1px 1px 3px #e0e0e0;
+  -moz-text-shadow: 1px 1px 3px #e0e0e0;
+  -ms-text-shadow: 1px 1px 3px #e0e0e0;
+  -o-text-shadow: 1px 1px 3px #e0e0e0;
+}
+.eui-form > div > div .eui-form-item > div > input[type=text],
+.eui-form > div > div .eui-form-item > div > input[type=password],
+.eui-form > div > div .eui-form-item > div > textarea {
+  display: block;
+  padding: 8px 10px;
+  -webkit-appearance: none;
+  border: 1px solid #ebebeb;
+  outline: none;
+  width: 250px;
+  border-radius: 3px;
+  background: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  box-shadow: 0 1px 6px rgba(238, 237, 237, 0.4) inset;
+  -webkit-box-shadow: 0 1px 6px rgba(238, 237, 237, 0.4) inset;
+  -moz-box-shadow: 0 1px 6px rgba(238, 237, 237, 0.4) inset;
+  -ms-box-shadow: 0 1px 6px rgba(238, 237, 237, 0.4) inset;
+  -o-box-shadow: 0 1px 6px rgba(238, 237, 237, 0.4) inset;
+}
+.eui-form > div > div .eui-form-item > div > input[type=text]:hover,
+.eui-form > div > div .eui-form-item > div > input[type=password]:hover,
+.eui-form > div > div .eui-form-item > div > textarea:hover {
+  border-color: #5fb6f0;
+  box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.4) inset,0 0 3px rgb(221, 220, 220);
+  -webkit-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.4) inset,0 0 3px rgb(221, 220, 220);
+  -moz-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.4) inset,0 0 3px rgb(221, 220, 220);
+  -ms-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.4) inset,0 0 3px rgb(221, 220, 220);
+  -o-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.4) inset,0 0 3px rgb(221, 220, 220);
+}
+.eui-form > div > div .eui-form-item > div > input[type=text]:focus,
+.eui-form > div > div .eui-form-item > div > input[type=password]:focus,
+.eui-form > div > div .eui-form-item > div > textarea:focus {
+  border-color: #58b5f3;
+  box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.5) inset;
+  -webkit-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.5) inset;
+  -moz-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.5) inset;
+  -ms-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.5) inset;
+  -o-box-shadow: 1px 1px 3px rgba(95, 182, 240, 0.5) inset;
+}
+.eui-form > div > div .eui-form-item > div > input[type=text]:disabled,
+.eui-form > div > div .eui-form-item > div > input[type=password]:disabled,
+.eui-form > div > div .eui-form-item > div > textarea:disabled {
+  background: #ebebeb;
+  color: #999;
+}
+.eui-form > div > div .eui-form-inline > div > label {
+  position: absolute;
+  left: 0;
+  top: 0;
+}

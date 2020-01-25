@@ -1,0 +1,430 @@
+.eui-cadenlar {
+  display: block;
+  width: 260px;
+  height: 380px;
+  overflow: hidden;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
+  -webkit-box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
+  -moz-box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
+  -ms-box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
+  -o-box-shadow: 0 0 8px rgba(10, 10, 10, 0.2);
+}
+.eui-cadenlar > div {
+  display: block;
+  height: 100%;
+  position: relative;
+}
+.eui-cadenlar > div > label {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 25px;
+  background: rgba(214, 236, 249, 0.8);
+  color: #4f7a92;
+}
+.eui-cadenlar > div .eui-cadenlar-title {
+  display: block;
+  height: 80px;
+  background: #5d8191;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend .eui-cadenlar-left,
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend .eui-cadenlar-right {
+  font-size: 40px;
+  color: #fff;
+  position: absolute;
+  top: 3px;
+  width: 30px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 3;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend .eui-cadenlar-left {
+  left: 0;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend .eui-cadenlar-right {
+  right: 0;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend > div {
+  display: block;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 25px;
+  color: #fff;
+  z-index: 2;
+  position: relative;
+  left: 0;
+  top: 0;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend > div > div {
+  display: block;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend > div > div i {
+  display: block;
+  font-style: normal;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 50px;
+  line-height: 50px;
+  width: 100%;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-title-weekend > b {
+  display: block;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  margin-left: -20px;
+  background: #5d8191;
+  z-index: 1;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  transform: rotateZ(45deg);
+  -webkit-transform: rotateZ(45deg);
+  -moz-transform: rotateZ(45deg);
+  -ms-transform: rotateZ(45deg);
+  -o-transform: rotateZ(45deg);
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-week-title {
+  display: block;
+  height: 30px;
+  line-height: 30px;
+  font-size: 0;
+  margin: 0 10px;
+  position: relative;
+  overflow: hidden;
+}
+.eui-cadenlar > div .eui-cadenlar-title .eui-cadenlar-week-title span {
+  display: inline-block;
+  font-size: 12px;
+  width: 14.2%;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #9fbac5;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.eui-cadenlar > div .eui-cadenlar-ct {
+  display: block;
+  position: relative;
+  padding: 10px;
+  background: rgba(160, 190, 199, 0.61);
+  height: calc(100% - 160px);
+  height: -webkit-calc(100% - 160px);
+  height: -moz-calc(100% - 160px);
+  height: -ms-calc(100% - 160px);
+  height: -o-calc(100% - 160px);
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar ul,
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar ul li {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li {
+  display: block;
+  height: 16.5%;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li > ul {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  font-size: 0;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li > ul > li {
+  display: inline-block;
+  height: 100%;
+  line-height: 32px;
+  width: 14.2%;
+  font-size: 14px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  vertical-align: text-top;
+  border: 1px solid transparent;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-shadow: 0 0 3px rgba(10, 10, 10, 0.2);
+  -webkit-text-shadow: 0 0 3px rgba(10, 10, 10, 0.2);
+  -moz-text-shadow: 0 0 3px rgba(10, 10, 10, 0.2);
+  -ms-text-shadow: 0 0 3px rgba(10, 10, 10, 0.2);
+  -o-text-shadow: 0 0 3px rgba(10, 10, 10, 0.2);
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li > ul > li:hover {
+  border-color: #45cab7;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li > ul > li.disabled {
+  color: #adadad;
+  text-shadow: none;
+  -webkit-text-shadow: none;
+  -moz-text-shadow: none;
+  -ms-text-shadow: none;
+  -o-text-shadow: none;
+  cursor: default;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li > ul .eui-calendar-today {
+  background: #e6575b;
+  border-color: #e6575b;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+}
+.eui-cadenlar > div .eui-cadenlar-ct > div .eui-calendar-bar > ul > li > ul .eui-calendar-checked {
+  background: #45cab7;
+  border-color: #45cab7;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom {
+  display: block;
+  height: 30px;
+  background: #678891;
+  text-align: center;
+  position: relative;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-taday,
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-select {
+  display: block;
+  height: 24px;
+  line-height: 24px;
+  font-size: 12px;
+  color: #fff;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-taday i,
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-select i {
+  display: block;
+  font-style: normal;
+  padding-left: 20px;
+  height: 24px;
+  line-height: 24px;
+  position: relative;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-taday i::after,
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-select i::after {
+  display: block;
+  content: "";
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 0;
+  top: 4px;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-left,
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-right {
+  position: absolute;
+  top: 3px;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-left {
+  left: 5px;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-right {
+  right: 10px;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-taday i::after {
+  background: #e6575b;
+}
+.eui-cadenlar > div .eui-cadenlar-bottom .eui-cadenlar-tag-select i::after {
+  background: #45cab7;
+}
+@keyframes calendarToNextKeyframe1 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes calendarToNextKeyframe1 {
+  0% {
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@-ms-keyframes calendarToNextKeyframe1 {
+  0% {
+    -ms-transform: translateX(0);
+  }
+  100% {
+    -ms-transform: translateX(-100%);
+  }
+}
+.aniCalendarToNext1 {
+  animation: calendarToNextKeyframe1 0.8s ease forwards;
+  -webkit-animation: calendarToNextKeyframe1 0.8s ease forwards;
+  -moz-animation: calendarToNextKeyframe1 0.8s ease forwards;
+  -ms-animation: calendarToNextKeyframe1 0.8s ease forwards;
+  -o-animation: calendarToNextKeyframe1 0.8s ease forwards;
+}
+@keyframes calendarToNextKeyframe2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@-webkit-keyframes calendarToNextKeyframe2 {
+  0% {
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+  }
+}
+@-ms-keyframes calendarToNextKeyframe2 {
+  0% {
+    -ms-transform: translateX(0);
+  }
+  100% {
+    -ms-transform: translateX(-100%);
+  }
+}
+.aniCalendarToNext2 {
+  animation: calendarToNextKeyframe2 0.8s ease forwards;
+  -webkit-animation: calendarToNextKeyframe2 0.8s ease forwards;
+  -moz-animation: calendarToNextKeyframe2 0.8s ease forwards;
+  -ms-animation: calendarToNextKeyframe2 0.8s ease forwards;
+  -o-animation: calendarToNextKeyframe2 0.8s ease forwards;
+}
+@keyframes calendarToPrevKeyframe1 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@-webkit-keyframes calendarToPrevKeyframe1 {
+  0% {
+    -webkit-transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(100%);
+  }
+}
+@-ms-keyframes calendarToPrevKeyframe1 {
+  0% {
+    -ms-transform: translateX(0);
+  }
+  100% {
+    -ms-transform: translateX(100%);
+  }
+}
+.aniCalendarToPrev1 {
+  animation: calendarToPrevKeyframe1 0.8s ease forwards;
+  -webkit-animation: calendarToPrevKeyframe1 0.8s ease forwards;
+  -moz-animation: calendarToPrevKeyframe1 0.8s ease forwards;
+  -ms-animation: calendarToPrevKeyframe1 0.8s ease forwards;
+  -o-animation: calendarToPrevKeyframe1 0.8s ease forwards;
+}
+@keyframes calendarToPrevKeyframe2 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@-webkit-keyframes calendarToPrevKeyframe2 {
+  0% {
+    -webkit-transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(0);
+  }
+}
+@-ms-keyframes calendarToPrevKeyframe2 {
+  0% {
+    -ms-transform: translateX(-100%);
+  }
+  100% {
+    -ms-transform: translateX(0);
+  }
+}
+.aniCalendarToPrev2 {
+  animation: calendarToPrevKeyframe2 0.8s ease forwards;
+  -webkit-animation: calendarToPrevKeyframe2 0.8s ease forwards;
+  -moz-animation: calendarToPrevKeyframe2 0.8s ease forwards;
+  -ms-animation: calendarToPrevKeyframe2 0.8s ease forwards;
+  -o-animation: calendarToPrevKeyframe2 0.8s ease forwards;
+}

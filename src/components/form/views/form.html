@@ -1,0 +1,15 @@
+<form onsubmit="return false;" class="eui-form {{props.theme}} {{layoutTheme}}" action="{{props.action}}" method="{{props.method}}">
+    <div class.eui-form-no-title="!this.props.hasTitle">
+        <header em:show="this.props.hasTitle"><span>{{props.title}}</span></header>
+        <div>
+            <content />
+        </div>
+        <footer>
+            <div class="{{layoutTheme}}" em:style="this.itemPaddingLeft">
+                <eui-button et:onClick="handleOnBtnSubmit" em:disabled="this.ajaxLoading" em:loading="this.ajaxLoading" style="vertical-align:middle;" theme="eui-button-primary" title="{{props.submitText}}"></eui-button>
+                <eui-button em:if="this.props.showReset" et:onClick="handleOnReset" em:disabled="this.ajaxLoading" style="margin-left: 10px;vertical-align:middle;" title="{{props.resetText}}"></eui-button>
+                <a class.eui-inline-hidden="{{!this.props.showBack}}" href="javascript:void(0);" et:click="handleOnBackClick" class="eui-button eui-button-default" style="margin-left: 10px;vertical-align:middle;" em:disabled="this.ajaxLoading">{{props.backText}}</a>
+            </div>
+        </footer>
+    </div>
+</form>

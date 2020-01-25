@@ -1,0 +1,104 @@
+@import "../../../style/common.less";
+@itemHeight: 25px;
+@iconWidth: 20px;
+.eui-treeview[treeview] {
+    display: block;
+    height: 100%;
+    padding: 4px;
+    .SetBoxSizing(border-box);
+    ul,ul li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: block;
+    }
+    ul {
+        li {
+            display: block;
+            label {
+                display: block;
+                height: @itemHeight;
+                line-height: @itemHeight;
+                font-size: 14px;
+                position: relative;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                border: 1px solid transparent;
+                >div{
+                    display: block;
+                    position: relative;
+                    padding-left: @iconWidth;
+                    height: @itemHeight;
+                    line-height: @itemHeight;
+                    >i {
+                        display: block;
+                        height: @itemHeight;
+                        width: @iconWidth;
+                        line-height: @itemHeight;
+                        text-align: center;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        font-size: 18px;
+                        .SetBoxSizing(border-box);
+                    }
+                    >img {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        vertical-align: middle;
+                    }
+                    >span {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                }
+            }
+        }
+        .eui-treeview-sub-child {
+            margin-left: 20px;
+        }
+    }
+    >div{
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        >ul {
+            margin-left: 0;
+        }
+    }
+}
+.elmerTheme {
+    .eui-treeview[treeview] {
+        ul {
+            li {
+                label {
+                    i {
+                        color: #76bcf7;
+                        &:hover {
+                            background: rgba(221, 238, 250, 0.624);
+                        }
+                    }
+                    span {
+                        color:#333;
+                    }
+                    &:hover {
+                        background: hsla(205, 83%, 95%, 0.582);
+                        border-color:#eaf5fd;
+                    }
+                }
+                .active,
+                .eui-treeview-item-selected {
+                    background: rgba(196, 227, 251, 0.521) !important;
+                    border-color: rgba(196, 227, 251, 0.473) !important;
+                    i {
+                        color:#333;
+                    }
+                }
+            }
+
+        }
+    }
+}

@@ -1,0 +1,43 @@
+<div class="eui-pc-region {{props.theme}}" em:style="this.props.style" class.eui-drop-down-disabled="this.props.disabled" tabindex="{{props.tabIndex}}" et:click="handleOnClick" class.eui-drop-down-focus="this.state.hasFocus" et:blur="handleOnBlur">
+    <div>
+        <input type="hidden" id="{{props.id}}" name="{{props.name}}" value="{{this.displayValue}}"/>
+        <div et:click="handleOnDisplayTitleClick" >
+            <span em:show="this.displayData.length eq 0">{{placeholder}}</span>
+            <label em:show="this.displayData.length gt 0" class="eui-pc-region-display">
+                <span et:click="handleOnDisplayTitleClick" data-id="{{tit.index}}" em:for="let tit in this.displayData" data-code="{{tit.value}}" class.split="tit.key gt 0">{{tit.title}}</span>
+            </label>
+        </div>
+        <eui-icon type="fa-caret-down"></eui-icon>
+    </div>
+    <div class="eui-drop-down-list aniDropDownShow" et:click="handleOnListClick" em:show="this.state.dropListVisible">
+         <div class="eui-pc-region-select-tab">
+             <div>
+                <a href="javascript:void(0);" et:click="handleOnTabClick" data-id="0" class.active="this.state.selectedTab eq '0'">{{this.proviceTitle}}</a>
+                <a href="javascript:void(0);" et:click="handleOnTabClick" data-id="1" class.active="this.state.selectedTab eq '1'">{{this.cityTitle}}</a>
+                <a href="javascript:void(0);" et:click="handleOnTabClick" data-id="2" class.active="this.state.selectedTab eq '2'">{{this.districtTitle}}</a>
+            </div>
+         </div>
+         <div class="eui-pc-region-list">
+            <ul class="eui-pc-region-province" class.active="this.state.selectedTab eq '0'">
+                <li em:for="let cat in this.provinceData">
+                <span>{{cat.title}}</span>
+                <ul>
+                    <li em:for="let provice in cat.data" et:click="handleOnProvinceClick" class.active="selectedProvince.value eq provice.value">
+                        <span>{{provice.title}}</span>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            <ul class="eui-pc-region-city" class.active="this.state.selectedTab eq '1'">
+                <li em:for="let city in this.cityData" et:click="handleOnCityClick" class.active="this.selectedCity.value eq city.value">
+                    <span>{{city.title}}</span>
+                </li>
+            </ul>
+            <ul class="eui-pc-region-city" class.active="this.state.selectedTab eq '2'">
+                <li em:for="let district in this.districtData" et:click="handleOnDistrictClick" class.active="this.selectedDistrict.value eq district.value">
+                    <span>{{district.title}}</span>
+                </li>
+            </ul>
+         </div>
+    </div>
+</div>

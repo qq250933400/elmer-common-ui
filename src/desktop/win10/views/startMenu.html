@@ -1,0 +1,59 @@
+<div em:show="this.state.visible"
+    class="eui-win10-start-menu {{state.theme}} {{state.showAnimation}}"
+    et:click="handleOnMenuClick"
+    class.eui-win10-start-menu-no-quick="this.state.quickStartList.length lteq 0"
+>
+    <div>
+        <div class="eui-win10-start-menu-left-side">
+            <ul>
+                <li em:for="let item in this.state.leftSideData" title="{{item.title}}" et:click="handleOnLeftSideClick">
+                    <div>
+                        <eui-icon type="{{item.icon}}"/>
+                        <span>{{item.title}}</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="eui-win10-start-menu-list">
+            <ul>
+                <li em:for="let item in this.state.menuList" title="{{item.name}}">
+                    <div et:click="handleOnMenuGroupClick" data-id="{{item.id}}">
+                        <span>{{item.name}}</span>
+                        <i class="fa" class.fa-angle-down="item.id neq this.state.activeGroupId"
+                            class.fa-angle-up="item.id eq this.state.activeGroupId"></i>
+                    </div>
+                    <ul em:if="item.data.length gt 0" em:show="item.id eq this.state.activeGroupId" class.AnimationOpacityIn="item.id eq this.state.activeGroupId">
+                        <li em:for="let subItem in item.data" title="{{subItem.title}}" et:click="handleOnMenuItemClick">
+                            <div>
+                                <eui-icon type="{{subItem.icon}}" />
+                                <span>{{subItem.title}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="eui-win10-start-menu-start">
+            <ul>
+                <li em:for="let item in this.state.quickStartList" title="{{item.name}}">
+                    <div>
+                        <span>{{item.name}}</span>
+                        <eui-icon type="fa-list" />
+                    </div>
+                    <ul em:if="item.data.length gt 0">
+                        <li em:for="let subItem in item.data"
+                            title="{{subItem.title}}"
+                            et:click="handleOnMenuItemClick"
+                            class="StartMenuItemNormal"
+                        >
+                            <div>
+                                <eui-icon type="{{subItem.icon}}" />
+                                <span>{{subItem.title}}</span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

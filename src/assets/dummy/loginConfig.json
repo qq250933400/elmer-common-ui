@@ -1,0 +1,8 @@
+{
+    "status": 200,
+    "message": "ok",
+    "body": {
+        "background": "http://localhost:3000/assets/wallper/background.jpg",
+        "copyRight": "Copyright (C) elmer s j mo all right reserve"
+    }
+}

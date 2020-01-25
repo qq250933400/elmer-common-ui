@@ -1,0 +1,370 @@
+@import "../../style/common.less";
+.eui-drop-down,
+.eui-pc-region {
+    display: inline-block;
+    position: relative;
+    padding: 4px;
+    z-index: 999;
+    outline:none;
+    height:24px;
+    .SetRadius(3px);
+    >div {
+        display: block;
+        padding-right: 25px;
+        padding-left: 4px;
+        >div {
+            display: block;
+            min-width: 80px;
+            height: 26px;
+            line-height: 26px;
+            position: relative;
+            cursor: default;
+            >span,
+            >label {
+                display: block;
+                height: 26px;
+                line-height: 26px;
+                font-size: 14px;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+            }
+        }
+        >i {
+            display: block;
+            width: 18px;
+            height: 18px;
+            position: absolute;
+            right: 0px;
+            top: 8px;
+            font-size: 18px;
+        }
+    }
+    .eui-drop-down-list ul,
+    .eui-drop-down-list ul li {
+        display: block;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    .eui-drop-down-list {
+        position: absolute;
+        width: 100%;
+        left: -1px;
+        top: 30px;
+        max-height: 200px;
+        overflow:hidden;
+        overflow-y:auto;
+        padding: 0;
+        border-width: 1px;
+        border-style: solid;
+        border-top-width: 0;
+        -webkit-overflow-scrolling: touch;
+        .SetRadius(0 0 3px 3px);
+        .SetBoxSizing(border-box);
+        .SetCalcWidth(~'100% + 2px');
+        >ul {
+            display: block;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+            li {
+                display: block;
+                height: 32px;
+                line-height: 32px;
+                cursor: pointer;
+                >div {
+                    display: block;
+                    height: 32px;
+                    line-height: 32px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    font-size: 14px;
+                    padding: 0 5px;
+                    span, i {
+                        display: inline-block;
+                        vertical-align: middle;
+                    }
+                    i {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        } 
+    }
+}
+.eui-pc-region {
+    >div {
+        min-width: 150px;
+        .eui-pc-region-display {
+            font-size: 14px;
+            span {
+                display: inline-block;
+                position: relative;
+                padding: 0 4px;
+                .SetRadius(2px);
+                &:hover {
+                    background: #e9f6ff;
+                    color:#58b5f3;
+                }
+            }
+            .split {
+                margin-left: 5px;
+                &::before{
+                    display: inline-block;
+                    content: "/";
+                    left: -5px;
+                    color:#999 !important;
+                    position: absolute;
+                }
+            }
+        }
+    }
+    .eui-drop-down-list {
+        height: auto !important;
+        width: auto !important;
+        min-width: calc(~'100% + 2px');
+        min-width: -webkit-calc(~'100% + 2px');
+        min-width: -moz-calc(~'100% + 2px');
+        min-width: -ms-calc(~'100% + 2px');
+        overflow: hidden;
+        .eui-pc-region-select-tab {
+            display: block;
+            height: 31px;
+            position: relative;
+            overflow: hidden;
+           >div {
+                display: block;
+                height: 30px;
+                border-bottom: 1px solid #ccc;
+                background: #f0f0f0;
+                font-size: 0;
+                a {
+                    display: inline-block;
+                    text-decoration: none;
+                    vertical-align: middle;
+                    line-height: 30px;
+                    height: 30px;
+                    
+                    font-size: 13px;
+                    padding: 0 15px;
+                    color:#333;
+                }
+                .active {
+                    background: #fff;
+                    border-bottom: 1px solid #fff;
+                    border-left-color: #ccc;
+                    border-right-color:#ccc;
+                    color:#58b5f3;
+                    margin-top: 1px;
+                }
+           }
+        }
+        .eui-pc-region-list {
+            display: block;
+            height: 100% !important;
+            max-height: 250px;
+            overflow-y:auto;
+            overflow-x: hidden;
+            min-height: 10px;
+            >ul {
+                display: none;
+            }
+            >.active {
+                display: block;
+            }
+            .eui-pc-region-province {
+                padding: 10px 0;
+                >li:hover {
+                    background: #fff !important;
+                }
+                >li {
+                    padding-left: 40px;
+                    position: relative;
+                    font-size: 12px;
+                    >span {
+                        color: #333 !important;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        height: 25px;
+                        line-height: 25px;
+                        text-align: right;
+                        width: 35px;
+                    }
+                    >ul {
+                        display: block;
+                        &::after {
+                            display: block;
+                            content: "";
+                            clear: both;
+                        }
+                        >li {
+                            display: block;
+                            float: left;
+                            padding: 0 10px;
+                            color:#333;
+                            &:hover {
+                                background: #e9f6ff;
+                                color:#58b5f3;
+                            }
+                        }
+                        >.active {
+                            background: #58b5f3 !important;
+                            color:#fff !important;
+                        }
+                    }
+                }
+            }
+        }
+        .eui-pc-region-city {
+            display: block;
+            font-size: 12px;
+            padding: 10px;
+            height: auto;
+            &::after {
+                content: "";
+                display: block;
+                clear: both;
+            }
+            >li {
+                display: block;
+                float: left;
+                padding: 0 10px;
+                color:#333;
+                &:hover {
+                    background: #e9f6ff;
+                    color:#58b5f3;
+                }
+            }
+            >.active {
+                background: #58b5f3 !important;
+                color:#fff !important;
+            }
+        }
+    }
+}
+.elmerTheme {
+    .eui-drop-down,
+    .eui-pc-region {
+        border: 1px solid #ebebeb;
+        background: #fff;
+        .SetBoxShadow(0 1px 6px rgba(238, 237, 237, 0.4) inset);
+        >div {
+            >i {
+                color:#999;
+            }
+            >div {
+                >span {
+                    color:#d4d4d4;
+                }
+            }
+        }
+        &:hover {
+            border-color:#5fb6f0;
+            .SetBoxShadow(~'0 0 3px rgb(221, 220, 220)');
+            >div>i {
+                color: #5fb6f0;
+
+            }
+            .eui-drop-down-list {
+                border-color:#5fb6f0;
+                .SetBoxShadow(~'1px 3px 3px rgb(221, 220, 220)');
+                ul li {
+                    div {
+                        color:#333;
+                    }
+                }
+            }
+        }
+        .eui-drop-down-list {
+            border-color: #ebebeb;
+            background: #fff;
+            .SetBoxShadow(1px 2px 6px rgba(238, 237, 237, 0.4));
+            .eui-drop-down-item-active {
+                background: #b0dfff;
+                color:#fff;
+                >div,>div i,>div span {
+                    color: #fff;
+                    .SetTextShadow(0 0 3px rgba(10,10,10,0.4));
+                }
+            }
+        }
+        .eui-drop-down-list {
+            li {
+                >div,>div span {
+                    color: #333;
+                }
+                >div>i {
+                    color:#5fb6f0;
+                }
+                &:hover {
+                    background: #58b5f3;
+                    color:#fff;
+                    >div,>div i,>div span {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+    .eui-drop-down-focus,
+    .eui-drop-down:focus {
+        border-color:#58b5f3;
+        >div>i {
+            color: #5fb6f0;
+        }
+        .eui-drop-down-list {
+            border-color: #58b5f3;
+            background: #fff;
+            .SetBoxShadow(1px 2px 6px rgba(238, 237, 237, 0.4));
+        }
+    }
+    .eui-drop-down-disabled {
+        border-color: #ebebeb !important;
+        background: #ebebeb !important;
+        color:#999 !important;
+    }
+    .eui-drop-down-item-disabled {
+        background: transparent !important;
+        color:#ddd;
+        >div>i,
+        >div>span{
+            color: #ddd !important;
+        }
+    }
+}
+
+@keyframes kfDropdownShow {
+    0% {
+        transform: scaleY(0);
+        opacity: 0.4;
+    }
+    90% {
+        transform: scaleY(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scaleY(1.0);
+    }
+}
+@-webkit-keyframes kfDropdownShow {
+    0% {
+        -webkit-transform: scaleY(0);
+        opacity: 0.4;
+    }
+    90% {
+        -webkit-transform: scaleY(1.1);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: scaleY(1.0);
+    }
+}
+
+.aniDropDownShow {
+    .SetTransformOrigin(top center);
+    .SetAnimation(kfDropdownShow 0.3s ease);
+}

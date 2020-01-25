@@ -1,0 +1,186 @@
+.SetPerspectiveOrigin(@origin:initial){
+    perspective-origin:@origin;
+    -webkit-perspective-origin:@origin;
+    -moz-perspective-origin:@origin;
+    -ms-perspective-origin:@origin;
+    -o-perspective-origin:@origin;
+}
+.SetPerspective(@perspective:0){
+    perspective:@perspective;
+    -webkit-perspective:@perspective;
+    -moz-perspective:@perspective;
+    -ms-perspective:@perspective;
+    -o-perspective:@perspective;
+}
+.SetTransform(@transform:rotate(0deg)){
+    transform:@transform;
+    -webkit-transform:@transform;
+    -moz-transform:@transform;
+    -ms-transform:@transform;
+    -o-transform:@transform;
+}
+.SetTransition(@transition:none){
+    transition:@transition;
+    -webkit-transition:@transition;
+    -moz-transition:@transition;
+    -ms-transition:@transition;
+    -o-transition:@transition;
+}
+.SetRadius(@Radius:0px){
+    border-radius:@Radius;
+    -webkit-border-radius:@Radius;
+    -moz-border-radius:@Radius;
+    -ms-border-radius:@Radius;
+    -o-border-radius:@Radius;
+}
+.SetRadiusImportant(@Radius:0px){
+    border-radius:@Radius !important;
+    -webkit-border-radius:@Radius !important;
+    -moz-border-radius:@Radius !important;
+    -ms-border-radius:@Radius !important;
+    -o-border-radius:@Radius !important;
+}
+.SetBoxShadow(@shadow:none){
+    box-shadow:@shadow;
+    -webkit-box-shadow:@shadow;
+    -moz-box-shadow:@shadow;
+    -ms-box-shadow:@shadow;
+    -o-box-shadow:@shadow;
+}
+.SetBoxShadowImportant(@shadow:none){
+    box-shadow:@shadow !important;
+    -webkit-box-shadow:@shadow !important;
+    -moz-box-shadow:@shadow !important;
+    -ms-box-shadow:@shadow !important;
+    -o-box-shadow:@shadow !important;
+}
+.SetAnimation(@animate:none){
+    animation:@animate;
+    -webkit-animation:@animate;
+    -moz-animation:@animate;
+    -ms-animation:@animate;
+    -o-animation:@animate;
+}
+
+.SetTextShadow(@shadow:none){
+    text-shadow:@shadow;
+    -webkit-text-shadow:@shadow;
+    -moz-text-shadow:@shadow;
+    -ms-text-shadow:@shadow;
+    -o-text-shadow:@shadow;
+}
+.SetTransformOrigin(@orgin:center) {
+    transform-origin:@orgin;
+    -webkit-transform-origin:@orgin;
+    -moz-transform-origin:@orgin;
+    -ms-transform-origin:@orgin;
+    -o-transform-origin:@orgin;
+}
+.SetAppNotTouchEffect(){
+       -webkit-tap-highlight-color: transparent;
+       -webkit-touch-callout: none;
+       -webkit-user-select: none;
+       -ms-touch-callout: none;
+       -moz-touch-callout: none;
+       -o-touch-callout: none;
+}
+.SetCalcWidth(@Value,@important: 0) when (@important > 0) {
+    width: calc(@Value) !important;
+    width: -webkit-calc(@Value) !important;
+    width: -moz-calc(@Value) !important;
+    width: -ms-calc(@Value) !important;
+    width: -o-calc(@Value) !important;
+}
+.SetCalcWidth(@Value,@important:0) when (@important <= 0){
+    width:calc(@Value);
+    width:-webkit-calc(@Value);
+    width:-moz-calc(@Value);
+    width:-ms-calc(@Value);
+    width:-o-calc(@Value);
+}
+.SetCalcHeight(@Value,@important:0) when(@important > 0){
+    height:calc(@Value) !important;
+    height:-webkit-calc(@Value) !important;
+    height:-moz-calc(@Value) !important;
+    height:-ms-calc(@Value) !important;
+    height:-o-calc(@Value) !important;
+}
+.SetCalcHeight(@Value,@important:0) when(@important <= 0){
+    height:calc(@Value);
+    height:-webkit-calc(@Value);
+    height:-moz-calc(@Value);
+    height:-ms-calc(@Value);
+    height:-o-calc(@Value);
+}
+.SetCalcTop(@Value,@important:0) when(@important > 0){
+    top:calc(@Value) !important;
+    top:-webkit-calc(@Value) !important;
+    top:-moz-calc(@Value) !important;
+    top:-ms-calc(@Value) !important;
+    top:-o-calc(@Value) !important;
+}
+.SetCalcTop(@Value,@important:0) when(@important <= 0){
+    top:calc(@Value);
+    top:-webkit-calc(@Value);
+    top:-moz-calc(@Value);
+    top:-ms-calc(@Value);
+    top:-o-calc(@Value);
+}
+.SetCalcLeft(@Value,@important:0) when (@important > 0){
+    left:calc(@Value) !important;
+    left:-webkit-calc(@Value) !important;
+    left:-moz-calc(@Value) !important;
+    left:-ms-calc(@Value) !important;
+    left:-o-calc(@Value) !important;
+}
+.SetCalcLeft(@Value,@important:0) when (@important <= 0){
+    left:calc(@Value);
+    left:-webkit-calc(@Value);
+    left:-moz-calc(@Value);
+    left:-ms-calc(@Value);
+    left:-o-calc(@Value);
+}
+.SetBoxSizing(@value){
+    box-sizing:@value;
+    -webkit-box-sizing:@value;
+    -moz-box-sizing:@value;
+    -ms-box-sizing:@value;
+    -o-box-sizing:@value;
+}
+.SetNoneSelect() {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.clearAutoFillBackground() {
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active,
+    select:-webkit-autofill,
+    select:-webkit-autofill:hover,
+    select:-webkit-autofill:active,
+    select:-webkit-autofill:focus,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    textarea:-webkit-autofill:active
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        -webkit-transition-delay: 99999s;
+        .SetTransition(~"color 99999s ease-out, background-color 99999s ease-out");
+    }
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    select:-webkit-autofill
+     {
+        background: transparent !important;
+        background-color: transparent !important;
+        background-image: none;
+        .SetBoxShadowImportant(0 0 0px 1000px transparent inset);
+    }
+}

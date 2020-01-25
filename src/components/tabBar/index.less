@@ -1,0 +1,92 @@
+@import "../../style/common.less";
+.eui-tab-bar,
+.eui-tab-bar .eui-tab-content {
+    .SetBoxSizing(border-box);
+}
+.eui-tab-bar {
+    display: block;
+    height: 100%;
+    position: relative;
+    .eui-tab-head {
+        display: block;
+        height: 35px;
+        border-bottom: 1px solid #cecccc;
+        padding: 0 5px;
+        position: relative;
+        overflow: visible;
+        ul,ul li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul {
+            display: block;
+            overflow-x: auto;
+            overflow-y: visible;
+            position: relative;
+            padding-top: 7px;
+            li {
+                display: inline-table;
+                height: 29px;
+                line-height: 28px;
+                vertical-align: text-bottom;
+                border-width: 1px;
+                border-style: solid;
+                border-color: #e2dfdf;
+                border-bottom-color: transparent;
+                padding: 0 10px;
+                font-size: 13px;
+                margin-left: 2px;
+                color:#999;
+                cursor: pointer;
+                .SetRadius(3px 3px 0 0);
+                .SetBoxSizing(border-box);
+                &:hover {
+                    background: #bee2fa;
+                    border-color:#a0d5f8;
+                    color:#166faa;
+                }
+                &:active {
+                    background: #a9d7f5;
+                    border-color:#94d3fd;
+                    color:#166faa;
+                    .SetBoxShadow(1px 2px 6px rgba(22, 111, 170, 0.596) inset);
+                }
+            }
+            >.active {
+                background: #fff;
+                border-color:#cecccc;
+                border-bottom-color:#fff;
+                color:#333;
+                &:hover {
+                    background: #d6eefd;
+                    border-color:#cecccc;
+                    border-bottom-color:#fff;
+                }
+            }
+        }
+    }
+    .eui-tab-content {
+        display: block;
+        overflow: hidden;
+        padding: 4px;
+        border: 1px solid #cecccc;
+        border-top: 0;
+        .SetCalcHeight(~'100% - 35px');
+        >div {
+            display: block;
+            width: 100%;
+            height: 100%;
+            .eui-tab-item-page {
+                display: none;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            >.active {
+                display: block;
+            }
+        }
+    }
+}

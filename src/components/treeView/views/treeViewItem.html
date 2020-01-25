@@ -1,0 +1,10 @@
+<div>
+    <label passive="{{false}}" et:dblclick="handleOnDblClick" et:click="handleOnClick" style="padding-left:{{offsetLeft}}px;" oncontextmenu="return false" class="eui-no-select {{theme}} {{data.theme}}">
+        <div>
+            <i et:click="handleOnExpandClick" passive="{{false}}" em:if="this.hasChild" class="fa {{expandIcon}}"></i>
+            <img src="{{data.icon}}" em:if="this.hasIcon" />
+            <span data-left="{{offsetLeft}}">{{data.title}}</span>
+        </div>
+    </label>
+    <eui-tree-view-list et:onUpdateChildren="handleOnListUpdateChildren" valueKey="{{props.valueKey}}" selectedData="{{props.selectedData}}" em:if="this.hasChild" em:show="this.expand" fixedWidth="{{listWidth}}" width="{{width}}" level="{{subLevel}}" treeViewItemTheme="{{theme}} eui-treeview-sub-child" et:onExpandClick="props.onExpandClick" et:onItemDblClick="props.dblClick" et:treeViewItemClick="props.click" em:data="this.data.children"></eui-tree-view-list>
+</div>

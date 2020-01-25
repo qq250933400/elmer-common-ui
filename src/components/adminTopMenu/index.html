@@ -1,0 +1,20 @@
+<div class="eui-admin-top-menu">
+    <div class="eui-admin-top-logo">
+        <img em:if="this.props.showLogoImage" src="{{props.logoImage}}" />
+        <label em:if="!this.props.showLogoImage">{{props.logoText}}</label>
+    </div>
+    <div class="eui-admin-top-menu-list">
+        <ul>
+            <li em:for="let item in this.state.data">
+                <label et:click="handleOnItemClick" class.active="item.id eq this.state.selectedData.id"><span>{{item.title}}</span></label>
+                <div>
+                    <ul em:if="item.items.length gt 0">
+                        <li em:for="let subItem in item.items">
+                            <label et:click="handleOnSubItemClick"><i class="fa {{subItem.icon}}" em:if="{{subItem.hasIcon}}"></i><span>{{subItem.title}}</span></label>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

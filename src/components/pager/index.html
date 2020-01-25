@@ -1,0 +1,10 @@
+<div class="nj_page_bar {{theme}}">
+    <span class.eui-inline-hidden="{{!props.summeryVisible}}" class.eui-inline-block="{{props.summeryVisible}}">共<i>{{allCount}}</i>条数据（<i>{{page}}</i>/{{pageCount}}页）</span>
+    <a class="nj_page_prev" class.nj_page_disabled='this.page lteq 1' data-page='{{prevPage}}' data-tag='prevPage' et:click='onGotoNextPage' data-type="html">&nbsp;</a>
+    <ul class.eui-inline-hidden='allCount eq 0'>
+        <li em:for='let item in this.pageList' class.active='item.value eq this.page'>
+            <a et:click='onChangeItem' class="{{item.theme}}" href="javascript:void(0);">{{item.value}}</a>
+        </li>
+    </ul>
+    <a class='nj_page_next' class.nj_page_disabled='page gteq this.pageCount' data-page='{{nextPage}}' data-tag='nextPage' et:click='onGotoNextPage' data-type="html">&nbsp;</a>
+</div>
