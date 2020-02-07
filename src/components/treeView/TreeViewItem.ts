@@ -33,21 +33,22 @@ export class TreeViewItem extends Component {
             rule: propTypes.func
         }
     };
+    public listWidth: string = "auto";
+    public settingWidth: boolean = false;
+    public hasChild: boolean = false;
+    public expandIcon: string = "fa-angle-right";
+    public hasIcon: boolean = false;
+    public icon: string;
+    public subLevel: number = 0;
+    public space: number = 0;
+
     private data: ITreeViewItem;
-    private hasChild: boolean = false;
     private expand: boolean = false;
-    private expandIcon: string = "fa-angle-right";
-    private hasIcon: boolean = false;
-    private icon: string;
     private treeViewItemClick: Function;
     private theme: string = "";
     private level: number = 0;
-    private subLevel: number = 0;
-    private space: number = 0;
     private offsetLeft: number = 0;
     private expandDom: HTMLElement;
-    private listWidth: string = "auto";
-    private settingWidth: boolean = false;
     private width: number = 0;
     private childrenMaxWidth: number = 0;
     @autowired(ElmerDOM)
@@ -56,7 +57,7 @@ export class TreeViewItem extends Component {
         super(props);
         this.data = JSON.parse(JSON.stringify(props.data));
         this.data.children = (<any>(this.data.children || []));
-        this.hasChild =this.data.hasExpand ? this.data.hasExpand : (this.data && this.data.children.length>0);
+        this.hasChild = this.data.hasExpand ? this.data.hasExpand : (this.data && this.data.children.length>0);
         this.hasIcon = !this.isEmpty(this.data.icon);
         this.icon = this.data.icon;
         this.theme = !this.isEmpty(props.theme) ? props.theme : "";
@@ -179,7 +180,7 @@ export class TreeViewItem extends Component {
         evt.nativeEvent.stopPropagation();
         evt.nativeEvent.preventDefault();
         evt.data = this.data;
-        evt.setData = this.updateData.bind(this);
+        evt.setData = this.updateData.bind(this);console.log(evt, "dblClick")
         this.isFunction(this.props.dblClick) && this.props.dblClick(evt);
     }
     render(): string {

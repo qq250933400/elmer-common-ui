@@ -12,7 +12,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const chalk = require("chalk");
 
 const port = 3000;
-console.log("-------Entry config");
+
 module.exports = merge(common, {
     // 使用 source-map
     devtool: 'source-map',

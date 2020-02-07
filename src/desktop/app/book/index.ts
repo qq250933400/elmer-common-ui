@@ -4,11 +4,14 @@ import "./index.less";
 
 type TypeBookProps = {
     menuData: IPropCheckRule;
+    title: IPropCheckRule;
 };
+type TypeBookStateKeys = Exclude<keyof TypeBookProps, "menuData">;
+
 type TypeBookState = {
     menuData: ITreeViewItem[];
-};
-
+} & {[P in TypeBookStateKeys]?: any};
+type TypeBookPropData = {[P in keyof TypeBookProps]: any};
 @declareComponent({
     selector: "book",
     template: {
@@ -22,20 +25,22 @@ export class Book extends Component {
             defaultValue: [],
             description: "menu data",
             rule: PropTypes.array.isRequired
+        },
+        title: {
+            defaultValue: "在线教程",
+            description: "标题",
+            rule: PropTypes.string.isRequired
         }
     };
     state:TypeBookState = {
         menuData: []
     };
-    constructor(props:any) {
+    props: TypeBookPropData;
+    constructor(props:TypeBookPropData) {
         super(props);
-        for(let i=0;i<10;i++) {
-            this.state.menuData.push({
-                title: "Book" + i,
-                id: "hhh",
-                children: []
-            });
-        }
+        this.state = {
+            ...this.state,
+            ...props
+        };
     }
-
 }

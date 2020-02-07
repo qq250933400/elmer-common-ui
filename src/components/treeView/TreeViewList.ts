@@ -24,14 +24,14 @@ export class TreeViewList extends Component {
             rule: propTypes.func
         }
     };
+    public selectedData: any = [];
+    public display: string = "none";
+    public treeViewItemClick: Function;
+    public treeViewItemDblClick: Function;
+    public level: number = 0;
+    public space: number = 0;
     private data: ITreeViewItem[] = [];
-    private selectedData: any = [];
-    private display: string = "none";
     private show: boolean;
-    private treeViewItemClick: Function;
-    private treeViewItemDblClick: Function;
-    private level: number = 0;
-    private space: number = 0;
     private width: number = 0;
     constructor(props: any) {
         super(props);

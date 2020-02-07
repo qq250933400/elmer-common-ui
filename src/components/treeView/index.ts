@@ -42,14 +42,18 @@ export class TreeView extends Component {
             rule: propTypes.oneOf([propTypes.string, propTypes.number])
         }
     };
-    private data: ITreeViewItem[] = [];
-    private level: number = 0;
+    public data: ITreeViewItem[] = [];
+    public level: number = 0;
     private containerWidth: number = 0;
     private settingWidthToChild: boolean = false;
     private selectedData: any = [];
     private changeOnDblClick: boolean = true;
     @autowired(ElmerDOM)
     private domObj: ElmerDOM;
+    constructor(props:any) {
+        super(props);
+        this.data = props.data || [];
+    }
     handleOnUpdateChildren(data: any): void {
         this.data = data;
     }

@@ -15,7 +15,7 @@ const babelOptions = {
         }]
     ]
 }
-console.log("---------------load config from common");
+
 module.exports = {
     entry: {
         "./script/main": './src/index.ts',
