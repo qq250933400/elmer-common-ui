@@ -3,7 +3,9 @@ import {
     declareComponent,
     IElmerEvent,
     IPropCheckRule,
-    PropTypes
+    PropTypes,
+    redux,
+    autoInit
 } from "elmer-ui-core";
 import "./app/setting";
 import { MatrixCharacterEffects } from "./BackgroundPlugn";
@@ -72,6 +74,7 @@ export class Desktop extends Component {
     reduxConfig: any = {};
     constructor(props:any) {
         super(props);
+        console.log(autoInit(redux.ReduxController));
     }
     $init(): void {
         this.setTheme<TypeDesktopThemes>("themeNoBack", this.supportThemes);

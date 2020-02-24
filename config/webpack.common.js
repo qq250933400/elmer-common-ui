@@ -85,26 +85,26 @@ module.exports = {
             },
             {
                 test: /\.less$/i,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'postcss-loader',
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            javascriptEnabled: true,
-                        },
-                    },
-                ]
-                // use: ExtractTextWebpackPlugin.extract({
-                //     fallback: "style-loader",
-                //     use: [
-                //         "css-loader",
-                //         'postcss-loader',
-                //         'less-loader'
-                //     ],
-                //     filename: "[name][hash:8].css"
-                // })
+                // use: [
+                //     'style-loader',
+                //     'css-loader',
+                //     'postcss-loader',
+                //     {
+                //         loader: 'less-loader',
+                //         options: {
+                //             javascriptEnabled: true,
+                //         },
+                //     },
+                // ]
+                use: ExtractTextWebpackPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        "css-loader",
+                        'postcss-loader',
+                        'less-loader'
+                    ],
+                    filename: "[name][hash:8].css"
+                })
             },{
                 test: /\.(woff|woff2|ttf|eot)/,
                 use: [

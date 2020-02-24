@@ -11,10 +11,7 @@ import "./test.js";
     withRouter: true,
     connect: {
         mapStateToProps: (state:any) => {
-            console.log(state, "-----------------");
-            return {
-                ...state.home.news
-            };
+            return {};
         }
     }
 })
