@@ -23,17 +23,19 @@ export class LayoutRow extends Component {
         }
     };
     state:any = {
-        theme: ""
+        theme: "",
+        setHeight: ""
     };
     constructor(props: any) {
         super(props);
         this.state.theme = !this.isEmpty(props.theme) ? props.theme : "";
+        this.state.setHeight = props.setHeight || "";
     }
     $before(): void {
         this.updateChildrenSetSize();
     }
     render(): string {
-        let cHeight = this.props.setHeight || "";
+        let cHeight = this.state.setHeight || "";
         const innerStyle = this.props.style || "";
         cHeight = !/\;/.test(cHeight) && cHeight.length > 0 ? cHeight + ";" + innerStyle : cHeight + innerStyle;
         return `<div class="{{state.theme}} eui-layout-row" style="${cHeight}"><content /></div>`;

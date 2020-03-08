@@ -9,7 +9,8 @@ const chalk = require("chalk");
 const copyWebpackPlugin = require("copy-webpack-plugin");
 
 const webpackConfig = merge(common, {
-    devtool: 'cheap-module-source-map',
+    target: "web",
+    devtool: "#source-map", // output mode
     plugins: [
         new UglifyJSPlugin({
             uglifyOptions: {

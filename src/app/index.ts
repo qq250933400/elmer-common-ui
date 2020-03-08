@@ -9,6 +9,9 @@ import "./test.js";
 @declareComponent({
     selector: "index",
     withRouter: true,
+    template: {
+        url: "http://localhost:3000/test.html"
+    },
     connect: {
         mapStateToProps: (state:any) => {
             return {};

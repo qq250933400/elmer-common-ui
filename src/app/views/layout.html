@@ -1,0 +1,21 @@
+
+<eui-layout>
+    <eui-layout-row height="60" style="overflow: visible;">
+        <eui-admin-top-menu et:onChange="onTopMenuChange" showLogoImage="{{false}}" logoText="江苏杯活动管理系统" logoImage="{{config.staticUrl}}elmerUI2/assets/logo.png" em:data="this.config.topMenu"/>
+    </eui-layout-row>
+    <eui-layout-row height="*" data-width="{{menuWidth}}" style="overflow: visible;">
+        <eui-layout-col width="{{menuWidth}}" >
+            <eui-admin-menu em:isExpand="this.isExpand" et:onChange="onLeftMenuChange"  et:onModeChange="onModeChange" em:data="this.config.leftMenu"/>
+        </eui-layout-col>
+        <eui-layout-col width="*">
+            <div style="display: block;width:100%;height: 100%;overflow:auto;">
+                <iframe id="layoutFrame" em:if="this.stateData.isFrameMode eq true" src="{{stateData.url}}" frameBorder="0" style="border:none;display:block;width:100%;height:100%;" ></iframe>
+                <div em:if="this.stateData.isFrameMode neq true" style="display: block;">
+                    <eui-router >
+                        <eui-route path="/" component="{{this.config.page}}"/>
+                    </eui-router>
+                </div>
+            </div>
+        </eui-layout-col>
+    </eui-layout-row>
+</eui-layout>

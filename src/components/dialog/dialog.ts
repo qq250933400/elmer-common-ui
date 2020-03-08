@@ -247,12 +247,18 @@ export const showInput = (options:TypeDialogInputOptions) => {
 // ----eAlert
 export type TypeEnumAlertIcon = "Alert" | "Error" | "Information" | "Question" | "Success" | "Warning";
 export type TypeEnumAlertMsg = "OKOnly" | "OkCancel" | "OkCancelRetry" | "YesOnly" | "YesNo" | "YesNoRetry";
+export type TypeEnumAlertButton = "Ok" | "Cancel" | "Retry" | "None";
+export type TypeOnAlertBeforeEvent = {
+    button: TypeEnumAlertButton;
+    cancel: boolean;
+};
 export type TypeAlertOptions = {
     title?: string;
     message: string;
     msgType?: TypeEnumAlertMsg;
     iconType?: TypeEnumAlertIcon;
     icon?: string;
+    showTipIcon?: boolean;
     okText?: string;
     okTheme?: string;
     cancelText?: string;
@@ -265,7 +271,7 @@ export type TypeAlertOptions = {
     onOk?(): void;
     onCancel?(): void;
     onRetry?(): void;
-    onBefore?(): void;
+    onBefore?(event:TypeOnAlertBeforeEvent): void;
 };
 export const eAlert = (options:TypeAlertOptions) => {
     const config:TypeAlertOptions = {
@@ -276,9 +282,11 @@ export const eAlert = (options:TypeAlertOptions) => {
         okTheme: "eui-button-primary",
         cancelTheme: "",
         retryTheme: "",
-        zIndex: 1000
+        zIndex: 1000,
+        showTipIcon: true
     };
     StaticCommon.extend(config, options);
+    const noTipTheme = !config.showTipIcon ? "elmerAlertNoTipIcon" : "";
     let bottomCode = "";
     let bottomTheme = "";
     let choseButton: "Ok" | "Cancel" | "Retry" | "None" = "None";
@@ -296,6 +304,7 @@ export const eAlert = (options:TypeAlertOptions) => {
         bottomTheme = "elmerAlertOneButton";
     }
     bottomTheme = "elmerAlertButton " + bottomTheme;
+
     return createDialog({
         showMask: true,
         params: {
@@ -312,20 +321,35 @@ export const eAlert = (options:TypeAlertOptions) => {
             // tslint:disable-next-line:object-literal-shorthand only-arrow-functions
             emit: function(evt:IElmerEvent): void {
                 let button = evt.target;
+                let clickButton:TypeEnumAlertButton = "None";
+                const beforeEvent:TypeOnAlertBeforeEvent = {
+                    button: "None",
+                    cancel: false
+                };
                 if(/alert\-yes/.test(button.className)) {
                     choseButton = "Ok";
+                    clickButton = "Ok";
                 } else if(/alert\-no/.test(button.className)) {
                     choseButton = "Cancel";
+                    clickButton = "Cancel";
                 } else if(/alert\-try/.test(button.className)) {
                     choseButton = "Retry";
+                    clickButton = "Retry";
                 } else {
                     choseButton = "Cancel";
+                    clickButton = "Cancel";
                 }
                 button = null;
-                this.close();
+                if(typeof config.onBefore === "function") {
+                    beforeEvent.button = clickButton;
+                    config.onBefore(beforeEvent);
+                }
+                if(!beforeEvent.cancel) {
+                    this.close();
+                }
             }
         },
-        htmlCode: `<div class="elmerAlertContent"><div data-type="html">${config.message}</div></div>`,
+        htmlCode: `<div class="elmerAlertContent ${noTipTheme}"><div data-type="html">${config.message}</div></div>`,
         onClose: () => {
             if(choseButton === "Ok") {
                 typeof config.onOk === "function" && config.onOk();
