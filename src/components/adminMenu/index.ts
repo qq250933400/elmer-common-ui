@@ -20,7 +20,7 @@ type TypeAdminMenuState = {
     data: IAdminMenuData[];
     selectedData: IAdminMenuData;
     hasExpand: boolean;
-}
+};
 
 @declareComponent({
     selector: "adminMenu"
@@ -80,6 +80,27 @@ export class AdminMenuComponent extends Component {
         this.state.data = this.getMenuData(props.data || []);
         this.state.icon = !props.isExpand ? this.state.expandIcon : this.state.collapseIcon;
         this.state.selectedData = props.selectedData;
+        if(this.state.selectedData && !this.isEmpty(this.state.selectedData)) {
+            // tslint:disable-next-line: forin
+            for(const key in this.state.data) {
+                const menuData = this.state.data[key];
+                let isMatched = false;
+                if(menuData.items && menuData.items.length>0) {
+                    // tslint:disable-next-line: forin
+                    for(const subKey in menuData.items) {
+                        const subMenuData = menuData.items[subKey];
+                        if(subMenuData.url === this.state.selectedData.url) {
+                            isMatched = true;
+                            break;
+                        }
+                    }
+                }
+                if(isMatched) {
+                    this.state.data[key].expand = true;
+                    break;
+                }
+            }
+        }
     }
     handleOnItemClick(evt:IElmerEvent): void {
         const itemData:IAdminMenuData = JSON.parse(JSON.stringify(evt.data.item));

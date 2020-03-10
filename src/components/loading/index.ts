@@ -93,6 +93,7 @@ export type TypeShowloadingResult = {
     show?(): void;
     hide?(): void;
     dispose?(): void;
+    setTitle?(title: string): void;
 };
 export const showLoading = (options: TypeShowLoadingOptions): TypeShowloadingResult => {
     let config:TypeShowLoadingOptions = {
@@ -129,6 +130,13 @@ export const showLoading = (options: TypeShowLoadingOptions): TypeShowloadingRes
             obj = null;
             ui  = null;
             config = null;
+        },
+        setTitle: (title: string): void => {
+            const cp:TypeShowLoadingOptions = JSON.parse(JSON.stringify(config));
+            cp.title = title;
+            obj.setData({
+                options: cp
+            });
         }
     };
 };
