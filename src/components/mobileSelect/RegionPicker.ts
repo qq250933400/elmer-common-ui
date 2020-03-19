@@ -1,4 +1,4 @@
-import { defineGlobalVar, getUI } from "elmer-ui-core";
+import { defineGlobalVar, getUI, Component } from "elmer-ui-core";
 import { IMobileSelectedEvent } from "./IMobileSelect";
 import { RegionData } from "./RegionData";
 
@@ -13,8 +13,11 @@ export interface IMobileRegionPickerOption {
     defaultValue?: any[];
     title?: string;
 }
-
-export const createRegionPicker = (options?:IMobileRegionPickerOption): object => {
+export type TypeRegionPicker = Component & {
+    show?: () => {};
+    hide?: () => {};
+};
+export const createRegionPicker = (options?:IMobileRegionPickerOption): TypeRegionPicker => {
     const config:IMobileRegionPickerOption = {
         data: RegionData,
         provinceTitle: "省份",
@@ -33,7 +36,7 @@ export const createRegionPicker = (options?:IMobileRegionPickerOption): object =
         value: -1,
         disabled: true
     });
-    const obj =  {
+    const obj:any =  {
         visible: false,
         data: [provinceData],
         provinceKey: -1,
@@ -93,6 +96,16 @@ export const createRegionPicker = (options?:IMobileRegionPickerOption): object =
                     });
                 }
             }
+        },
+        show: (): void => {
+            obj.setData({
+                visible: true
+            });
+        },
+        hide: (): void => {
+            obj.setData({
+                visible: false
+            });
         }
     };
     const initData = () => {

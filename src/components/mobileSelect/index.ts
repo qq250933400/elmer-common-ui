@@ -359,8 +359,10 @@ export class MobileSelector extends Component {
         });
     }
     private scrollTo(dom:HTMLElement, offsetY: number): void {
+        let oldOffsetY = this.$.attr(dom, "offsety");
         let offsetCode = this.$.getCss3("transform", `translate3d(0,${offsetY}px,0)`);
         offsetCode += "width:" + this.listWidth + ";";
+        oldOffsetY = this.isNumeric(oldOffsetY) && /^[0-9]*$/.test(oldOffsetY) ? parseInt(oldOffsetY, 10) : 0;
         this.$.attr(dom, "style", offsetCode);
         this.$.attr(dom, "offsety", offsetY);
         offsetCode = null;
@@ -391,6 +393,9 @@ export class MobileSelector extends Component {
                         if(tmpUl.tagName === "UL") {
                             const selectedIndex = this.displayIndexs[index] || 0;
                             this.scrollTo(<HTMLElement>tmpUl, offsetTop - itemHeight*selectedIndex);
+                            this.$.css(<HTMLElement>tmpUl, {
+                                width: this.listWidth
+                            });
                             index += 1;
                         }
                     }

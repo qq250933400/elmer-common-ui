@@ -17,7 +17,6 @@
                         data-key="{{listData.key}}"
                         em:for="let listData in this.data"
                         passive="passive"
-                        style="opacity:0;"
                         >
                         <li em:for="let tmpOption in listData" data-value="{{tmpOption.value}}" data-key="{{tmpOption.key}}" class.disabled="{{tmpOption.disabled}}">{{tmpOption.title}}</li>
                     </ul>

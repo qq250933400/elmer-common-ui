@@ -1,5 +1,5 @@
 import { autowired, Component, declareComponent, ElmerDOM, ElmerServiceRequest, IElmerEvent } from "elmer-ui-core";
-import { showLoading, showToast } from "../components";
+import { createRegionPicker, showLoading, showToast, TypeRegionPicker } from "../components";
 import dialog, { TypeCreateDialogResult } from "../components/dialog/dialog";
 import "./admin";
 import "./demo";
@@ -10,7 +10,8 @@ import "./test.js";
     selector: "index",
     withRouter: true,
     template: {
-        url: "http://localhost:3000/test.html"
+        url: "./views/index.html",
+        fromLoader: true
     },
     connect: {
         mapStateToProps: (state:any) => {
@@ -37,7 +38,7 @@ export class IndexComponent extends Component {
     listData: any[] = [];
     listShow: boolean = false;
     numCalc: number = 0;
-
+    regionPicker: TypeRegionPicker;
     @autowired(ElmerDOM)
     private $:ElmerDOM;
 
@@ -52,12 +53,20 @@ export class IndexComponent extends Component {
                 id: "mapping_id: " + i
             });
         }
+        this.regionPicker = createRegionPicker({
+            onSelected: (data) =>{
+                console.log(data);
+            }
+        });
     }
     $init(): void {
         this.http.init(true);
     }
     $onPropsChanged(newProps:any):void {
         console.log("+++++++++OnPropsChanged++++++++++++", newProps);
+    }
+    handleOnShowMobileSelect(): void {
+        this.regionPicker.show();
     }
     handleOnServiceRequest(): void {
         this.http.sendRequest({
