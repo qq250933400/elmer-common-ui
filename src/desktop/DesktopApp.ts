@@ -228,16 +228,16 @@ export const autoRunAppList:DesktopApp[] = [
     //         height: 500
     //     }
     // },
-    {
-        title: "WebbookOnline",
-        icon: "fa-book",
-        id: "-3",
-        data: {
-            type: "ElmerUI",
-            component: "eui-book",
-            width: 700,
-            height: 500
-        }
-    }
+    // {
+    //     title: "WebbookOnline",
+    //     icon: "fa-book",
+    //     id: "-3",
+    //     data: {
+    //         type: "ElmerUI",
+    //         component: "eui-book",
+    //         width: 700,
+    //         height: 500
+    //     }
+    // }
 ];
 // tslint:enable: object-literal-shorthand

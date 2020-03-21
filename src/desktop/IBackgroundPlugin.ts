@@ -1,5 +1,6 @@
 export interface IBackgroundPlugin {
     canvas:HTMLCanvasElement;
+    isAnimation?: boolean;
     init(): void;
     dispose(): void;
     onPropsChange(props:any): void;

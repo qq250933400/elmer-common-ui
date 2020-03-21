@@ -33,7 +33,7 @@ module.exports = merge(common, {
             format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
             clear: true
         }),
-        new webpack.HotModuleReplacementPlugin()
+        // new webpack.HotModuleReplacementPlugin()
     ],
     // 设置出口文件地址与文件名
     output: {
@@ -41,9 +41,9 @@ module.exports = merge(common, {
         filename: 'bundle.min.js'
     },
     mode: "development",
-    plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ],
+    // plugins: [
+    //     new webpack.HotModuleReplacementPlugin()
+    // ],
     watchOptions: {
         ignored: /node_modules/
     }

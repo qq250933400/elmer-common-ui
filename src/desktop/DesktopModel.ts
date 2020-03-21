@@ -14,6 +14,11 @@ export class DesktopModel extends Canvas {
         super();
         this.dom = obj;
     }
+    onPropsChange(props:any): void {
+        if(this.plugin) {
+            this.plugin.onPropsChange(props);
+        }
+    }
     setCanvas(cav:HTMLCanvasElement): void {
         this.cav = cav;
         this.supportCanvas = cav && cav.getContext("2d") !== null;
@@ -33,10 +38,17 @@ export class DesktopModel extends Canvas {
     }
     start(): void {
         if(this.supportCanvas) {
-            if(this.userPlugin) {
-                this.plugin = new this.userPlugin.factory(this.cav);
+            if(this.userPlugin && typeof this.userPlugin.factory === "function") {
+                this.plugin = new this.userPlugin.factory(this.cav, this.dom.props);
                 typeof this.plugin.init === "function" && this.plugin.init();
-                this.animationHandler= this.startAnimation(this.animation, this);
+                if(this.plugin.isAnimation) {
+                    this.animationHandler= this.startAnimation(this.animation, this);
+                } else {
+                    typeof this.plugin.draw === "function" && this.plugin.draw(0);
+                }
+            } else {
+                // tslint:disable-next-line: no-console
+                console.error("Background Plugin is not an function");
             }
         } else {
             // tslint:disable-next-line: no-console

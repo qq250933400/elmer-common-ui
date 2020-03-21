@@ -1,4 +1,4 @@
-import { IBackgroundPlugin } from "./IBackgroundPlugin";
+import { IBackgroundPlugin } from "../IBackgroundPlugin";
 
 type TypeDrawObject = {
     x: number;
@@ -11,6 +11,7 @@ type TypeDrawObject = {
 export class MatrixCharacterEffects implements IBackgroundPlugin {
     canvas: HTMLCanvasElement;
     cvt: CanvasRenderingContext2D;
+    isAnimation: boolean = true;
     private width: number;
     private height: number;
     private objects: TypeDrawObject[] = [];

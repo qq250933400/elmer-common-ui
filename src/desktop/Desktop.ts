@@ -1,14 +1,15 @@
 import {
+    autoInit,
     Component,
     declareComponent,
     IElmerEvent,
     IPropCheckRule,
     PropTypes,
-    redux,
-    autoInit
+    redux
 } from "elmer-ui-core";
 import "./app/setting";
-import { MatrixCharacterEffects } from "./BackgroundPlugn";
+import { MatrixCharacterEffects } from "./backgroundPlugin/MatrixCharacterEffects";
+import { PictureBackground } from "./backgroundPlugin/PictureBackground";
 import "./config/service";
 import { autoRunAppList } from "./DesktopApp";
 import { DesktopModel } from "./DesktopModel";
@@ -21,10 +22,13 @@ type TypeDesktopThemes = {
     themeDefault: string;
     themeNoBack: string;
 };
-type TypeDesktopProps = {
+type TypeDesktopPropsCheckRule = {
     userWallperPlugin: IPropCheckRule;
     autoRunAppList: IPropCheckRule;
+    backgroundConfig: IPropCheckRule;
+    backgroundPlugin: IPropCheckRule;
 };
+type TypeDesktopProps = {[P in keyof TypeDesktopPropsCheckRule]:any};
 
 @declareComponent({
     selector: "desktop",
@@ -36,7 +40,7 @@ type TypeDesktopProps = {
         obj: DesktopModel
     },
     connect: {
-        mapStateToProps: () => {
+        mapStateToProps: (state:any) => {
             return {
                 autoRunAppList,
                 backgroundPlugin: <TypePluginInfo[]>[
@@ -44,16 +48,21 @@ type TypeDesktopProps = {
                         id: "hackers",
                         title: "黑客帝国",
                         factory: MatrixCharacterEffects
+                    }, {
+                        id: "images",
+                        title: "背景图片",
+                        factory: PictureBackground
                     }
-                ]
+                ],
+                backgroundConfig: state.desktop.background
             };
         }
     }
 })
 export class Desktop extends Component {
-    static propType:TypeDesktopProps = {
+    static propType:TypeDesktopPropsCheckRule = {
         userWallperPlugin: {
-            defaultValue: "hackers",
+            defaultValue: "images",
             description: "设置背景使用的插件id",
             rule: PropTypes.string.isRequired
         },
@@ -61,6 +70,14 @@ export class Desktop extends Component {
             defaultValue: [],
             description: "系统启动运行程序",
             rule: PropTypes.array.isRequired
+        },
+        backgroundConfig: {
+            description: "背景设置参数",
+            rule: PropTypes.any
+        },
+        backgroundPlugin: {
+            description: "背景渲染插件",
+            rule: PropTypes.array
         }
     };
     supportThemes:TypeDesktopThemes = {
@@ -72,16 +89,21 @@ export class Desktop extends Component {
     theme:keyof TypeDesktopThemes   = "default";
     cavId: string = this.getRandomID();
     reduxConfig: any = {};
-    constructor(props:any) {
-        super(props);
-        console.log(autoInit(redux.ReduxController));
-    }
+    props:TypeDesktopProps;
+    private backgroundConfig: any;
     $init(): void {
         this.setTheme<TypeDesktopThemes>("themeNoBack", this.supportThemes);
     }
     $inject(): void {
         this.model.obj.setBackgroundPluginData(this.props.backgroundPlugin);
         this.model.obj.setBackgroundPluginId(this.props.userWallperPlugin);
+    }
+    $onPropsChanged(props:TypeDesktopProps):void {
+        if(JSON.stringify(props.backgroundConfig) !== JSON.stringify(this.backgroundConfig)) {
+            this.backgroundConfig = props.backgroundConfig;
+        }
+        console.log("---PropsChange");
+        this.model.obj.onPropsChange(props);
     }
     $after(): void {
         this.addEvent(this, document.body, "contextmenu", (evt:IElmerEvent): boolean => {
