@@ -7,11 +7,26 @@ import {
 } from "elmer-ui-core";
 import "./style.less";
 
+type TypeDropDownPropsCheckRule = {
+    id: IPropCheckRule;
+    name: IPropCheckRule;
+    disabled: IPropCheckRule;
+    theme: IPropCheckRule;
+    value: IPropCheckRule;
+    data: IPropCheckRule;
+    placeholder: IPropCheckRule;
+    tabIndex: IPropCheckRule;
+    onChanged?: IPropCheckRule;
+    onChange: IPropCheckRule;
+    style: IPropCheckRule;
+    showValue: IPropCheckRule;
+};
+type TypeDropDownProps = {[P in keyof TypeDropDownPropsCheckRule]: any};
 @declareComponent({
     selector: "dropDown"
 })
 export class ElmerDropDown extends Component {
-    static propType: any = {
+    static propType: TypeDropDownPropsCheckRule = {
         id: <IPropCheckRule> {
             description: "组件ID",
             rule: propTypes.oneOf([propTypes.string, propTypes.number])
@@ -61,6 +76,11 @@ export class ElmerDropDown extends Component {
         style: <IPropCheckRule> {
             description: "内联样式",
             rule: propTypes.string
+        },
+        showValue: {
+            defaultValue: false,
+            description: "是否显示value值在title后面",
+            rule: propTypes.bool
         }
     };
     state: any = {
@@ -72,7 +92,8 @@ export class ElmerDropDown extends Component {
         dataList: [],
         style: ""
     };
-    constructor(props:any) {
+    props: TypeDropDownProps;
+    constructor(props:TypeDropDownProps) {
         super(props);
         this.state.dataList = props.data || [];
         this.state.style = props.style || "";

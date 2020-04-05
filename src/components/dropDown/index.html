@@ -10,9 +10,9 @@
     <div class="eui-drop-down-list aniDropDownShow" et:click="handleOnListClick" em:show="this.state.dropListVisible">
         <ul>
             <li em:for="let item in this.state.dataList" class.eui-drop-down-item-disabled="{{item.disabled}}" class.eui-drop-down-item-active="item.value eq this.state.selectedData.value">
-                <div et:click="handleOnListItemClick" title="{{item.title}}">
+                <div et:click="handleOnListItemClick" title="{{item.title}}({{item.value}})">
                     <eui-icon type="{{item.icon}}" theme="{{checkIconVisible(item)}}"/>
-                    <span>{{item.title}}</span>
+                    <span>{{item.title}}<i if="{{props.showValue}}">({{item.value}})</i></span>
                 </div>
             </li>
         </ul>
