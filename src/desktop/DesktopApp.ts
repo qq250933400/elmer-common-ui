@@ -174,7 +174,7 @@ export const DesktopMenus:IContentMenuItem[] = [
     { title: "主题设置", type: "NormalText", icon: "fa-theme" },
     { title: "系统设置", type: "NormalText", icon: "fa-system" }
 ];
-export const startMenuList:TypeStartMenu[] = [
+export const mainMenuList:TypeStartMenu[] = [
     {
         name: "程序",
         id: "application",

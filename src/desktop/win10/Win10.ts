@@ -1,4 +1,4 @@
-import { autowired, Component,declareComponent, ElmerDOM, IElmerEvent,IElmerMouseEvent, propTypes, IPropCheckRule, PropTypes  } from "elmer-ui-core";
+import { autowired, Component,declareComponent, ElmerDOM, IElmerEvent,IElmerMouseEvent, IPropCheckRule, PropTypes  } from "elmer-ui-core";
 import dialog, { TypeCreateDialogResult } from "../../components/dialog/dialog";
 import { ContentMenu, IContentMenuItem } from "../../components/menu";
 import { createDesktopAppContent ,demoAppData, DesktopApp, DesktopMenus } from "../DesktopApp";
@@ -18,13 +18,18 @@ type DeskTopWin10State = {
     activeAppId: string;
     showCalendar: boolean;
     showStartMenu: boolean;
+    startMenuList: DesktopApp[];
     desktopMenuVisible: boolean;
     desktopMenuStyle: string;
 };
 
-type TypeDesktopWin10Props = {
+type TypeDesktopWin10PropsRules = {
     autoRunAppList: IPropCheckRule;
+    deskTopAppList: IPropCheckRule;
+    startMenuList: IPropCheckRule;
+    quickStartMenu: IPropCheckRule;
 };
+type TypeDesktopWin10Props = {[P in keyof TypeDesktopWin10PropsRules]: any};
 
 @declareComponent({
     selector: "desktop-win10",
@@ -33,10 +38,25 @@ type TypeDesktopWin10Props = {
     ]
 })
 export class DeskTopWin10 extends Component {
-    static propType:TypeDesktopWin10Props = {
+    static propType:TypeDesktopWin10PropsRules = {
         autoRunAppList: {
             defaultValue: [],
-            description: "Auto run application list",
+            description: "页面加载后自动运行的App列表",
+            rule: PropTypes.array.isRequired
+        },
+        deskTopAppList: {
+            defaultValue: [],
+            description: "显示在桌面的程序列表",
+            rule: PropTypes.array.isRequired
+        },
+        startMenuList: {
+            defaultValue: [],
+            description: "开始菜单数据",
+            rule: PropTypes.array.isRequired
+        },
+        quickStartMenu: {
+            defaultValue: [],
+            description: "快速启动菜单",
             rule: PropTypes.array.isRequired
         }
     };
@@ -44,9 +64,10 @@ export class DeskTopWin10 extends Component {
     state:DeskTopWin10State = {
         windowTime: "",
         windowDate: "",
-        desktopApp: demoAppData,
+        desktopApp: [],
         openWindows: [],
         activeAppId: "",
+        startMenuList: [],
         showCalendar: false,
         showStartMenu: false,
         desktopMenuVisible: false,
@@ -57,17 +78,19 @@ export class DeskTopWin10 extends Component {
     windowNormalZIndex:number = 5;
     desktopMenu:IContentMenuItem[] = DesktopMenus;
 
-    props:{[P in keyof TypeDesktopWin10Props]: any};
+    props:TypeDesktopWin10Props;
 
     @autowired(ElmerDOM)
     private $:ElmerDOM;
-    constructor(props:any) {
+    constructor(props:TypeDesktopWin10Props) {
         super(props);
         let now = new Date();
         this.state.windowTime = now.format("H:i");
         this.state.windowDate = now.format("YYYY:MM:DD");
         this.state.wWidth = document.body.clientWidth;
         this.state.wHeight = document.body.clientHeight;
+        this.state.desktopApp = props.deskTopAppList;
+        this.state.startMenuList = props.startMenuList;
         this.timeHandler = setInterval(this.timeTick.bind(this), 6000);
         now = null;// define propertye
     }

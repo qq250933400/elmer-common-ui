@@ -9,12 +9,14 @@ export class PictureBackground extends Common implements IBackgroundPlugin{
     private imageLink: string = "";
     private image:HTMLImageElement;
     private blur: number = 10;
+    private fillBackColor: string = "rgb(235, 235, 235)";
     constructor(cav:HTMLCanvasElement, props:any) {
         super();
         this.canvas = cav;
         this.cvt = cav.getContext("2d");
         this.imageLink = this.getValue(props, "backgroundConfig.image");
         this.blur = this.getValue(props, "backgroundConfig.blur");
+        this.fillBackColor = this.getValue(props, "backgroundConfig.backgroundColor") || "rgb(235, 235, 235)";
     }
     init(): void {
         this.width = this.canvas.clientWidth;
@@ -46,7 +48,7 @@ export class PictureBackground extends Common implements IBackgroundPlugin{
     draw(tim?: number): void {
         if(this.image) {
             this.fillBack();
-            this.cvt.drawImage(this.image, 0, 0);
+            this.cvt.drawImage(this.image, 0, 0, this.width, this.height);
             this.drawBlur();
         }
     }
@@ -58,7 +60,7 @@ export class PictureBackground extends Common implements IBackgroundPlugin{
         this.draw();
     }
     private fillBack():void {
-        this.cvt.fillStyle = "#000";
+        this.cvt.fillStyle = this.fillBackColor;
         this.cvt.fillRect(0,0,this.width, this.height);
         this.cvt.fill();
         this.cvt.save();

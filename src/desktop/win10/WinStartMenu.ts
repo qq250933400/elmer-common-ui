@@ -1,5 +1,5 @@
 import { autowired, Component,declareComponent, ElmerDOM, ElmerUI as UI, IElmerEvent, IPropCheckRule, propTypes  } from "elmer-ui-core";
-import { DesktopApp, startMenuList, SystemQuickStartTool, TypeStartMenu, winStartmenuSideButtons } from "../DesktopApp";
+import { DesktopApp, TypeStartMenu, winStartmenuSideButtons } from "../DesktopApp";
 
 type TypeWinStartmenuProps = {
     data: IPropCheckRule;
@@ -19,7 +19,7 @@ type TypeWinStartmenuState = {
     visible: boolean;
     showAnimation: string;
     theme: string;
-    quickStartList: TypeStartMenu[];
+    quickStartList: any;
 };
 
 @declareComponent({
@@ -69,7 +69,7 @@ export class WinStartmenuComponent extends Component {
     state: TypeWinStartmenuState = {
         data: [],
         leftSideData: winStartmenuSideButtons,
-        menuList: startMenuList,
+        menuList: [],
         quickStartList: [],
         activeGroupId: "",
         visible: false,
@@ -80,7 +80,8 @@ export class WinStartmenuComponent extends Component {
         super(props);
         this.state.theme = !this.isEmpty(props.theme) ? props.theme : "";
         this.state.showAnimation = props.visible ? props.showAnimation : "";
-        this.state.quickStartList = [SystemQuickStartTool, ...props.quickStartList];
+        this.state.quickStartList = props.quickStartList;
+        this.state.menuList = props.menuList || [];
     }
     $onPropsChanged(props:{[P in keyof TypeWinStartmenuProps]: any}): void {
         if(props.visible !== this.state.visible) {

@@ -13,7 +13,7 @@
         <div id="container" style="display:block;width:0;height:0;"></div>
         <!-- <eui-icon-demo /> -->
         <eui-calendar if="{{state.showCalendar}}" theme="AnimationOpacityUpIn" et:onOutClick="handleOnAppTimeOutClick" style="position:absolute;right:4px;bottom:4px;z-index:4;"/>
-        <eui-win10-startmenu visible="{{state.showStartMenu}}" showAnimation="AnimationOpacityUpIn" et:onClick="handleOnStartMenuClick" et:onOutClick="handleOnStartMenuOutClick"/>
+        <eui-win10-startmenu quickStartList="{{props.quickStartMenu}}" menuList="{{state.startMenuList}}" visible="{{state.showStartMenu}}" showAnimation="AnimationOpacityUpIn" et:onClick="handleOnStartMenuClick" et:onOutClick="handleOnStartMenuOutClick"/>
         <menu et:onItemClick="handleOnDesktopMenuClick" visible="{{state.desktopMenuVisible}}" em:style="this.state.desktopMenuStyle" data="{{desktopMenu}}"/>
     </div>
     <div class="eui-desktop-win10-toolbar">

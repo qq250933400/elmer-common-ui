@@ -1,5 +1,4 @@
 import {
-    autoInit,
     Component,
     declareComponent,
     IElmerEvent,
@@ -11,7 +10,6 @@ import "./app/setting";
 import { MatrixCharacterEffects } from "./backgroundPlugin/MatrixCharacterEffects";
 import { PictureBackground } from "./backgroundPlugin/PictureBackground";
 import "./config/service";
-import { autoRunAppList } from "./DesktopApp";
 import { DesktopModel } from "./DesktopModel";
 import { TypePluginInfo } from "./IBackgroundPlugin";
 import "./styles/desktop.less";
@@ -27,6 +25,10 @@ type TypeDesktopPropsCheckRule = {
     autoRunAppList: IPropCheckRule;
     backgroundConfig: IPropCheckRule;
     backgroundPlugin: IPropCheckRule;
+    template: IPropCheckRule;
+    deskTopApp: IPropCheckRule;
+    mainMenuList: IPropCheckRule;
+    quickStartMenu: IPropCheckRule;
 };
 type TypeDesktopProps = {[P in keyof TypeDesktopPropsCheckRule]:any};
 
@@ -42,7 +44,7 @@ type TypeDesktopProps = {[P in keyof TypeDesktopPropsCheckRule]:any};
     connect: {
         mapStateToProps: (state:any) => {
             return {
-                autoRunAppList,
+                autoRunAppList: state.desktop.autoRunAppList,
                 backgroundPlugin: <TypePluginInfo[]>[
                     {
                         id: "hackers",
@@ -54,7 +56,12 @@ type TypeDesktopProps = {[P in keyof TypeDesktopPropsCheckRule]:any};
                         factory: PictureBackground
                     }
                 ],
-                backgroundConfig: state.desktop.background
+                backgroundConfig: state.desktop.background,
+                deskTopApp: state.desktop.deskTopApp,
+                mainMenuList: state.desktop.mainMenuList,
+                quickStartMenu: state.desktop.quickStartMenu,
+                template: state.desktop.template,
+                userWallperPlugin: state.desktop.userWallperPlugin || "images"
             };
         }
     }
@@ -78,6 +85,26 @@ export class Desktop extends Component {
         backgroundPlugin: {
             description: "背景渲染插件",
             rule: PropTypes.array
+        },
+        template: {
+            defaultValue: "Win10",
+            description: "设置管理系统模板",
+            rule: PropTypes.oneValueOf(["Win10", "WebAdmin", "Office"])
+        },
+        deskTopApp: {
+            defaultValue: [],
+            description: "显示桌面快捷菜单",
+            rule: PropTypes.array.isRequired
+        },
+        mainMenuList: {
+            defaultValue: [],
+            description: "主菜单列表",
+            rule: PropTypes.array.isRequired
+        },
+        quickStartMenu: {
+            defaultValue: [],
+            description: "快捷菜单",
+            rule: PropTypes.array.isRequired
         }
     };
     supportThemes:TypeDesktopThemes = {
@@ -92,6 +119,7 @@ export class Desktop extends Component {
     props:TypeDesktopProps;
     private backgroundConfig: any;
     $init(): void {
+        console.log(this.props);
         this.setTheme<TypeDesktopThemes>("themeNoBack", this.supportThemes);
     }
     $inject(): void {
@@ -102,7 +130,6 @@ export class Desktop extends Component {
         if(JSON.stringify(props.backgroundConfig) !== JSON.stringify(this.backgroundConfig)) {
             this.backgroundConfig = props.backgroundConfig;
         }
-        console.log("---PropsChange");
         this.model.obj.onPropsChange(props);
     }
     $after(): void {

@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>展开合闭按钮</title>
+<link href="css/css.css" type="text/css" rel="stylesheet" />
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<script language="javascript">
+function switchSysBar(){
+ if (parent.document.getElementById('attachucp').cols=="194,12,*"){
+ document.getElementById('leftbar').style.display="";
+ parent.document.getElementById('attachucp').cols="0,12,*";
+ }
+ else{
+ parent.document.getElementById('attachucp').cols="194,12,*";
+ document.getElementById('leftbar').style.display="none"
+ }
+}
+function load(){
+ if (parent.document.getElementById('attachucp').cols=="0,12,*"){
+ document.getElementById('leftbar').style.display="";
+ }
+}
+</script>
+</head>
+<body marginwidth="0" marginheight="0" onLoad="load()" topmargin="0" leftmargin="0" onselectstart="return false" oncontextmenu=return(false) style="overflow-x:hidden;">
+<center>
+
+</center>
+</body>
+</html>

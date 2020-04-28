@@ -4,7 +4,16 @@
             <canvas id="{{cavId}}" style="width:100%;height:100%;display:block;"></canvas>
         </div>
         <div class="eui-desktop-layout">
-            <eui-desktop-win10 autoRunAppList="{{props.autoRunAppList}}"/>
+            <eui-desktop-win10
+                em:if="props.template eq 'Win10'"
+                startMenuList="{{props.mainMenuList}}"
+                deskTopAppList="{{props.deskTopApp}}"
+                autoRunAppList="{{props.autoRunAppList}}"
+                quickStartMenu="{{props.quickStartMenu}}"
+            />
+            <eui-web-admin
+                em:if="props.template eq 'WebAdmin'"
+            />
         </div>
     </div>
 </eui-redux-provider>
