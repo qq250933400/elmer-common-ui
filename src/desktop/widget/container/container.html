@@ -1,0 +1,8 @@
+<div class="webAdminContainer" show="{{state.visible}}">
+    <iframe frameBorder="0" src="{{state.data.data.url}}" em:if="state.data.data.type eq 'Url'"/>
+    <eui-router em:if="state.data.data.type eq 'Route'">
+        <eui-route path="{{props.prefixPath}}/login" component="eui-login"/>
+        <eui-route path="{{props.prefixPath}}/" component="WebAdminMain"/>
+    </eui-router>
+    <span em:if="state.data.data.type neq 'Url'">{{state.data.title}}</span>
+</div>

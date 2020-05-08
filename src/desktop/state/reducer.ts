@@ -10,7 +10,11 @@ const initState = {
         image: "./assets/wallper/background.jpg",
         color: ""
     },
-    userWallperPlugin: "images"
+    userWallperPlugin: "images",
+    webconfig: {
+        copyRight: "COPYRIGHT©2012    版权所有 北京**科技发展有限公司",
+        servicePhone: "010-88312038-8015"
+    }
 };
 
 redux.defineReducer(autoInit(redux.ReduxController), "desktop", (state = initState, action):any => {

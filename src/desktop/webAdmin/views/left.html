@@ -7,11 +7,21 @@
         <div class="web-admin-sdmenu">
             <div em:for="let item in this.state.menuData" class.collapsed="item.isExpand neq true">
                 <span et:click="handleOnMenuClick">{{item.name}}</span>
-                <a href="javascript:void(0);" em:for="let subItem in item.data">{{subItem.title}}</a>
+                <a
+                    href="javascript:void(0);"
+                    em:for="let subItem in item.data"
+                    et:click="handleOnMenuItemClick"
+                    class.active="subItem.key eq state.selectSubMenu.key"
+                >{{subItem.title}}</a>
             </div>
         </div>
     </div>
     <div class="web-admin-switch-bar">
-        <a et:click="handleOnSwitchBarClick" href="javascript:void(0);" class="web-admin-leftbar-btn" class.web-admin-leftbar-btn-right="state.hideMenu"/>
+        <a
+            et:click="handleOnSwitchBarClick"
+            href="javascript:void(0);"
+            class="web-admin-leftbar-btn"
+            class.web-admin-leftbar-btn-right="state.hideMenu"
+        />
     </div>
 </div>

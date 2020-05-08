@@ -1,0 +1,118 @@
+.webAdminMain {
+    overflow-x: hidden;
+    padding: 20px;
+    #main{ font-size:12px;}
+    #main span.time{ font-size:14px; color:#528dc5; width:100%; padding-bottom:10px; float:left}
+    #main div.top{ width:100%; background:url(../images/main/main_r2_c2.jpg) no-repeat 0 10px; padding:0 0 0 15px; line-height:35px; float:left}
+    #main div.sec{ width:100%; background:url(../images/main/main_r2_c2.jpg) no-repeat 0 15px; padding:0 0 0 15px; line-height:35px; float:left}
+    .left{ float:left}
+    #main div a{ float:left}
+    #main span.num{  font-size:30px; color:#538ec6; font-family:"Georgia","Tahoma","Arial";}
+    .left{ float:left}
+    div.main-tit{ font-size:14px; font-weight:bold; color:#4e4e4e; background:url(../images/main/main_r4_c2.jpg) no-repeat 0 33px; width:100%; padding:30px 0 0 20px; float:left}
+    div.main-con{ width:100%; float:left; padding:10px 0 0 20px; line-height:36px;}
+    div.main-corpy{ font-size:14px; font-weight:bold; color:#4e4e4e; background:url(../images/main/main_r6_c2.jpg) no-repeat 0 33px; width:100%; padding:30px 0 0 20px;}
+    div.main-order{ line-height:30px; padding:10px 0 0 0;}
+}
+.web-admin-header {
+    @adminHeaderBottomEffectSize: 193px;
+    @adminHeaderBottomBtnWidth: 26px;
+    display: block;
+    height: 95px;
+    background: url(../images/main/top_r1_c5.jpg) repeat-x left bottom #fbfbfb;
+    .web-admin-header-top {
+        height: 40px;
+        position: relative;
+        padding-left: 81px;
+        .logo {
+            padding: 14px 0 0 7px;
+            width: 74px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            i {
+                display: block;
+                width: 74px;
+                height: 64px;
+            }
+        }
+        .topOperate {
+            height: 40px;
+            .header-name {
+                float: left;
+            }
+            .header-right {
+                float: right;
+                vertical-align: bottom;
+            }
+        }
+    }
+    .web-admin-header-bottom {
+        display: block;
+        height: 55px;
+        padding-left: 81px;
+        position: relative;
+        .header-admin {
+            float: left;
+        }
+        .header-menu {
+            display: block;
+            position: absolute;
+            right:0;
+            bottom:0;
+            width: calc(~'100% - @{adminHeaderBottomEffectSize}');
+            width: -webkit-calc(~'100% - @{adminHeaderBottomEffectSize}');
+            width: -ms-calc(~'100% - @{adminHeaderBottomEffectSize}');
+            width: -moz-calc(~'100% - @{adminHeaderBottomEffectSize}');
+            box-sizing: border-box;
+            padding-right: @adminHeaderBottomBtnWidth;
+            .header-menu-container {
+                white-space: nowrap;
+                height: 37px;
+                >div {
+                    height: auto !important;
+                    transition:  all 0.4s ease;
+                    &::after {
+                        content: "";
+                        clear: both;
+                        display: block;
+                        height: 0;
+                    }
+                }
+            }
+            .top-menu-btn {
+                width: @adminHeaderBottomBtnWidth;
+                height: 10px;
+                line-height: 10px;
+                font-size: 6px;
+                background: transparent;
+                border: 1px solid #b3b3b3;
+                position: absolute;
+                right: 0;
+                bottom: 6px;
+                font-family: 'fantasy', 'Times New Roman', Times, serif;
+                span {
+                    display: block;
+                    transform: scale(0.8,0.6);
+                }
+                &:hover{
+                    color: #fff;
+                    background: #b3b3b3;
+                }
+                &:active {
+                    color: #fff;
+                    background: #949494;
+                }
+            }
+            .action-top {
+                bottom: 17px;
+            }
+            .action-close {
+                right: @adminHeaderBottomBtnWidth + 1px;
+                height: 21px;
+                line-height: 21px;
+                font-size: 20px;
+            }
+        }
+    }
+}

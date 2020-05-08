@@ -1,15 +1,23 @@
 <div class="web-admin-layout">
-	<WebAdminTop />
+	<WebAdminTop et:onClose="handleOnCloseTab" et:onChange="handleOnTopMenuClick" menuList="{{state.openMenuList}}" selectedMenu="{{state.defaultOpenMenu}}"/>
 	<div class="web-admin-main" class.hideLeftMenu="state.hideMenu eq true">
 		<div class="web-admin-main-left">
-			<WebLeftMenu data="{{props.menuList}}" et:onSwitchClick="handleOnMenuSwitchClick"/>
+			<WebLeftMenu et:onClick="handleOnLeftMenuClick" data="{{props.menuList}}" et:onSwitchClick="handleOnMenuSwitchClick"/>
 		</div>
 		<div class="web-admin-main-right">
-			<div></div>
+			<div>
+				<eui-webadmin-container
+					em:for="let item in this.state.openMenuList"
+					em:visible="item.id eq this.state.defaultOpenMenu.id"
+					data="{{item}}"
+					data-key="{{item.id}}"
+					id="{{item.id}}"
+				/>
+			</div>
 		</div>
 	</div>
 	<div class="web-admin-botttom">
-		<label>COPYRIGHT©2012    版权所有 北京**科技发展有限公司 </label>
-		<span data-type="html"><i>如有疑问请您联系TEL：010-88312038-8015</i></span>
+		<label>{{props.webconfig.copyRight}} </label>
+		<span><i>如有疑问请您联系TEL：{{props.webconfig.servicePhone}}</i></span>
 	</div>
 </div>
