@@ -1,0 +1,29 @@
+<div em:style="this.state.style" show="{{state.visible}}" class="euiImageViewer {{props.className}}">
+    <div>
+        <header>
+            <div>
+                <span data-type="html">{{props.title}}&nbsp;-&nbsp;{{state.currentTitle}}</span>
+                <button et:click="onClose"><eui-icon type="fa-close"/></button>
+            </div>
+        </header>
+        <div id="{{containerId}}"  passive="{{false}}"
+            et:mousedown="handleOnContainerMouseDown"
+            et:mousemove="handleOnContainerMouseMove"
+            et:mouseup="handleOnContainerMouseUp"
+        >
+            <img title="{{state.currentData.title}}" et:load="onloadImageComplete" et:animationEnd="onImageAnimationEnd" id="{{currentId}}" class="{{state.currentClassName}}" src="{{state.currentData.url}}" em:style="this.state.currentStyle"/>
+            <img title="{{state.nextData.title}}" et:load="onloadImageComplete" id="{{nextId}}" class="{{state.nextClassName}}" src="{{state.nextData.url}}" em:style="this.state.nextStyle"/>
+        </div>
+        <footer>
+            <div>
+                <button et:click="onGoPrev"><eui-icon type="fa-chevron-left"/></button>
+                <button et:click="onGoNext"><eui-icon type="fa-chevron-right"/></button>
+                <button et:click="onRoutateLeft"><eui-icon type="fa-rotate-left"/></button>
+                <button et:click="onRoutateRight"><eui-icon type="fa-rotate-right"/></button>
+                <button et:click="onZoomIn"><eui-icon type="fa-search-plus"/></button>
+                <button et:click="onZoomOut"><eui-icon type="fa-search-minus"/></button>
+                <button et:click="onReset"><eui-icon type="fa-refresh"/></button>
+            </div>
+        </footer>
+    </div>
+</div>

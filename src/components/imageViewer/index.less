@@ -1,0 +1,166 @@
+.euiImageViewer {
+    @imageViewerHeaderHeight: 40px;
+    @imageViewerFooterHeight: 50px;
+    @imageViewerOperateBtnHeight: 40px;
+    @imageViewerOperateBtnWidth: 50px;
+    @imageViewerOperateWidth: @imageViewerOperateBtnWidth * 7;
+    display: block;
+    background: rgba(10,10,10,0.8);
+    >div {
+        display: block;
+        height: 100%;
+        overflow: auto;
+        position: relative;
+        >header,
+        >header>div>button,
+        >header>div>span {
+            height: @imageViewerHeaderHeight;
+            line-height: @imageViewerHeaderHeight;
+        }
+        >header {
+            display: block;
+            background: rgba(51, 51, 51, 0.9);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            >div {
+                display: block;
+                height: 100%;
+                position: relative;
+                padding-right: @imageViewerHeaderHeight;
+                button {
+                    display: block;
+                    width: @imageViewerHeaderHeight;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    border: none;
+                    background: transparent;
+                    color:#fff;
+                    cursor: pointer;
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.4);
+                    }
+                    &:active {
+                        background: rgba(255, 255, 255, 0.6);
+                    }
+                    >i {
+                        font-size: 22px;
+                    }
+                }
+                >span {
+                    display: block;
+                    padding-left: 5px;
+                    font-size: 15px;
+                    color:#fff;
+                }
+            }
+        }
+        >footer {
+            display: block;
+            height: @imageViewerFooterHeight;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            z-index: 100;
+            >div {
+                display: block;
+                width: @imageViewerOperateWidth;
+                height: @imageViewerOperateBtnHeight;
+                margin: 0 auto;
+                margin-top: @imageViewerFooterHeight - @imageViewerOperateBtnHeight;
+                background: rgba(10,10,10,0.8);
+                border-radius: 5px 5px 0 0;
+                overflow: hidden;
+                box-shadow: 0 0 5px rgba(10,10,10,0.4);
+                button {
+                    display: inline-block;
+                    width: @imageViewerOperateBtnWidth;
+                    height: @imageViewerOperateBtnHeight;
+                    line-height: @imageViewerOperateBtnHeight;
+                    box-sizing: border-box;
+                    appearance: none;
+                    background: transparent;
+                    border: none;
+                    font-size: 20px;
+                    color: #fff;
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.4);
+                    }
+                    &:active {
+                        background: rgba(255, 255, 255, 0.6);
+                    }
+                }
+            }
+        }
+        >div {
+            display: block;
+            height: 100%;
+            line-height: 100%;
+            position: relative;
+            overflow: hidden;
+            img {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                max-width: 100%;
+                max-height: 100%;
+                width: 100% !important;
+                cursor: move;
+            }
+        }
+    }
+}
+
+@keyframes toLeftHideFrame {
+    0%{
+        transform: translate3d(0,0,0);
+    }
+    100% {
+        transform: translate3d(-100%,0,0);
+    }
+}
+@keyframes toLeftShowFrame {
+    0%{
+        transform: translate3d(100%,0,0);
+    }
+    100% {
+        transform: translate3d(0%,0,0);
+    }
+}
+
+@keyframes toRightHideFrame {
+    0% {
+        transform: translate3d(0%,0,0);
+    }
+    100% {
+        transform: translate3d(100%,0,0);
+    }
+}
+@keyframes toRightShowFrame {
+    0% {
+        transform: translate3d(-100%,0,0);
+    }
+    100% {
+        transform: translate3d(0%,0,0);
+    }
+}
+.animationToRightHide {
+    opacity: 1 !important;
+    animation: toRightHideFrame 0.8s ease-in-out forwards;
+}
+.animationToRightShow {
+    opacity: 1 !important;
+    animation: toRightShowFrame 0.8s ease-in-out forwards;
+}
+.animationToLeftHide {
+    opacity: 1 !important;
+    animation: toLeftHideFrame 0.8s ease-in-out forwards;
+}
+.animationToLeftShow {
+    opacity: 1 !important;
+    animation: toLeftShowFrame 0.8s ease-in-out forwards;
+}

@@ -15,7 +15,7 @@ const port = 3000;
 
 module.exports = merge(common, {
     // 使用 source-map
-    devtool: 'source-map',
+    // devtool: 'source-map',
     // 对 webpack-dev-server 进行配置
     devServer: {
         contentBase: './dist',
@@ -33,7 +33,7 @@ module.exports = merge(common, {
             format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
             clear: true
         }),
-        // new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin()
     ],
     // 设置出口文件地址与文件名
     output: {
@@ -41,9 +41,6 @@ module.exports = merge(common, {
         filename: 'bundle.min.js'
     },
     mode: "development",
-    // plugins: [
-    //     new webpack.HotModuleReplacementPlugin()
-    // ],
     watchOptions: {
         ignored: /node_modules/
     }

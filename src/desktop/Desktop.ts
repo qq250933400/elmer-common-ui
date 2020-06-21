@@ -7,6 +7,8 @@ import {
     redux
 } from "elmer-ui-core";
 import "./app/setting";
+import "./state/reducer";
+// tslint:disable-next-line: ordered-imports
 import { MatrixCharacterEffects } from "./backgroundPlugin/MatrixCharacterEffects";
 import { PictureBackground } from "./backgroundPlugin/PictureBackground";
 import "./config/service";
@@ -43,6 +45,7 @@ type TypeDesktopProps = {[P in keyof TypeDesktopPropsCheckRule]:any};
     },
     connect: {
         mapStateToProps: (state:any) => {
+            console.log(state);
             return {
                 autoRunAppList: state.desktop.autoRunAppList,
                 backgroundPlugin: <TypePluginInfo[]>[

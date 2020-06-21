@@ -1,0 +1,141 @@
+.mobile-keyboard-number {
+    @keyboardHeight: 40px;
+    @keyboardTopButtonWidth: 60px;
+    @keyboardButtonHeight: 40px;
+    @keyboardButtonActiveBkColor: rgb(199, 253, 237);
+    @keyboardButtonActiveColor: rgb(68, 68, 68);
+    display: block;
+    position: fixed;
+    z-index: 10001;
+    height: 40%;
+    width: 100%;
+    background:#fff;
+    border-top: 1px solid rgb(233, 233, 233);
+    left: 0;
+    bottom: 0;
+    box-sizing: border-box;
+    box-shadow: 0 -2px 5px rgba(10,10,10,0.1);
+    >div {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        .mobile-keyboard-number-topbar {
+            display: block;
+            height: @keyboardHeight;
+            line-height: @keyboardHeight;
+            position: relative;
+            font-size: 0;
+            * {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 14px;
+                height: @keyboardHeight;
+                line-height: @keyboardHeight;
+            }
+            button {
+                width: @keyboardTopButtonWidth;
+                color: rgba(10,10,10,0.8);
+                background:transparent;
+                border: none;
+                appearance: none;
+                outline: none;
+                &:active {
+                    background-color: @keyboardButtonActiveBkColor;
+                    color: @keyboardButtonActiveColor;
+                }
+            }
+            .mobile-keyboard-number-ok {
+                color: rgb(14, 150, 109);
+            }
+            span {
+                width: calc(~'100% - 2 * @{keyboardTopButtonWidth}');
+                width: -webkit-calc(~'100% - 2 * @{keyboardTopButtonWidth}');
+                text-align: center;
+            }
+        }
+        .mobile-keyboard-number-buttons {
+            display: block;
+            height: calc(~'100% - @{keyboardHeight} - 30px');
+            position: relative;
+            button {
+                display: inline-block;
+                width: calc(~'33% - 5px');
+                height: calc(~'25% - 5px');
+                margin-left: 5px;
+                margin-top: 5px;
+                appearance: none;
+                border: none;
+                background: rgb(241, 241, 241);
+                font-size: 1.6rem;
+                color: rgb(99, 99, 99);
+                &:active {
+                    background: @keyboardButtonActiveBkColor;
+                    color: @keyboardButtonActiveColor;
+                }
+            }
+        }
+        .mobile-keyboard-copyright {
+            display: block;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 12px;
+            color:rgb(224, 224, 224);
+        }
+    }
+}
+
+.keyBoardHidden {
+    display: none;
+}
+
+@keyframes showKeyboardFrame {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0%);
+    }
+}
+
+@-webkit-keyframes showKeyboardFrame {
+    from {
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+    to{
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+}
+.showKeyboardAnimation {
+    animation: showKeyboardFrame 0.6s ease forwards;
+}
+
+@keyframes hideKeyboardFrame {
+    0% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(100%);
+    }
+}
+
+@-webkit-keyframes hideKeyboardFrame {
+    0% {
+        opacity: 1;
+        -webkit-transform: translateY(0%);
+    }
+    100%{
+        opacity: 0;
+        -webkit-transform: translateY(100%);
+    }
+}
+.hideKeyboardAnimation {
+    animation: hideKeyboardFrame 0.6s ease forwards;
+}

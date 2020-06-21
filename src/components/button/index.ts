@@ -72,7 +72,14 @@ export class ButtonComponent extends Component {
         },true);
     }
     handleOnClick(evt:any):void {
-        evt.data = this.props.data;
+        if(!evt.data) {
+            evt.data = this.props.data;
+        } else if(this.props.data) {
+            evt.data = {
+                ...evt.data,
+                ...this.props.data
+            };
+        }
         typeof this.props.onClick === "function" && this.props.onClick(evt);
     }
     render(): string {

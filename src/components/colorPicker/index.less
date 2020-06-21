@@ -1,0 +1,163 @@
+.color-picker {
+    @width: 410px;
+    @height: auto;
+    @radius: 4px;
+    @pickWidth: 166px;
+    @pickHeight: 166px;
+    @RWidth: 80px;
+    display: block;
+    border: 1px solid #ccd0d8;
+    background: #fff;
+    width: @width;
+    height: @height;
+    border-radius: @radius;
+    box-sizing: border-box;
+    padding: 5px;
+    box-shadow: 1px 1px 8px rgba(10,10,10, 0.2);
+    >div {
+        display: block;
+        height: 100%;
+        position: relative;
+        .color-picker-buttons,
+        .color-picker-result,
+        .color-picker-area,
+        .color-picker-slider {
+            display: inline-block;
+            vertical-align: middle;
+            position: relative;
+            height: @pickHeight;
+        }
+        .color-picker-area {
+            width: @pickWidth;
+            border: 1px solid #ccd0d8;
+            box-sizing: border-box;
+            cursor: crosshair;
+            overflow: hidden;
+            canvas {
+                width: 100%;
+                height: 100%;
+                cursor: crosshair;
+            }
+            >i {
+                display: block;
+                width: 10px;
+                height: 10px;
+                box-sizing: border-box;
+                border: 1px solid #ccd0d8;
+                position: absolute;
+                right: 0;
+                top: 0;
+                border-radius: 100%;
+            }
+        }
+        .color-picker-slider {
+            height: @pickHeight;
+            width: 15px;
+            margin-left: 10px;
+            border: 1px solid #ccd0d8;
+            canvas {
+                width: 100%;
+                height: 100%;
+            }
+            a {
+                display: block;
+                height: 4px;
+                width: 100%;
+                position: absolute;
+                left:0;
+                top: 0;
+                z-index: 5;
+                cursor: ns-resize;
+                &::before,&::after {
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border: 6px solid transparent;
+                    position: absolute;
+                    top:-5px;
+                }
+                &::before {
+                    border-left-color: #a1a1a1;
+                    left:-1px;
+                }
+                &::after {
+                    border-right-color: #a1a1a1;
+                    right:-1px;
+                }
+            }
+        }
+        .color-picker-result {
+            width: @RWidth;
+            height: @pickHeight;
+            margin-left: 10px;
+            .color-picker-chose {
+                display: block;
+                width: @RWidth;
+                height: 24px;
+                border: 1px solid #ccd0d8;
+                box-sizing: border-box;
+                background-repeat: repeat;
+                position: relative;
+                canvas {
+                    width: 100%;
+                    height: 100%;
+                }
+                i {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    z-index: 2;
+                }
+            }
+            label {
+                display: block;
+                height: 28px;
+                line-height: 28px;
+                span {
+                    display: inline-block;
+                    vertical-align: middle;
+                    width: 15px;
+                }
+                input {
+                    display: inline-block;
+                    box-sizing: border-box;
+                    vertical-align: middle;
+                    width: calc(@RWidth - 15px);
+                    min-width: calc(@RWidth - 15px);
+                  
+                }
+            }
+            label>input,>input {
+                height: 20px;
+                appearance: none;
+                border-radius: 0px;
+                border: 1px solid #ccd0d8;
+                padding: 0 5px;
+            }
+            >input {
+                width: 100%;
+                min-width: 100%;
+                margin-top: 8px;
+                box-sizing: border-box;
+            }
+        }
+        .color-picker-buttons {
+            width: 72px;
+            overflow: hidden;
+            margin-left: 10px;
+            button {
+                width: 70px;
+                height: 30px;
+                box-sizing: border-box;
+            }
+            i {
+                display: block;
+                height: 5px;
+            }
+        }
+    }
+}

@@ -1,0 +1,42 @@
+<div class="{{state.className}} officeDataView" em:style="this.state.outStyle" id="{{tableViewId}}">
+    <div class="officeDataView_table" id="{{tableId}}">
+        <div em:style="this.state.tableStyle">
+            <table width="100%" cellspacing="0" cellpadding="0">
+                <col em:for="let col in this.state.columnSizeData" width="{{col.width}}" em:style="col.style"/>
+                <thead id="{{tableHeaderId}}" >
+                    <tr em:for="let item in this.state.data.header.data">
+                        <td em:for="let subItem in item"
+                            colspan="{{subItem.colspan}}"
+                            rowspan="{{subItem.rowspan}}"
+                            class="{{subItem.className}}"
+                            em:style="subItem.style"
+                            >
+                            <span>{{subItem.title}}</span>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody em:style="this.state.tBodyStyle" id="{{tableBodyId}}">
+                    <tr em:for="let bItem in this.state.bodyData">
+                        <td em:for="let bSubItem in bItem" em:style="bSubItem.style" class="{{bSubItem.className">
+                            <span em:if="bSubItem.type eq 'Text'">{{bSubItem.title}}</span>
+                            <eui-run-code code="{{bSubItem.title}}" em:if="bSubItem.type eq 'FromRender'"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="pager" id="{{tablePagerId}}">
+        <span>{{state.pager.position}}</span>
+        <div>
+            <button class="pager_first" et:click="onFirstClick"/>
+            <button class="pager_prev" et:click="onPrevClick"/>
+            <button class="pager_next" et:click="onNextClick"/>
+            <button class="pager_last" et:click="onLastClick"/>
+            <span>转到</span>
+            <input bind="state.jumpNums" type="text" min="0" max="{{state.pager.totalPage}}" type="number"/>
+            <span>页</span>
+            <button class="pager_goto" et:click="OnGotoClick"/>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+.officeDataView {
+    @pagerHeight: 30px;
+    .officeDataView_table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-width: 1px;
+        border-style: solid;
+    }
+    table {
+        border-collapse: collapse;
+        td {
+            padding: 5px 20px;
+            text-align: center;
+            border-right-width: 1px;
+            border-right-style: solid;
+            box-sizing: border-box !important;
+        }
+        thead{
+            tr {
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                font-weight: bold;
+            }
+        }
+        tbody tr,thead tr {
+            width: 100%;
+            display:table;
+            table-layout:fixed;
+        }
+        tbody {
+            overflow-x: hidden;
+            overflow-y: auto;
+            display:block;
+        }
+    }
+    .pager {
+        height: @pagerHeight;
+        position: relative;
+        >span,>div {
+            display: block;
+            height: @pagerHeight;
+            line-height: @pagerHeight;
+        }
+        >div {
+            position: absolute;
+            right: 0;
+            top:0;
+            button, input {
+                display: inline-block;
+                vertical-align: middle;
+                width: 30px;
+                height: 20px;
+                margin-right: 5px;
+                -webkit-appearance: none;
+                appearance: none;
+                box-sizing: border-box;
+            }
+            span{
+                display: inline-block;
+                vertical-align: middle;
+                height: @pagerHeight;
+                line-height: @pagerHeight;
+                margin-right: 4px;
+            }
+        }
+    }
+}
+.office_blue {
+    @foreColor: #15428b;
+    .officeDataView_table {
+        border-color: #bccbdd;
+    }
+    table {
+        
+        background-color: #fff;
+        td {
+            border-right-color: #bccbdd;
+            color: @foreColor;
+        }
+        thead {
+            tr {
+                border-bottom-color: #bccbdd;
+                background: url(../../images/blue/tbg.gif) repeat-x;
+                background-size: 100% 100%;
+                td:hover {
+                    background: url(../../images/blue/tbg1.gif) repeat-x;
+                    background-size: 100% 100%;
+                }
+            }
+        }
+        tbody>tr:nth-child(2n) {
+            background-color: #e6f0f9;
+        }
+    }
+    .pager {
+        span {
+            color: @foreColor;
+        }
+        >div {
+            button {
+                border: none;
+                width: 30px;
+                height: 20px;
+                &:active {
+                    opacity: 0.7;
+                }
+            }
+            .pager_first {
+                background: url(../../images/blue/rs_44.gif) no-repeat;
+            }
+            .pager_prev {
+                background: url(../../images/blue/rs_46.gif) no-repeat;
+            }
+            .pager_next {
+                background: url(../../images/blue/rs_48.gif) no-repeat;
+            }
+            .pager_last {
+                background: url(../../images/blue/rs_50.gif) no-repeat;
+            }
+            .pager_goto {
+                background: url(../../images/blue/rs_52.gif) no-repeat;
+            }
+            input[type=number] {
+                border: solid 1px #99b6db;
+                outline: none;
+                &:focus {
+                    border-color: #6d92c2;
+                }
+            }
+        }
+    }
+}

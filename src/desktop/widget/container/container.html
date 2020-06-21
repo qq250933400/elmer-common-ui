@@ -1,8 +1,10 @@
 <div class="webAdminContainer" show="{{state.visible}}">
     <iframe frameBorder="0" src="{{state.data.data.url}}" em:if="state.data.data.type eq 'Url'"/>
-    <eui-router em:if="state.data.data.type eq 'Route'">
+    <eui-router em:if="state.data.data.type eq 'Route'" hashRouter="{{state.data.data.hashRouter}}" url="{{state.data.data.component}}">
         <eui-route path="{{props.prefixPath}}/login" component="eui-login"/>
+        <eui-route path="{{props.prefixPath}}/user/setting" component="eui-desktop-setting" />
         <eui-route path="{{props.prefixPath}}/" component="WebAdminMain"/>
     </eui-router>
-    <span em:if="state.data.data.type neq 'Url'">{{state.data.title}}</span>
+    <span em:if="state.data.data.type neq 'Url' && state.data.data.type neq 'Route'">{{state.data.title}}</span>
+    <div><eui-run-code em:if="state.data.data.type eq 'ElmerUI'" code="{{state.data.data.component}}"/></div>
 </div>

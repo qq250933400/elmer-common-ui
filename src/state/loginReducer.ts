@@ -1,15 +1,14 @@
+import { defineGlobalState, getGlobalState, redux } from "elmer-ui-core";
 import { REDUX_ACTION_LOGIN_CONFIG } from "./actions";
-import { redux, getGlobalState, defineGlobalState } from "elmer-ui-core";
+
 const initState = {
     loginConfig: {}
 };
 
 export const loginReducer = (state:any = initState, action:any) => {
-    console.log("init---LoginReducers", state, action);
     switch(action.type) {
         // handle the login page api response
         case REDUX_ACTION_LOGIN_CONFIG: {
-            console.log("----------++++++++==========---------Reducers", action);
             return {
                 ...initState,
                 ...state,

@@ -1,0 +1,56 @@
+<div class="color-picker {{props.className}}"
+    em:style="this.props.style"
+    passive="{{false}}"
+    et:dragstart="onDragstart"
+    et:contextmenu="onStopReturnValue"
+    et:selectstart="onStopReturnValue"
+    et:copy="onStopReturnValue"
+    et:mousedown="onselectAreaStart"
+    et:touchstart="onselectAreaStart"
+    et:touchmove="onIndicatorMove"
+    et:mousemove="onIndicatorMove"
+    id="{{containerId}}"
+>
+    <div>
+        <div class="color-picker-area"
+            id="{{selectAreaId}}"
+        >
+            <canvas id="{{pickerId}}"/>
+            <i id="{{selectAreaFocusId}}"/>
+        </div>
+        <div class="color-picker-slider">
+            <canvas id="{{indicatorId}}"/>
+            <a
+                href="javascript:void(0);"
+                id="{{indicatorBarId}}"
+                et:touchstart="onIndicatorTouchStart"
+                et:mousedown="onIndicatorTouchStart"
+            ><div></div></a>
+        </div>
+        <div class="color-picker-slider">
+            <canvas id="{{opacityId}}"/>
+            <a
+                id="{{opacityBarId}}"
+                href="javascript:void(0);"
+                et:touchstart="onOpacityTouchStart"
+                et:mousedown="onOpacityTouchStart"
+            ><div></div></a>
+        </div>
+        <div class="color-picker-result">
+            <div class="color-picker-chose" et:click="handleOnChangeDisplay" em:style="this.state.choseResultStyle">
+                <canvas id="{{choseResultBackId}}"/>
+                <i id="{{choseColorId}}" style="background: {{state.color}};"></i>
+            </div>
+            <label><span>R</span><input et:click="handleOnInputResultClick" id="{{inputRId}}" type="text" readonly="reandonly" value="{{state.choseColorData.r}}"/></label>
+            <label><span>G</span><input et:click="handleOnInputResultClick" id="{{inputGId}}" type="text" readonly="reandonly" value="{{state.choseColorData.g}}"/></label>
+            <label><span>B</span><input et:click="handleOnInputResultClick" id="{{inputBId}}" type="text" readonly="reandonly" value="{{state.choseColorData.b}}"/></label>
+            <label><span>A</span><input et:click="handleOnInputResultClick" id="{{inputAId}}" type="text" readonly="reandonly" value="{{state.choseColorData.a}}"/></label>
+            <input data-type="result" et:click="handleOnInputResultClick" type="text" id="{{inputResultId}}" readonly="reandonly" value="{{state.choseColorData.hex}}"/>
+        </div>
+        <div class="color-picker-buttons">
+            <button et:click="onConfirmClick" class="eui-button eui-button-primary">{{props.confirmText}}</button>
+            <i />
+            <button et:click="onCancelClick" class="eui-button eui-button-default">{{props.cancelText}}</button>
+        </div>
+    </div>
+</div>

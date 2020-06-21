@@ -1,0 +1,24 @@
+<div class="mobile-keyboard-number {{state.currentAnimation}}" et:animationEnd="onAnimationEnd">
+    <div>
+        <div class="mobile-keyboard-number-topbar">
+            <button et:click="hide" if="{{props.showClose}}" class="mobile-keyboard-number-cancel">{{props.btnCloseText}}</button>
+            <span>{{props.title}}</span>
+            <button et:click="onConfirm" if="{{props.showConfirm}}" class="mobile-keyboard-number-ok">{{props.btnConfirmText}}</button>
+        </div>
+        <div class="mobile-keyboard-number-buttons">
+            <button data-value="1" et:click="onItemClick">1</button>
+            <button data-value="2" et:click="onItemClick">2</button>
+            <button data-value="3" et:click="onItemClick">3</button>
+            <button data-value="4" et:click="onItemClick">4</button>
+            <button data-value="5" et:click="onItemClick">5</button>
+            <button data-value="6" et:click="onItemClick">6</button>
+            <button data-value="7" et:click="onItemClick">7</button>
+            <button data-value="8" et:click="onItemClick">8</button>
+            <button data-value="9" et:click="onItemClick">9</button>
+            <button data-value="." et:click="onItemClick">·</button>
+            <button data-value="0" et:click="onItemClick">0</button>
+            <button data-value="DEL" et:click="onItemClick"><eui-icon type="fa-long-arrow-left"/></button>
+        </div>
+        <label class="mobile-keyboard-copyright">{{props.copyRight}}</label>
+    </div>
+</div>

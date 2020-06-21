@@ -18,6 +18,7 @@ const initState = {
 };
 
 redux.defineReducer(autoInit(redux.ReduxController), "desktop", (state = initState, action):any => {
+    console.log(action.type , "----");
     return state;
 });
 

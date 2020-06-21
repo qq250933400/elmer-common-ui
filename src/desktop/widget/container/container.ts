@@ -1,4 +1,5 @@
 import { Component,declareComponent, IPropCheckRule, PropTypes } from "elmer-ui-core";
+import { RouterService } from "elmer-ui-core/lib/widget/router/RouterService";
 import WebAdminMain from "../../webAdmin/main";
 
 type TypeWebAdminContainerPropRule = {
@@ -15,6 +16,7 @@ type TypeWebAdminContainerProps = {[P in keyof TypeWebAdminContainerPropRule]?:a
 type TypeWebAdminContainerState = TypeWebAdminContainerProps & {
     visible?: boolean;
     data?: any;
+    routeUrl?: string;
 };
 
 @declareComponent({
@@ -24,7 +26,10 @@ type TypeWebAdminContainerState = TypeWebAdminContainerProps & {
             selector: "WebAdminMain",
             component: WebAdminMain
         }
-    ]
+    ],
+    model: {
+        checkRoute: RouterService
+    }
 })
 export default class WebAdminContainer extends Component {
     static propType:TypeWebAdminContainerPropRule = {
@@ -55,14 +60,23 @@ export default class WebAdminContainer extends Component {
         }
     };
     state: TypeWebAdminContainerState = {
-        visible: false
+        visible: false,
+        routeUrl: "/"
     };
     constructor(props:TypeWebAdminContainerProps) {
         super(props);
         this.state.visible = props.visible;
         this.state.data = props.data;
-        console.log(props.data);
+        this.state.routeUrl = this.getValue(this.props, "data.data.component");
+        if(this.isEmpty(this.getValue(props.data, "data.hashRouter"))) {
+            this.state.data.data.hashRouter = false;
+        }
+        if(props.data.type === "ElmerUI") {
+            console.log(props.data.component);
+        }
+
     }
+
     $onPropsChanged(props: TypeWebAdminContainerProps): void {
         const updateState:TypeWebAdminContainerState = {};
         if(this.state.visible !== props.visible) {

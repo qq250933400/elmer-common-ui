@@ -1,1 +1,14 @@
-<eui-desktop template="WebAdmin"/>
+<!-- <eui-redux-provider>
+    <eui-desktop template="WebAdmin"/>
+</eui-redux-provider> -->
+<!-- <eui-icon-demo /> -->
+<div>
+    <eui-button title="visible" et:onClick="onButtonVisible"><span>my ddd</span></eui-button>
+    <eui-button et:onClick="onRemoveClick">Remove</eui-button>
+    <eui-button et:onClick="onShowImageView">图片预览</eui-button>
+    <input et:click="handleOnInputClick" value="{{saveValue}}" type="text" class="eui-input" readonly="readonly"/>
+    <eui-keyboard-number id="myKeyboard" em:visible="this.kVisible"/>
+    <div em:for="let item in this.testDataList">HAHAH {{item.value}}</div>
+    <eui-color-picker et:onConfirm="onColorPickerConfirm" style="position: fixed; left:40%;top:30%;"/>
+    <!-- <eui-image-viewer data="{{imageData}}" visible="{{viewerVisible}}" et:onClose="onImageViewClick"/> -->
+</div>

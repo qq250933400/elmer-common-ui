@@ -1,5 +1,5 @@
 import { Component,declareComponent, IElmerEvent, IPropCheckRule, propTypes } from "elmer-ui-core";
-import { RegionData } from "../mobileSelect/RegionData";
+import { RegionData } from "../mobile/mobileSelect/RegionData";
 import "./style.less";
 
 @declareComponent({

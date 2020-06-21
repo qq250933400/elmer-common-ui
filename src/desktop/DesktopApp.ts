@@ -2,7 +2,7 @@ import dialog from "../components/dialog/dialog";
 import { IContentMenuItem } from "../components/menu";
 // tslint:disable: object-literal-shorthand
 export type DesktopRunData = {
-    type: "ElmerUI" | "React" | "Angular" | "Vue" | "Url" | "CallMethod";
+    type: "ElmerUI" | "React" | "Angular" | "Vue" | "Url" | "CallMethod" | "Route";
     props?: any;
     component?: string|Function;
     width?: number | string;
@@ -19,6 +19,7 @@ export type DesktopRunData = {
     maxBarTheme?:string;
     titleTheme?: string;
     url?: string;
+    hashRouter?: boolean;
 };
 // tslint:disable-next-line:interface-over-type-literal
 export type DesktopApp = {
@@ -58,7 +59,7 @@ export const demoAppData:DesktopApp[] = [
         id: "-----------1",
         data: {
             type: "ElmerUI",
-            component: "eui-icon-demo",
+            component: "<eui-icon-demo />",
             showBottom: true,
             showBarMax: false,
             showBarMin: false,
@@ -67,16 +68,23 @@ export const demoAppData:DesktopApp[] = [
             titleTheme: "ahaha"
         }
     }, {
-        title: "WxSetting",
+        title: "DataView",
         icon: "fa-vcard",
         id: "-----------2",
         data: {
-            type: "Url",
-            url: "http://127.0.0.1/api/public/index.php/activity/admin/setting/wx",
-            width: 800,
-            height: 600
+            type: "ElmerUI",
+            component: "<eui-office-data-view />"
         }
     }, {
+        title: "用户管理",
+        icon: "fa-vcard",
+        id: "-----------90",
+        data: {
+            type: "Route",
+            hashRouter: false,
+            component: "/user/setting"
+        }
+    },{
         title: "calendar",
         icon: "fa-calendar-plus-o",
         id: "-----------3",
@@ -96,6 +104,7 @@ export const demoAppData:DesktopApp[] = [
         icon: "fa-support",
         data: {
             type: "CallMethod",
+            hashRouter: false,
             component: function(): void {
                 this.launchFullscreen(document.body);
             }

@@ -1,0 +1,14 @@
+html{font-size:9pt; color:#15428b;}
+body{margin:0;padding:0;}
+a:active,a:focus{outline:none;}
+img{border:0px;}
+.menu{height:65px;}
+.menu ul{list-style:none;margin:0px;padding:0px;}
+.menu ul li{list-style:none; display: inline; float:left; margin-right:3px; height:65px;}
+.menu ul li a {display:block; float:left;  height:65px; background:url(main_21.gif) no-repeat left top; padding-left:3px; text-decoration:none;color:#15428b; }
+.menu ul li a span{height:65px; background:url(main_23.gif) repeat-x left top; float:left; padding-left:5px; padding-right:5px;padding-top:6px;}
+.menu ul li a em{width:3px; height:65px; background:url(main_24.gif) no-repeat top; float:left;}
+
+.menu ul li a:hover {display:block; float:left;  height:65px; background:url(main_16.gif) no-repeat left top; padding-left:3px; }
+.menu ul li a:hover span{height:65px; background:url(main_18.gif) repeat-x left top; float:left; padding-left:5px; padding-right:5px; padding-top:6px;}
+.menu ul li a:hover em{width:3px; height:65px; background:url(main_19.gif) no-repeat top; float:left;}
