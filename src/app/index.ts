@@ -1,10 +1,5 @@
 import { autowired, Component, declareComponent, ElmerDOM, ElmerServiceRequest, IElmerEvent } from "elmer-ui-core";
-import { createRegionPicker, showLoading, showToast, TypeRegionPicker } from "../components";
-import dialog, { TypeCreateDialogResult } from "../components/dialog/dialog";
-import "./admin";
-import "./demo";
-import "./style/index.less";
-import "./test.js";
+import { createOfficeDataViewHeader, createOfficeDataViewSource } from "../components/office/widget/dataView";
 
 @declareComponent({
     selector: "index",
@@ -20,31 +15,39 @@ import "./test.js";
     }
 })
 export class IndexComponent extends Component {
-    data: any[] = [];
-    index: number = 0;
-    onActionAdd():void{
-        const mData = JSON.parse(JSON.stringify(this.data));
-        mData.push({
-            title: "Demo Item",
-            index: this.index
-        });
-        this.index += 1;
-        this.setData({
-            data: mData
-        });
-    }
-    onDel(evt:IElmerEvent):void {
-        const myData = JSON.parse(JSON.stringify(this.data));
-        const newData = [];
-        for(let i=0;i<myData.length;i++) {
-            if(myData[i].index !== evt.data.item.index) {
-                newData.push(myData[i]);
-            }
+    dataSource = createOfficeDataViewSource({
+        header: {
+            defineIndex: 1
+        },
+        body: {
+            data: []
         }
-
-        this.setData({
-            data: newData
-        });
+    });
+    dataColumns = createOfficeDataViewHeader( [
+        [
+            {title: "表格标题", colspan: 3}
+        ],
+        [
+            {title: "全选", render: ()=>{
+                return "<eui-checkbox />";
+            }},
+            { title: "标题", dataKey: "title" },
+            { title: "进度", dataKey: "value", type: "Progress" }
+        ]]
+    );
+    constructor(props:any) {
+        super(props);
+        console.log(this.dataSource);
+    }
+    $init(): void {
+        for(let i=0;i<100;i++) {
+            this.dataSource.body.data.push({
+                aaa: "ccc",
+                title: "ccc" + i,
+                value: i % 100
+            });
+        }
+        console.log(this.dataSource.header);
     }
     render():any {
         return require("./views/test.html");

@@ -1,0 +1,49 @@
+.eui-checkbox {
+    @checkWidth: 20px;
+    @checkHeight: @checkWidth;
+    @checkIconSize: @checkHeight + 4px;
+    display: inline-block;
+    position: relative;
+    >input[type=checkbox] {
+        width: @checkWidth;
+        height: @checkHeight;
+        display: inline-block;
+        vertical-align: text-top;
+        opacity: 0;
+        +i{
+            font-size: 24px;
+        }
+        +i+i{
+            display: none;
+            font-size: 16px;
+            text-align: center;
+            line-height: @checkIconSize + 2px;
+        }
+        &:checked+i+i{
+            display: block;
+        }
+        &:checked+i,
+        &:checked+i+i {
+            color: #5e8bd0;
+        }
+    }
+    >i {
+        display: block;
+        width: @checkIconSize;
+        height: @checkIconSize;
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #bccbdd;
+    }
+    >span {
+        display: inline-block;
+        vertical-align: text-top;
+        line-height: 20px;
+        margin-left: 8px;
+        padding-right: 10px;
+        color: #15428E;
+        font-size: 14px;
+        min-height: 22px;
+    }
+}

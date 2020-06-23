@@ -4,7 +4,7 @@
             <table width="100%" cellspacing="0" cellpadding="0">
                 <col em:for="let col in this.state.columnSizeData" width="{{col.width}}" em:style="col.style"/>
                 <thead id="{{tableHeaderId}}" >
-                    <tr em:for="let item in this.state.data.header.data">
+                    <tr em:for="let item in this.state.headerData">
                         <td em:for="let subItem in item"
                             colspan="{{subItem.colspan}}"
                             rowspan="{{subItem.rowspan}}"
@@ -17,9 +17,9 @@
                 </thead>
                 <tbody em:style="this.state.tBodyStyle" id="{{tableBodyId}}">
                     <tr em:for="let bItem in this.state.bodyData">
-                        <td em:for="let bSubItem in bItem" em:style="bSubItem.style" class="{{bSubItem.className">
-                            <span em:if="bSubItem.type eq 'Text'">{{bSubItem.title}}</span>
-                            <eui-run-code code="{{bSubItem.title}}" em:if="bSubItem.type eq 'FromRender'"/>
+                        <td em:for="let bSubItem in bItem" em:style="bSubItem.style" class="{{bSubItem.className}}">
+                            <span em:if="bSubItem.type eq 'Text'">{{bSubItem.value}}</span>
+                            <eui-run-code ...props="{{bSubItem.events}}" code="{{bSubItem.value}}" data="{{bSubItem}}" em:if="bSubItem.type eq 'Code'"/>
                         </td>
                     </tr>
                 </tbody>

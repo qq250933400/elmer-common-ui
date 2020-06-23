@@ -86,7 +86,7 @@ window.onload = ()=> {
     wResizeListen.listen();
     // tslint:disable-next-line:no-console
     console.time("ElmerRender");
-    ui.render(document.getElementById("app"), htmlCode, indexData);
+    ui.render(document.getElementById("app"), "<eui-index />", indexData);
     htmlCode = null;
     wResizeListen = null;
     // tslint:disable-next-line:no-console

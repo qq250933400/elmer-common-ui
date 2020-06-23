@@ -1,6 +1,7 @@
 import "./adminMenu";
 import "./adminTopMenu";
 import "./button";
+import "./checkbox";
 import "./dropDown";
 import "./dropDown/PcRegionPicker";
 import "./icon";

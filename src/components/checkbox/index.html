@@ -1,0 +1,6 @@
+<label class="eui-checkbox {{state.className}}">
+    <input type="checkbox" checked="{{state.checked}}" et:change="onCheckedChange"/>
+    <eui-icon type="fa-square-o" theme="checkout"/>
+    <eui-icon type="fa-check" theme="checkinner"/>
+    <span if="{{state.showTitle}}">{{state.title}}</span>
+</label>

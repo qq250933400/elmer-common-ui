@@ -8,7 +8,7 @@ import "./index.less";
 
 type TypeOfficeDataViewColumnType = "Text" | "Progress" | "CheckBox" | "FromRender";
 
-type TypeOfficeDataViewHeaderItem = {
+export type TypeOfficeDataViewHeaderItem = {
     title?: string;
     dataKey?: string;
     colspan?: number;
@@ -17,9 +17,14 @@ type TypeOfficeDataViewHeaderItem = {
     style?: string;
     type?: TypeOfficeDataViewColumnType;
     render?: Function;
+    minKey?: string;
+    maxKey?: string;
+    max?: number;
+    min?: number;
+    events?: any;
 };
 
-type TypeOfficeDataViewBodyItem = {
+export type TypeOfficeDataViewBodyItem = {
     title?: string;
     data?: any;
     style?: string;
@@ -34,13 +39,12 @@ type TypeOfficeDataViewData = {
         rows?: number;
         defineIndex?: number;
         overrideBody?: boolean;
-        data: TypeOfficeDataViewHeaderItem[][]
     },
     body: {
         pageSize?: number;
         page?: number;
         totalNums?: number;
-        data: TypeOfficeDataViewBodyItem[][];
+        data: any[];
     }
 };
 type TypeOfficeDataViewPager = {
@@ -54,6 +58,7 @@ type TypeOfficeDataViewPager = {
 type TypeOfficeDataViewProps = {
     data: TypeOfficeDataViewData;
     className: string;
+    columns: TypeOfficeDataViewHeaderItem[][];
     width: string;
     height: string;
     tableWidth: string;
@@ -72,6 +77,7 @@ type TypeOfficeDataViewState = {
     tBodyStyle?: string;
     columnSizeData: any[],
     bodyData?: TypeOfficeDataViewBodyItem[],
+    headerData?: TypeOfficeDataViewHeaderItem​​[],
     jumpNums?: string;
 };
 
@@ -80,6 +86,8 @@ export const createOfficeDataViewSource = (data: TypeOfficeDataViewData) => {
 };
 
 export const createOfficeDataViewPager = (data:TypeOfficeDataViewPager) => (data);
+
+export const createOfficeDataViewHeader = (data: TypeOfficeDataViewHeaderItem[][]) => data;
 
 @declareComponent({
     selector: "OfficeDataView",
@@ -92,62 +100,17 @@ export default class OfficeDataView extends Component {
     static propType:TypeOfficeDataViewPropsRule = {
         data: {
             description: "Data Source",
-            defaultValue: createOfficeDataViewSource({
-                header: {
-                    defineIndex: 1,
-                    overrideBody: true,
-                    data: [
-                        [{
-                            title: "序号",
-                            colspan: 2,
-                            className: "map"
-                        }, {
-                            title: "测试",
-                            colspan: 2
-                        }],
-                        [
-                            {
-                                title: "AA",
-                                render: () => {
-                                    return "<input type='checkbox' />";
-                                }
-                            }, {
-                                title: "BB"
-                            }, {
-                                title: "CC"
-                            }, {
-                                title: "DD",
-                                type: "Progress"
-                            }
-                        ],
-                    ]
-                },
-                body: {
-                    data: [
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                        [{title: "A1"},{title: "A2"},{title: "A3"},{title: "A4"}],
-                    ]
-                }
-            }),
             rule: PropTypes.object.isRequired
         },
         className: {
             description: "Dom style class name",
             defaultValue: "office_blue",
             rule: PropTypes.string.isRequired
+        },
+        columns: {
+            description: "标题",
+            defaultValue: [],
+            rule: PropTypes.array.isRequired
         },
         width: {
             description: "Widget width",
@@ -205,7 +168,10 @@ export default class OfficeDataView extends Component {
         this.tablePagerId = this.getRandomID();
         this.tableHeaderId = this.getRandomID();
         this.tableBodyId = this.getRandomID();
-        this.state.bodyData = this.getBodyData(props.data.body.data);
+        this.state.bodyData = this.getBodyData(this.getValue(props, "data.body.data"));
+        this.state.headerData = JSON.parse(JSON.stringify(props.columns));
+        console.clear();
+        console.log(props.columns);
         if(props.pager) {
             this.state.pager = props.pager;
             if(!this.isEmpty(props.pager.position)) {
@@ -299,40 +265,67 @@ export default class OfficeDataView extends Component {
             });
         }
     }
-    private getBodyData(bodyData: TypeOfficeDataViewBodyItem[][]):any {
-        const defineIndex = this.props.data.header.defineIndex;
-        const defineHeader = this.props.data.header.data[defineIndex];
-        let updateBodyData = [];
-        if(defineHeader) {
-            if(this.props.data.header.overrideBody) {
-                for(let i=0,mLen=bodyData.length;i<mLen;i++) {
-                    const bodyRowData = bodyData[i];
-                    const updateBodyRow = [];
-                    for(let j=0,rLen=bodyRowData.length;j<rLen;j++) {
-                        const defineHeaderCol = defineHeader[j];
-                        const dataKey = this.isEmpty(defineHeaderCol.dataKey) ? "title" : defineHeaderCol.dataKey;
-                        if(typeof defineHeaderCol.render === "function") {
-                            updateBodyRow.push({
-                                title: defineHeaderCol.render(this.getValue(bodyRowData[j], dataKey)),
-                                data: bodyRowData[j],
-                                type: "FromRender"
-                            });
-                        } else {
-                            updateBodyRow.push({
-                                title: this.getValue(bodyRowData[j], dataKey),
-                                data: bodyRowData[j],
-                                type: "Text"
-                            });
+    private getBodyData(bodyData: any[]):any {
+        if(this.props.data && this.props.data.header) {
+            const defineIndex = this.props.data.header.defineIndex || 0;
+            const defineHeader = this.props.columns[defineIndex];
+            const updateBodyData = [];
+            if(defineHeader) {
+                // console.log(defineHeader, "");
+                // 解析body数据
+                if(bodyData && bodyData.length>0) {
+                    for(let row = 0;row < bodyData.length; row ++) {
+                        const rowData = bodyData[row];
+                        const bodyLineData = [];
+                        for(let col = 0; col < defineHeader.length; col++) {
+                            const defineHeaderCol = defineHeader[col];
+                            if(defineHeaderCol) {
+                                const colValue = this.getValue(rowData, defineHeaderCol.dataKey);
+                                if(typeof defineHeaderCol.render === "function") {
+                                    bodyLineData.push({
+                                        type: "Code",
+                                        value: defineHeaderCol.render(colValue, rowData),
+                                        events: defineHeaderCol.events
+                                    });
+                                } else {
+                                    if(defineHeaderCol.type === "Progress") {
+                                        let min = !this.isEmpty(defineHeaderCol.minKey) ? this.getValue(rowData,defineHeaderCol.minKey) : 0;
+                                        let max = !this.isEmpty(defineHeaderCol.maxKey) ? this.getValue(rowData,defineHeaderCol.maxKey) : 0;
+                                        if(defineHeaderCol.max > 0) {
+                                            min = defineHeaderCol.min;
+                                            max = defineHeaderCol.max;
+                                        }
+                                        bodyLineData.push({
+                                            type: "Code",
+                                            value: `<eui-progress value="${colValue}" min="${min}" max="${max}"/>`,
+                                            events: defineHeaderCol.events
+                                        });
+                                    } else if(defineHeaderCol.type === "CheckBox") {
+                                        const checkValue = colValue ? "true" : "false";
+                                        bodyLineData.push({
+                                            type: "Code",
+                                            value: `<eui-checkbox checked="{{${checkValue}}}"/>`,
+                                            events: defineHeaderCol.events
+                                        });
+                                    } else {
+                                        bodyLineData.push({
+                                            type: "Text",
+                                            value: colValue
+                                        });
+                                    }
+                                }
+                            }
                         }
+                        updateBodyData.push(bodyLineData);
                     }
-                    updateBodyData.push(updateBodyRow);
                 }
+                return updateBodyData;
             } else {
-                updateBodyData = JSON.parse(JSON.stringify(bodyData));
+                return JSON.parse(JSON.stringify(bodyData));
             }
-            return updateBodyData;
         } else {
-            return JSON.parse(JSON.stringify(bodyData));
+            // tslint:disable-next-line: no-console
+            console.error(`未设置数据表标题[${this["selector"]}]`);
         }
     }
     private initColumnData():void {
@@ -349,27 +342,27 @@ export default class OfficeDataView extends Component {
     }
     private initHeaderStyle():void {
         const bodyDom:HTMLElement = this.dom[this.tableBodyId];
-        const firstRow:HTMLTableRowElement = <any>bodyDom.firstChild;
-        const colNums = firstRow.children.length;
-        const headerData = this.state.data.header.data;
-        for(let i=0,mLen=headerData.length;i < mLen; i++) {
-            if(headerData[i].length === colNums) {
-                for(let j=0;j<colNums - 1;j++) {
-                    let colWidth = firstRow.children[j].clientWidth;
-                    if(j>0) {
+        // const firstRow:HTMLTableRowElement = <any>bodyDom.firstChild;
+        // const colNums = firstRow.children.length;
+        // const headerData = this.state.data.header.data;
+        // for(let i=0,mLen=headerData.length;i < mLen; i++) {
+        //     if(headerData[i].length === colNums) {
+        //         for(let j=0;j<colNums - 1;j++) {
+        //             let colWidth = firstRow.children[j].clientWidth;
+        //             if(j>0) {
                         // colWidth += 1;
-                    }
+                    // }
                     // if(!this.isEmpty(headerData[i][j].style)) {
                     //     headerData[i][j].style += "width:" + colWidth + "px";
                     // } else {
                     //     headerData[i][j].style = "width:" + colWidth + "px";
                     // }
-                    this.state.columnSizeData[j].style="width:" + colWidth + "px";
-                    this.state.columnSizeData[j].width=colWidth + "px";
-                }
-                break;
-            }
-        }
+        //             this.state.columnSizeData[j].style="width:" + colWidth + "px";
+        //             this.state.columnSizeData[j].width=colWidth + "px";
+        //         }
+        //         break;
+        //     }
+        // }
         //this.state.data.header.data = headerData;
     }
     private getPagerPosition(pagerData: TypeOfficeDataViewPager):string {
