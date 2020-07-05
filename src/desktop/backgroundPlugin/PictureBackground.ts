@@ -76,9 +76,11 @@ export class PictureBackground extends Common implements IBackgroundPlugin{
         }
     }
     private drawBlur(): void {
-        const imgData:ImageData = this.cvt.getImageData(0,0, this.width, this.height);
-        const blurData = this.gaussBlur(imgData);
-        this.cvt.putImageData(blurData, 0, 0);
+        if(this.height) {
+            const imgData:ImageData = this.cvt.getImageData(0,0, this.width, this.height);
+            const blurData = this.gaussBlur(imgData);
+            this.cvt.putImageData(blurData, 0, 0);
+        }
     }
     private gaussBlur(imgData:ImageData):ImageData {
         const pixes = imgData.data;

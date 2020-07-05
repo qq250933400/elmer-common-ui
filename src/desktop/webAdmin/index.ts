@@ -72,6 +72,7 @@ export default class WebAdmin extends Component {
             this.state.defaultOpenMenu = openMenu;
         }
         this.state.openMenuList = defaultMenuList;
+        console.log(defaultMenuList);
     }
     handleOnCloseTab(data:any): void {
         const openList = this.state.openMenuList;

@@ -1,0 +1,18 @@
+<div class="DesktopSettingConfig">
+    <h5 class="desktopSettingTitle"><eui-icon type="{{props.data.icon}}"/><span>{{props.data.title}}</span></h5>
+    <div>
+        <eui-tab
+            et:onChange="handleOnTabChange"
+            et:onBeforeChange="handleOnTabBeforeChange"
+            currentIndex="{{state.tabIndex}}"
+            timestamp="{{state.timestamp}}"
+        >
+            <eui-tab-item title="分组管理" >
+                    <eui-office-data-view height="100%;" pager="{{state.pager}}" data="{{state.data}}" columns="{{this.columns}}"/>
+            </eui-tab-item>
+            <eui-tab-item title="分组权限{{state.groupName}}" >
+                <span>切换分组</span>
+            </eui-tab-item>
+        </eui-tab>
+    </div>
+</div>

@@ -1,5 +1,8 @@
 .officeDataView {
     @pagerHeight: 30px;
+    overflow: hidden;
+    position: relative;
+    padding-right: 2px;
     .officeDataView_table {
         display: block;
         width: 100%;
@@ -10,18 +13,23 @@
     }
     table {
         border-collapse: collapse;
+        box-sizing: border-box;
         td {
-            padding: 5px 20px;
+            padding: 5px;
             text-align: center;
             border-right-width: 1px;
             border-right-style: solid;
             box-sizing: border-box !important;
+            font-size: 12px;
         }
         thead{
             tr {
                 border-bottom-width: 1px;
                 border-bottom-style: solid;
                 font-weight: bold;
+                td {
+                    font-size: 12px;
+                }
             }
         }
         tbody tr,thead tr {
@@ -92,6 +100,23 @@
         }
         tbody>tr:nth-child(2n) {
             background-color: #e6f0f9;
+        }
+        tbody {
+            .dataViewEmptyLine {
+                >label>span {
+                    display: inline-block;
+                    vertical-align: middle;
+                    font-size: 1.2rem;
+                    color: rgba(179, 179, 179, 0.58);
+                }
+                >label>i {
+                    display: inline-block;
+                    vertical-align: middle;
+                    font-size: 1.4rem;
+                    margin-right: 0.2rem;
+                    color: rgba(179, 179, 179, 0.58);
+                }
+            }
         }
     }
     .pager {

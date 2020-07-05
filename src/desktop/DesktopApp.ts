@@ -90,7 +90,7 @@ export const demoAppData:DesktopApp[] = [
         id: "-----------3",
         data: {
             type: "ElmerUI",
-            component: "eui-calendar",
+            component: "<eui-calendar />",
             showBottom: true,
             showBarMax: false,
             showBarMin: false,
@@ -137,7 +137,7 @@ export const winStartmenuSideButtons: DesktopApp[] = [
         id: "201912041946029353417",
         data: {
             type: "ElmerUI",
-            component: "eui-desktop-setting",
+            component: "<eui-desktop-setting />",
             width: 700,
             height: 500
         }
@@ -147,6 +147,7 @@ export const winStartmenuSideButtons: DesktopApp[] = [
         id: "201912041945522559766",
         data: {
             type: "CallMethod",
+            // tslint:disable-next-line: only-arrow-functions
             component: function(): void {
                 dialog.alert({
                     title: "询问",
@@ -154,6 +155,7 @@ export const winStartmenuSideButtons: DesktopApp[] = [
                     iconType: "Question",
                     message: "确定退出系统？",
                     onOk: (): void => {
+                        // tslint:disable-next-line: no-console
                         console.log("logout");
                     }
                 });

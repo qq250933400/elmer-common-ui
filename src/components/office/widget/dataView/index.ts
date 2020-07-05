@@ -22,6 +22,7 @@ export type TypeOfficeDataViewHeaderItem = {
     max?: number;
     min?: number;
     events?: any;
+    isCodeTitle?: boolean;
 };
 
 export type TypeOfficeDataViewBodyItem = {
@@ -47,7 +48,7 @@ type TypeOfficeDataViewData = {
         data: any[];
     }
 };
-type TypeOfficeDataViewPager = {
+export type TypeOfficeDataViewPager = {
     position?: string;
     page: number;
     pageSize: number;
@@ -56,7 +57,8 @@ type TypeOfficeDataViewPager = {
 };
 
 type TypeOfficeDataViewProps = {
-    data: TypeOfficeDataViewData;
+    data: any[];
+    defineIndex: number;
     className: string;
     columns: TypeOfficeDataViewHeaderItem[][];
     width: string;
@@ -69,7 +71,7 @@ type TypeOfficeDataViewProps = {
 type TypeOfficeDataViewPropsRule = {[P in keyof TypeOfficeDataViewProps]: IPropCheckRule};
 
 type TypeOfficeDataViewState = {
-    data?: TypeOfficeDataViewData,
+    data?: any[],
     className?: string;
     outStyle: string;
     tableStyle: string;
@@ -77,12 +79,8 @@ type TypeOfficeDataViewState = {
     tBodyStyle?: string;
     columnSizeData: any[],
     bodyData?: TypeOfficeDataViewBodyItem[],
-    headerData?: TypeOfficeDataViewHeaderItem​​[],
+    headerData?: TypeOfficeDataViewHeaderItem[],
     jumpNums?: string;
-};
-
-export const createOfficeDataViewSource = (data: TypeOfficeDataViewData) => {
-    return data;
 };
 
 export const createOfficeDataViewPager = (data:TypeOfficeDataViewPager) => (data);
@@ -100,7 +98,12 @@ export default class OfficeDataView extends Component {
     static propType:TypeOfficeDataViewPropsRule = {
         data: {
             description: "Data Source",
-            rule: PropTypes.object.isRequired
+            rule: PropTypes.array.isRequired
+        },
+        defineIndex: {
+            description: "Set the header mapping index",
+            defaultValue: 0,
+            rule: PropTypes.number.isRequired
         },
         className: {
             description: "Dom style class name",
@@ -168,26 +171,25 @@ export default class OfficeDataView extends Component {
         this.tablePagerId = this.getRandomID();
         this.tableHeaderId = this.getRandomID();
         this.tableBodyId = this.getRandomID();
-        this.state.bodyData = this.getBodyData(this.getValue(props, "data.body.data"));
-        this.state.headerData = JSON.parse(JSON.stringify(props.columns));
-        console.clear();
-        console.log(props.columns);
+        this.state.bodyData = this.getBodyData(props.data);
+        this.state.headerData = <any>props.columns;
+        this.state.data = props.data;
         if(props.pager) {
             this.state.pager = props.pager;
             if(!this.isEmpty(props.pager.position)) {
                 this.defaultPagerPosition = props.pager.position;
             }
-            const sourceLength:number = this.getValue(props,"data.body.data.length");
+            const sourceLength:number = props.pager.totalNums;
             this.state.pager.pageSize = props.pager.pageSize > 0 ? props.pager.pageSize : 20;
             this.state.pager.page = props.pager.page > 0 ? props.pager.page : 1;
-            if(props.pager.totalNums < sourceLength) {
+            if(props.pager.totalNums <= sourceLength) {
                 this.state.pager.totalNums = sourceLength;
                 this.state.pager.totalPage = Math.ceil(sourceLength / this.state.pager.pageSize);
             }
             this.state.pager.position = this.getPagerPosition(this.state.pager);
         } else {
             const dPageSize = 10;
-            const totalNums:number = this.getValue(props,"data.body.data.length");
+            const totalNums:number = props.data.length;
             const totalPage = Math.ceil(totalNums/dPageSize);
             this.state.pager = createOfficeDataViewPager({
                 position: this.getPagerPosition({
@@ -202,7 +204,6 @@ export default class OfficeDataView extends Component {
                 totalPage
             });
         }
-        this.state.data = props.data;
         this.initColumnData();
     }
     onFirstClick(): void {
@@ -265,9 +266,18 @@ export default class OfficeDataView extends Component {
             });
         }
     }
+    $onPropsChanged(props:TypeOfficeDataViewProps): void {
+        if(JSON.stringify(props.data) !== JSON.stringify(this.state.data)) {
+            const bodyData = this.getBodyData(props.data);
+            this.setState({
+                bodyData,
+                data: props.data
+            });
+        }
+    }
     private getBodyData(bodyData: any[]):any {
-        if(this.props.data && this.props.data.header) {
-            const defineIndex = this.props.data.header.defineIndex || 0;
+        if(this.props.data && this.props.columns) {
+            const defineIndex = this.props.defineIndex;
             const defineHeader = this.props.columns[defineIndex];
             const updateBodyData = [];
             if(defineHeader) {
@@ -285,7 +295,11 @@ export default class OfficeDataView extends Component {
                                     bodyLineData.push({
                                         type: "Code",
                                         value: defineHeaderCol.render(colValue, rowData),
-                                        events: defineHeaderCol.events
+                                        events: defineHeaderCol.events,
+                                        style: defineHeaderCol.style,
+                                        rowspan: 1,
+                                        colspan: 1,
+                                        data: rowData
                                     });
                                 } else {
                                     if(defineHeaderCol.type === "Progress") {
@@ -298,19 +312,30 @@ export default class OfficeDataView extends Component {
                                         bodyLineData.push({
                                             type: "Code",
                                             value: `<eui-progress value="${colValue}" min="${min}" max="${max}"/>`,
-                                            events: defineHeaderCol.events
+                                            events: defineHeaderCol.events,
+                                            style: defineHeaderCol.style,
+                                            rowspan: 1,
+                                            colspan: 1,
+                                            data: rowData
                                         });
                                     } else if(defineHeaderCol.type === "CheckBox") {
                                         const checkValue = colValue ? "true" : "false";
                                         bodyLineData.push({
                                             type: "Code",
                                             value: `<eui-checkbox checked="{{${checkValue}}}"/>`,
-                                            events: defineHeaderCol.events
+                                            events: defineHeaderCol.events,
+                                            style: defineHeaderCol.style,
+                                            rowspan: 1,
+                                            colspan: 1,
+                                            data: rowData
                                         });
                                     } else {
                                         bodyLineData.push({
                                             type: "Text",
-                                            value: colValue
+                                            value: colValue,
+                                            rowspan: 1,
+                                            colspan: 1,
+                                            style: defineHeaderCol.style
                                         });
                                     }
                                 }
@@ -318,6 +343,30 @@ export default class OfficeDataView extends Component {
                         }
                         updateBodyData.push(bodyLineData);
                     }
+                    if(bodyData.length < this.state.pager.pageSize) {
+                        for(let i=bodyData.length;i<this.state.pager.pageSize;i++) {
+                            const bodyLine = [];
+                            for(let col = 0; col < defineHeader.length; col++) {
+                                bodyLine.push({
+                                    type: "Code",
+                                    colspan: 1,
+                                    rowspan: 1,
+                                    style: defineHeader[col].style,
+                                    value: "<span data-type='html'>&nbsp;&nbsp;</span>"
+                                });
+                            }
+                            updateBodyData.push(bodyLine);
+                        }
+                    }
+                } else {
+                    updateBodyData.push([{
+                        type: "Code",
+                        colspan: defineHeader.length,
+                        rowspan: 1,
+                        style: "height: 100px;",
+                        className: "dataViewEmptyLine",
+                        value: "<label><eui-icon type='fa-trash-o'/><span>没有更多数据了</span></label>"
+                    }]);
                 }
                 return updateBodyData;
             } else {
@@ -329,7 +378,7 @@ export default class OfficeDataView extends Component {
         }
     }
     private initColumnData():void {
-        const bodyData = this.state.data.body.data;
+        const bodyData = this.state.data;
         const columNums = bodyData.length;
         const result = [];
         for(let i=0;i<columNums;i++) {
@@ -342,28 +391,6 @@ export default class OfficeDataView extends Component {
     }
     private initHeaderStyle():void {
         const bodyDom:HTMLElement = this.dom[this.tableBodyId];
-        // const firstRow:HTMLTableRowElement = <any>bodyDom.firstChild;
-        // const colNums = firstRow.children.length;
-        // const headerData = this.state.data.header.data;
-        // for(let i=0,mLen=headerData.length;i < mLen; i++) {
-        //     if(headerData[i].length === colNums) {
-        //         for(let j=0;j<colNums - 1;j++) {
-        //             let colWidth = firstRow.children[j].clientWidth;
-        //             if(j>0) {
-                        // colWidth += 1;
-                    // }
-                    // if(!this.isEmpty(headerData[i][j].style)) {
-                    //     headerData[i][j].style += "width:" + colWidth + "px";
-                    // } else {
-                    //     headerData[i][j].style = "width:" + colWidth + "px";
-                    // }
-        //             this.state.columnSizeData[j].style="width:" + colWidth + "px";
-        //             this.state.columnSizeData[j].width=colWidth + "px";
-        //         }
-        //         break;
-        //     }
-        // }
-        //this.state.data.header.data = headerData;
     }
     private getPagerPosition(pagerData: TypeOfficeDataViewPager):string {
         let pStr = this.defaultPagerPosition || "";

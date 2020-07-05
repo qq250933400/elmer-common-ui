@@ -31,6 +31,10 @@ export class RunCodeComponent extends Component {
             console.log("RunCode Component Props: ", props);
         }
     }
+    help(): void {
+        // tslint:disable-next-line: no-console
+        console.log(this.props);
+    }
     $onPropsChanged(props:any, oldProp:any): void {
         if(props.code !== this.state.htmlCode) {
             this.setState({
@@ -43,6 +47,10 @@ export class RunCodeComponent extends Component {
         }
     }
     render(): string {
-        return this.state.htmlCode;
+        if(/^\s*\<[a-z0-9\-\_]{1,}/i.test(this.state.htmlCode)) {
+            return this.state.htmlCode;
+        } else {
+            throw new Error("不支持的htmlCode: " + this.state.htmlCode);
+        }
     }
 }

@@ -1,4 +1,4 @@
-import { Component, declareComponent,IPropCheckRule, propTypes } from "elmer-ui-core";
+import { Component, declareComponent,IPropCheckRule, PropTypes } from "elmer-ui-core";
 
 @declareComponent({
     selector: "tabItem"
@@ -8,28 +8,37 @@ export class TabBarItem extends Component {
         title: <IPropCheckRule> {
             defaultValue: "tabItem",
             description: "tab标签标题",
-            rule: propTypes.oneOf([propTypes.string, propTypes.number]).isRequired
+            rule: PropTypes.oneOf([PropTypes.string, PropTypes.number]).isRequired
         },
         currentIndex: <IPropCheckRule> {
-            defaultValue: 0,
+            defaultValue: -1,
             description: "当前选择的tab页",
-            rule: propTypes.number
+            rule: PropTypes.number
         }
+    };
+    static contextType:any = {
+        tabStore: PropTypes.object
     };
     currentIndex: number = 0;
     index: number = 0;
     private title: string = "tab标签标题";
-    constructor(props:any) {
-        super(props);
+    constructor(props:any, context:any) {
+        super(props, context);
         this.title = props.title;
-        this.currentIndex = props.currentIndex;
+        this.currentIndex = props.currentIndex >= 0 ? props.currentIndex : 0;
         this.index = props.index;
     }
-    $onPropsChanged(newProps:any): void {
-        this.setData({
-            title: newProps.title,
-            currentIndex: newProps.currentIndex
-        });
+    setIndex(index:number): void {
+        this.index = index;
+    }
+    $contextChange(context:any, oldContext:any): void {
+        const storeIndex = this.getValue(context, "tabStore.tabIndex");
+        const oldStoreIndex = this.getValue(oldContext, "tabStore.tabIndex");
+        if(storeIndex !== oldStoreIndex) {
+            this.setData({
+                currentIndex: storeIndex
+            });
+        }
     }
     render(): string {
         return require("./views/tabBarItem.html");

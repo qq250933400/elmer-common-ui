@@ -3,7 +3,7 @@
     <div>
         <eui-tab et:onChange="handleOnTabChange">
             <eui-tab-item title="系统设置" currentIndex="{{state.tabIndex}}">
-                <eui-form hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
+                <eui-form action="{{ajaxUrl}}" et:onSuccess="handleOnResponse" hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
                     <eui-form-item name="logo" type="Input" title="网站LOGO"/>
                     <eui-form-item name="qrcode" type="Input" title="关注二维码"/>
                     <eui-form-item name="siteName" type="Input" title="网站名称"/>
@@ -19,22 +19,22 @@
                     <eui-form-item name="copyRight" type="Input" title="备案号"/>
                 </eui-form>
             </eui-tab-item>
-            <eui-tab-item title="安全设置" currentIndex="{{state.tabIndex}}">
+            <!-- <eui-tab-item title="安全设置" currentIndex="{{state.tabIndex}}">
                 <eui-form hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
                     <eui-form-item name="operate" type="Input" title="系统秘钥"/>
                     <eui-form-item name="copyRight" type="Input" title="禁止上传"/>
                     <eui-form-item name="globalCss" type="TextArea" title="DES公钥"/>
                     <eui-form-item name="globalScript" type="TextArea" title="微信Token"/>
                 </eui-form>
-            </eui-tab-item>
-            <eui-tab-item title="菜单管理" currentIndex="{{state.tabIndex}}">
+            </eui-tab-item> -->
+            <!-- <eui-tab-item title="菜单管理" currentIndex="{{state.tabIndex}}">
                 <eui-form hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
                     <eui-form-item name="operate" type="Input" title="系统秘钥"/>
                     <eui-form-item name="copyRight" type="Input" title="禁止上传"/>
                     <eui-form-item name="globalCss" type="TextArea" title="DES公钥"/>
                     <eui-form-item name="globalScript" type="TextArea" title="微信Token"/>
                 </eui-form>
-            </eui-tab-item>
+            </eui-tab-item> -->
             <eui-tab-item title="其他" currentIndex="{{state.tabIndex}}">
                 <eui-form hasTitle="{{false}}" showReset="{{true}}" showBack="{{false}}">
                     <eui-form-item name="operate" type="Input" title="操作"/>

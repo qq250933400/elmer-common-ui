@@ -12,7 +12,8 @@
         "build": "webpack --config ./config/webpack.config.prod.js --color --progress -p",
         "lib": "babel ./src -d ./bin",
         "lint": "tslint --project . src/**/*.ts src/**/*.tsx",
-        "static": "node ./bin/index.js"
+        "static": "node ./bin/index.js",
+        "start": "elmer-cli start -t ./src/index.html -e ./src/index.ts"
     },
     "repository": {
         "type": "git",

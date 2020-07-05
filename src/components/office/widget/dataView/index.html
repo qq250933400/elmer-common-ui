@@ -1,7 +1,7 @@
 <div class="{{state.className}} officeDataView" em:style="this.state.outStyle" id="{{tableViewId}}">
     <div class="officeDataView_table" id="{{tableId}}">
         <div em:style="this.state.tableStyle">
-            <table width="100%" cellspacing="0" cellpadding="0">
+            <table cellspacing="0" cellpadding="0">
                 <col em:for="let col in this.state.columnSizeData" width="{{col.width}}" em:style="col.style"/>
                 <thead id="{{tableHeaderId}}" >
                     <tr em:for="let item in this.state.headerData">
@@ -11,15 +11,16 @@
                             class="{{subItem.className}}"
                             em:style="subItem.style"
                             >
-                            <span>{{subItem.title}}</span>
+                            <span em:if="subItem.isCodeTitle neq true">{{subItem.title}}</span>
+                            <eui-run-code events="{{subItem.events}}" showProps="{{true}}" if="{{subItem.isCodeTitle}}" code="{{subItem.title}}" data="{{subItem}}"/>
                         </td>
                     </tr>
                 </thead>
                 <tbody em:style="this.state.tBodyStyle" id="{{tableBodyId}}">
                     <tr em:for="let bItem in this.state.bodyData">
-                        <td em:for="let bSubItem in bItem" em:style="bSubItem.style" class="{{bSubItem.className}}">
+                        <td em:for="let bSubItem in bItem" colspan="{{bSubItem.colspan}}" rowspan="{{bSubItem.rowspan}}" em:style="bSubItem.style" class="{{bSubItem.className}}">
                             <span em:if="bSubItem.type eq 'Text'">{{bSubItem.value}}</span>
-                            <eui-run-code ...props="{{bSubItem.events}}" code="{{bSubItem.value}}" data="{{bSubItem}}" em:if="bSubItem.type eq 'Code'"/>
+                            <eui-run-code em:events="bSubItem.events" code="{{bSubItem.value}}" data="{{bSubItem.data}}" em:if="bSubItem.type eq 'Code'"/>
                         </td>
                     </tr>
                 </tbody>

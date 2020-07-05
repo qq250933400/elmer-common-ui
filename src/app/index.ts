@@ -1,5 +1,5 @@
 import { autowired, Component, declareComponent, ElmerDOM, ElmerServiceRequest, IElmerEvent } from "elmer-ui-core";
-import { createOfficeDataViewHeader, createOfficeDataViewSource } from "../components/office/widget/dataView";
+import { createOfficeDataViewHeader } from "../components/office/widget/dataView";
 
 @declareComponent({
     selector: "index",
@@ -15,41 +15,32 @@ import { createOfficeDataViewHeader, createOfficeDataViewSource } from "../compo
     }
 })
 export class IndexComponent extends Component {
-    dataSource = createOfficeDataViewSource({
-        header: {
-            defineIndex: 1
-        },
-        body: {
-            data: []
-        }
-    });
+    // tslint:disable-next-line: typedef
     dataColumns = createOfficeDataViewHeader( [
         [
             {title: "表格标题", colspan: 3}
         ],
         [
-            {title: "全选", render: ()=>{
+            {title: "<eui-checkbox help='{{true}}' et:onChange='props.onTitleCheckBoxChange'/>", render: ()=>{
                 return "<eui-checkbox />";
-            }},
+            },
+            isCodeTitle: true,
+            events: {
+                showProps: true,
+                onTitleCheckBoxChange: (checked) => {
+                    console.log(checked);
+                }
+            }
+        },
             { title: "标题", dataKey: "title" },
             { title: "进度", dataKey: "value", type: "Progress" }
         ]]
     );
     constructor(props:any) {
         super(props);
-        console.log(this.dataSource);
-    }
-    $init(): void {
-        for(let i=0;i<100;i++) {
-            this.dataSource.body.data.push({
-                aaa: "ccc",
-                title: "ccc" + i,
-                value: i % 100
-            });
-        }
-        console.log(this.dataSource.header);
     }
     render():any {
-        return require("./views/test.html");
+        // return require("./views/router.html");
+        return "<span>aaa</span>";
     }
 }

@@ -3,7 +3,7 @@ import { ElmerUI, WindowResizeListen } from "elmer-ui-core";
 import "./app";
 import "./components";
 import "./components/dialog/WinForm";
-// import "./config";
+import "./config/service";
 import "./desktop";
 import { loginReducer, testReducer } from "./state/loginReducer";
 import "./style/app.less";
@@ -82,14 +82,16 @@ window.onload = ()=> {
     };
     typeof window["debug"] === "function" && window["debug"](false);
     let wResizeListen = new WindowResizeListen();
-    let htmlCode = require("./app/views/index.html");
+    let htmlCode = require("./app/views/router.html");
     wResizeListen.listen();
     // tslint:disable-next-line:no-console
     console.time("ElmerRender");
-    ui.render(document.getElementById("app"), "<eui-index />", indexData);
+    ui.render(
+        document.getElementById("app"),
+        htmlCode, // "<eui-index />",
+        indexData);
     htmlCode = null;
     wResizeListen = null;
     // tslint:disable-next-line:no-console
     console.timeEnd("ElmerRender");
 };
-

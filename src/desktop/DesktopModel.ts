@@ -37,22 +37,27 @@ export class DesktopModel extends Canvas {
         }
     }
     start(): void {
-        if(this.supportCanvas) {
-            if(this.userPlugin && typeof this.userPlugin.factory === "function") {
-                this.plugin = new this.userPlugin.factory(this.cav, this.dom.props);
-                typeof this.plugin.init === "function" && this.plugin.init();
-                if(this.plugin.isAnimation) {
-                    this.animationHandler= this.startAnimation(this.animation, this);
+        try {
+            if(this.supportCanvas) {
+                if(this.userPlugin && typeof this.userPlugin.factory === "function") {
+                    this.plugin = new this.userPlugin.factory(this.cav, this.dom.props);
+                    typeof this.plugin.init === "function" && this.plugin.init();
+                    if(this.plugin.isAnimation) {
+                        this.animationHandler= this.startAnimation(this.animation, this);
+                    } else {
+                        typeof this.plugin.draw === "function" && this.plugin.draw(0);
+                    }
                 } else {
-                    typeof this.plugin.draw === "function" && this.plugin.draw(0);
+                    // tslint:disable-next-line: no-console
+                    console.error("Background Plugin is not an function");
                 }
             } else {
                 // tslint:disable-next-line: no-console
-                console.error("Background Plugin is not an function");
+                console.error("Your browser not support Canvas. Upgrade your browser maybe resolve this problem.");
             }
-        } else {
+        } catch(e) {
             // tslint:disable-next-line: no-console
-            console.error("Your browser not support Canvas. Upgrade your browser maybe resolve this problem.");
+            console.error(e);
         }
     }
     stop(): void {

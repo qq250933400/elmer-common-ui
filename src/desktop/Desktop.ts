@@ -45,7 +45,6 @@ type TypeDesktopProps = {[P in keyof TypeDesktopPropsCheckRule]:any};
     },
     connect: {
         mapStateToProps: (state:any) => {
-            console.log(state);
             return {
                 autoRunAppList: state.desktop.autoRunAppList,
                 backgroundPlugin: <TypePluginInfo[]>[
@@ -122,7 +121,6 @@ export class Desktop extends Component {
     props:TypeDesktopProps;
     private backgroundConfig: any;
     $init(): void {
-        console.log(this.props);
         this.setTheme<TypeDesktopThemes>("themeNoBack", this.supportThemes);
     }
     $inject(): void {

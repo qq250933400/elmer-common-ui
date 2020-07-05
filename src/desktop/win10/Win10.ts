@@ -129,7 +129,6 @@ export class DeskTopWin10 extends Component {
         this.setState({
             desktopMenuVisible: false
         });
-        console.log(evt.data);
     }
     handleOnDesktopMouseUp(evt:IElmerMouseEvent): void {
         const mouseX = evt.nativeEvent.clientX, mouseY = evt.nativeEvent.clientY;
