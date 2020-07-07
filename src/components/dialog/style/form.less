@@ -145,6 +145,7 @@
     .elmerDialogFormContent {
         display: block;
         min-height: 60px;
+        padding: 5px;
         .SetCalcHeight(~"100% - 50px - 30px");
         &>div{
             display: block;
@@ -164,6 +165,7 @@
     }
     .elmerAlertButton {
         text-align: right;
+        padding: 0 10px;
         button{
             display: inline-block;
             vertical-align: top;
@@ -194,6 +196,9 @@
                 filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#dfdfdf', endColorstr='#ededed',GradientType=0);
                 background-color:#dfdfdf;
             }
+        }
+        button:last-child {
+            margin-right: 0;
         }
         >.eui-button-primary {
             -moz-box-shadow:inset 0px 1px 0px 0px #dcecfb;
@@ -249,6 +254,7 @@
         >div{
             display: block;
             height: 100%;
+            font-size: 14px;
         }
         &::before{
             content: "";
@@ -286,6 +292,9 @@
         .alert-yes {
             border-right: 1px solid #dbdbdb !important;
         }
+    }
+    .elmerAlertButton {
+        padding: 0;
     }
     .elmerAlertOneButton {
         text-align: center !important;

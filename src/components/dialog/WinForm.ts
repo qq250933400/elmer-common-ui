@@ -249,28 +249,20 @@ export class WinFormComponent extends Component {
         }
     }
     render(): any {
-        const sourceCode = require("./views/winForm.html");
-        let htmlCode = "";
-        if(this.getType(sourceCode) === "[object Module]") {
-            htmlCode = sourceCode.default;
-        } else {
-            htmlCode = sourceCode;
-        }
-        htmlCode = htmlCode.replace(/\[bottomHtmlCode\]/g, this.state.bottom || "");
-        return htmlCode;
+        return require("./views/winForm.html");
     }
     $after(): void {
         this.addEvent(this, document.body, "mousemove", this.onbodyMouseMove.bind(this));
         this.addEvent(this, document.body, "mouseup", this.onbodyMouseUp.bind(this));
-        if(!this.state.showForm) {
-            this.formDom = this.dom[this.formID];
-            this.maxDom = this.dom[this.maxID];
-            this.titleDom = this.dom[this.titleID];
-            this.contentDom = this.dom[this.contentID];
-            this.bottomDom = this.dom[this.bottomID];
-            // add dom event listen
-            this.show();
-        }
+    }
+    $didMount(): void {
+        this.formDom = this.dom[this.formID];
+        this.maxDom = this.dom[this.maxID];
+        this.titleDom = this.dom[this.titleID];
+        this.contentDom = this.dom[this.contentID];
+        this.bottomDom = this.dom[this.bottomID];
+        this.show();
+        console.log(this.domData);
     }
     onFormClick(): void {
         typeof this.props.onFocus === "function" && this.props.onFocus();
@@ -365,35 +357,39 @@ export class WinFormComponent extends Component {
         }
     }
     show(): void {
-        let left = this.formDom.style.left || "";
-        let top = this.formDom.style.top || "";
-        left = left.replace(/[a-z\%]*$/i,"");
-        top = top.replace(/[a-z\%]*$/i,"");
-        if(this.animationEndType === "None") {
-            if(!this.isNumeric(left) || !this.isNumeric(top) || this.isEmpty(left) || this.isEmpty(top)) {
-                const mask = this.getOwnerDom();
-                const maskWidth = mask ? mask.clientWidth : null,maskHeight = mask ? mask.clientHeight : null;
-                // 没有设置form的位置，重新定义
-                const frmWidth = this.formDom.clientWidth;
-                const frmHeight = this.formDom.clientHeight;
-                const winWidth = maskWidth || window.innerWidth;
-                const winHeight = maskHeight || window.innerHeight;
-                const nLeft = (winWidth - frmWidth) / 2;
-                const nTop = (winHeight - frmHeight) / 2;
-                const formStyle = this.getFormSizeStyle();
-                this.animationEndType = "ShowForm";
-                this.setState({
-                    formStyle: `left: ${nLeft}px;top:${nTop}px;opacity:1;${formStyle}`,
-                    formAnimation: this.state.showAnimation
-                });
-            } else {
-                this.animationEndType = "ShowForm";
-                this.setState({
-                    formAnimation: this.state.showAnimation,
-                });
+        if(this.formDom) {
+            let left = this.formDom.style.left || "";
+            let top = this.formDom.style.top || "";
+            left = left.replace(/[a-z\%]*$/i,"");
+            top = top.replace(/[a-z\%]*$/i,"");
+            if(this.animationEndType === "None") {
+                if(!this.isNumeric(left) || !this.isNumeric(top) || this.isEmpty(left) || this.isEmpty(top)) {
+                    const mask = this.getOwnerDom();
+                    const maskWidth = mask ? mask.clientWidth : null,maskHeight = mask ? mask.clientHeight : null;
+                    // 没有设置form的位置，重新定义
+                    const frmWidth = this.formDom.clientWidth;
+                    const frmHeight = this.formDom.clientHeight;
+                    const winWidth = maskWidth || window.innerWidth;
+                    const winHeight = maskHeight || window.innerHeight;
+                    const nLeft = (winWidth - frmWidth) / 2;
+                    const nTop = (winHeight - frmHeight) / 2;
+                    const formStyle = this.getFormSizeStyle();
+                    this.animationEndType = "ShowForm";
+                    this.setState({
+                        formStyle: `left: ${nLeft}px;top:${nTop}px;opacity:1;${formStyle}`,
+                        formAnimation: this.state.showAnimation
+                    });
+                } else {
+                    this.animationEndType = "ShowForm";
+                    this.setState({
+                        formAnimation: this.state.showAnimation,
+                    });
+                }
+                this.state.visible = true;
+                this.state.showForm = true;
             }
-            this.state.visible = true;
-            this.state.showForm = true;
+        } else {
+            console.log(this.dom);
         }
     }
     getOwnerDom(): HTMLElement {

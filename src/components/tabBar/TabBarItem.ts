@@ -31,6 +31,14 @@ export class TabBarItem extends Component {
     setIndex(index:number): void {
         this.index = index;
     }
+    setCurrentIndex(index:number): void {
+        if(index !== this.currentIndex) {
+            this.setData({
+                currentIndex: index
+            });
+            this.mountPage();
+        }
+    }
     $contextChange(context:any, oldContext:any): void {
         const storeIndex = this.getValue(context, "tabStore.tabIndex");
         const oldStoreIndex = this.getValue(oldContext, "tabStore.tabIndex");
@@ -38,9 +46,18 @@ export class TabBarItem extends Component {
             this.setData({
                 currentIndex: storeIndex
             });
+            this.mountPage();
         }
     }
     render(): string {
         return require("./views/tabBarItem.html");
+    }
+    private mountPage():void {
+        if(this.dom) {
+            // tslint:disable-next-line: forin
+            for(const key in this.dom) {
+                typeof this.dom[key].$didMount === "function" && this.dom[key].$didMount();
+            }
+        }
     }
 }

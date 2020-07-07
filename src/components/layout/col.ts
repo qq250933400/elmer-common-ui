@@ -41,7 +41,7 @@ export class LayoutCol extends Component {
         let cWidth = this.props.setWidth || "";
         const innerStyle = this.props.style || "";
         cWidth = !/\;/.test(cWidth) && cWidth.length > 0 ? cWidth + ";" + innerStyle : cWidth + innerStyle;
-        return `<div class="{{state.theme}} eui-layout-col" style="${cWidth}"><content /></div>`;
+        return `<div class="{{state.theme}} eui-layout-col" style="${cWidth}"><context /></div>`;
     }
     $onPropsChanged(props:any): void {
         this.setState({}, true);

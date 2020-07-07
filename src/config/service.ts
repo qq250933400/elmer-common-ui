@@ -38,6 +38,14 @@ defineGlobalConfiguration({
                                 path: "/desktop",
                                 reduxActionType: "REDUX_ACTION_UPDATE_ADMIN_USERS_LIST"
                             }
+                        },
+                        adminRightModule: {
+                            url: "/admin/users/group/rights/module",
+                            type: "POST",
+                            options: {
+                                path: "/desktop",
+                                reduxActionType: "REDUX_ACTION_UPDATE_ADMIN_RIGHT_MODULE"
+                            }
                         }
                     }
                 }

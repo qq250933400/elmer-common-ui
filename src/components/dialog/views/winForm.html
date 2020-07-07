@@ -1,4 +1,3 @@
-<!--TemplateLoader=Text-->
 <div em:show='this.state.visible' et:animationEnd="formAnimationEnd" et:click="onFormClick" id='{{formID}}' class='elmerDialogForm {{state.formAnimation}} {{state.theme|""}}' em:style="this.state.formStyle">
     <div et:mousedown='ontitleBarMouseDown' class='elmerDialogFormTitleBar {{state.titleTheme|""}}'>
         <span class='fa {{state.icon}}' class.eui-alert-no-icon="!state.showIcon">{{state.title}}</span>
@@ -9,7 +8,9 @@
         </ul>
     </div>
     <div class='elmerDialogFormContent' class.elmerDialogFormContentNoBottom="!this.state.showBottom">
-        <content></content>
+        <contextContent />
     </div>
-    <div em:if='this.state.showBottom' class='elmerDialogFormBottom {{props.bottomTheme}}'>[bottomHtmlCode]</div>
+    <div em:if='this.state.showBottom' class='elmerDialogFormBottom {{props.bottomTheme}}'>
+        <contextBottom />
+    </div>
 </div>

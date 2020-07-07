@@ -247,24 +247,21 @@ export default class OfficeDataView extends Component {
             pager: myPager
         });
     }
-    $after(): void {
-        if(!this.isInitSize) {
-            const outDom:HTMLDivElement = this.dom[this.tableViewId];
-            const tableHeadDom:HTMLElement = this.dom[this.tableHeaderId];
-            const pagerDom: HTMLDivElement = this.dom[this.tablePagerId];
-            const tableWidthStyle = !this.isEmpty(this.props.tableWidth) ? "width:" + this.props.tableWidth +";": "width:100%;";
-            const outHeight = outDom.clientHeight;
-            const pagerHeight = pagerDom.clientHeight;
-            const tableHeight = outHeight - pagerHeight;
-            const tableHeaderHeight = tableHeadDom.clientHeight;
-            const tableHeightStyle = "height:" + tableHeight + "px;";
-            this.isInitSize = true;
-            this.initHeaderStyle();
-            this.setState({
-                tableStyle: tableWidthStyle + tableHeightStyle,
-                tBodyStyle: "height:" + (tableHeight - tableHeaderHeight) + "px;overflow-y: auto;"
-            });
-        }
+    $didMount(): void {
+        const outDom:HTMLDivElement = this.dom[this.tableViewId];
+        const tableHeadDom:HTMLElement = this.dom[this.tableHeaderId];
+        const pagerDom: HTMLDivElement = this.dom[this.tablePagerId];
+        const tableWidthStyle = !this.isEmpty(this.props.tableWidth) ? "width:" + this.props.tableWidth +";": "width:100%;";
+        const outHeight = outDom.clientHeight;
+        const pagerHeight = pagerDom.clientHeight;
+        const tableHeight = outHeight - pagerHeight;
+        const tableHeaderHeight = tableHeadDom.clientHeight;
+        const tableHeightStyle = "";// "height:" + tableHeight + "px;";
+        this.initHeaderStyle();
+        this.setState({
+            tableStyle: tableWidthStyle + tableHeightStyle,
+            tBodyStyle: "height:" + (tableHeight - tableHeaderHeight) + "px;overflow-y: auto;"
+        });
     }
     $onPropsChanged(props:TypeOfficeDataViewProps): void {
         if(JSON.stringify(props.data) !== JSON.stringify(this.state.data)) {

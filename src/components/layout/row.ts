@@ -38,7 +38,7 @@ export class LayoutRow extends Component {
         let cHeight = this.state.setHeight || "";
         const innerStyle = this.props.style || "";
         cHeight = !/\;/.test(cHeight) && cHeight.length > 0 ? cHeight + ";" + innerStyle : cHeight + innerStyle;
-        return `<div class="{{state.theme}} eui-layout-row" style="${cHeight}"><content /></div>`;
+        return `<div class="{{state.theme}} eui-layout-row" style="${cHeight}"><context /></div>`;
     }
     $onPropsChanged(props:any): void {
         this.setState({}, true);

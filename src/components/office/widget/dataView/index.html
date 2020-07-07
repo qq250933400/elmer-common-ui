@@ -12,7 +12,7 @@
                             em:style="subItem.style"
                             >
                             <span em:if="subItem.isCodeTitle neq true">{{subItem.title}}</span>
-                            <eui-run-code events="{{subItem.events}}" showProps="{{true}}" if="{{subItem.isCodeTitle}}" code="{{subItem.title}}" data="{{subItem}}"/>
+                            <eui-run-code em:events="subItem.events" if="{{subItem.isCodeTitle}}" code="{{subItem.title}}" data="{{subItem}}"/>
                         </td>
                     </tr>
                 </thead>

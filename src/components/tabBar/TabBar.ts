@@ -89,13 +89,10 @@ export class TabBar extends Component {
             this.props.children.map((item:IVirtualElement) => {
                 if(item.tagName === "eui-tab-item") {
                     const domKey = "tabItem_" + index;
-                    this.dom[domKey].setData({
-                        currentIndex: newProps.currentIndex
-                    });
+                    this.dom[domKey].setCurrentIndex(newProps.currentIndex);
                     index += 1;
                 }
             });
         }
-        console.log(newProps.currentIndex, this.currentIndex);
     }
 }

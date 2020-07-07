@@ -33,7 +33,7 @@ export class LayoutComponent extends Component {
     }
     render(): string {
         this.updateChildrenSetSize();
-        return `<div data-time="{{state.timeId}}" class="{{state.theme}} eui-layout"><content /></div>`;
+        return `<div data-time="{{state.timeId}}" class="{{state.theme}} eui-layout"><context /></div>`;
     }
     $onPropsChanged(): void {
         this.setState({

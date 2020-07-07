@@ -10,6 +10,12 @@
         -webkit-overflow-scrolling: touch;
         border-width: 1px;
         border-style: solid;
+        height: calc(~'100% - @{pagerHeight}');
+        -webkit-height: calc(~'100% - @{pagerHeight}');
+        -moz-height: calc(~'100% - @{pagerHeight}');
+        >div {
+            min-height: 100%;
+        }
     }
     table {
         border-collapse: collapse;
@@ -102,6 +108,9 @@
             background-color: #e6f0f9;
         }
         tbody {
+            tr:hover {
+                background: #f3f7fb;
+            }
             .dataViewEmptyLine {
                 >label>span {
                     display: inline-block;

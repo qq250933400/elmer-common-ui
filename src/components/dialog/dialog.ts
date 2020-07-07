@@ -9,7 +9,7 @@ export type TypeCreateDialogFormAttrs = {
 
 export type TypeCreateDailogOptions = {
     parent?:HTMLElement;
-    params?: TypeCreateDialogFormAttrs & {
+    options?: TypeCreateDialogFormAttrs & {
         position?: "absolute" | "fixed";
         data?: any;
     };
@@ -34,7 +34,7 @@ export type TypeCreateDialogResult = {
 export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogResult => {
     let ui = getUI();
     let cOptions:TypeCreateDailogOptions = {
-        params: {
+        options: {
             visible: true
         },
         htmlCode: ""
@@ -42,13 +42,13 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
     let parent:HTMLElement;
     ui.extend(cOptions, options);
     const result:TypeCreateDialogResult = {
-        options: cOptions.params,
+        options: cOptions.options,
         // tslint:disable-next-line: object-literal-shorthand
         show: function(updateOptions?: TypeCreateDailogOptions):void {
             let cParams:TypeCreateDialogFormAttrs = JSON.parse(JSON.stringify(this.options));
             cParams.visible = true;
             if(options) {
-                this.component.extend(cParams, updateOptions.params);
+                this.component.extend(cParams, updateOptions.options);
             }
             this.component.setData({
                 options: cParams
@@ -79,7 +79,7 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
         }
     };
     const dialogOwner = {
-        options: ui.extend(cOptions.params, options.params),
+        options: ui.extend(cOptions.options, options.options),
         renderObj: null,
         container: parent,
         formID: ui.getRandomID(),
@@ -143,7 +143,7 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
         dialogOwner.removeFromContent = true;
     } else {
         parent = document.createElement("div");
-        cOptions.params.position = "fixed";
+        cOptions.options.position = "fixed";
         dialogOwner.removeFromContent = false;
         document.body.appendChild(parent);
     }
@@ -158,13 +158,17 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
     // -----------------------Check if hasMaxk
     let htmlCode = `<eui-win-form id="{{formID}}" et:onFocus="onFocus" et:onMax="onMax" et:onMin="onMin" et:onClose="onClose" ...="{{options}}" attrs="{{attrs}}" et:emit="options.emit">${cOptions.htmlCode}</eui-win-form>`;
     if(cOptions.showMask) {
-        htmlCode = `<div id="{{formID}}" et:onFocus="onFocus" em:show='this.options.visible' class='elmerDialog'><div><eui-win-form id="{{demoID}}" et:emit="options.emit" attrs="{{attrs}}" et:onMax="onMax" et:onMin="onMin" et:onClose="onClose" ...="{{options}}">${cOptions.htmlCode}</eui-win-form></div></div>`;
+        htmlCode = `<div id="{{formID}}" et:onFocus="onFocus" em:show='this.options.visible' class='elmerDialog'>
+            <div><eui-win-form id="{{demoID}}" et:emit="options.emit" attrs="{{attrs}}" et:onMax="onMax" et:onMin="onMin" et:onClose="onClose" ...="{{options}}">
+                <ChildrenWrapperContent>${cOptions.htmlCode}</ChildrenWrapperContent>
+                <ChildrenWrapperBottom>${cOptions.options.bottom}</ChildrenWrapperBottom>
+            </eui-win-form></div></div>`;
     }
     // -----------------------
     result.render = ui.render(parent, htmlCode, dialogOwner);
     result.component = <any>dialogOwner;
-    result.options = cOptions.params;
-    result.zIndex = cOptions.params.zIndex;
+    result.options = cOptions.options;
+    result.zIndex = cOptions.options.zIndex;
     dialogOwner.renderObj = result.render;
     ui = null;
     cOptions =  null;
@@ -202,7 +206,7 @@ export const showInput = (options:TypeDialogInputOptions) => {
     StaticCommon.extend(config, options);
     return createDialog({
         showMask: true,
-        params: {
+        options: {
             title: config.title,
             zIndex: config.zIndex,
             showBarMax: false,
@@ -254,7 +258,8 @@ export type TypeOnAlertBeforeEvent = {
 };
 export type TypeAlertOptions = {
     title?: string;
-    message: string;
+    message?: string;
+    content?: string;
     msgType?: TypeEnumAlertMsg;
     iconType?: TypeEnumAlertIcon;
     icon?: string;
@@ -291,23 +296,23 @@ export const eAlert = (options:TypeAlertOptions) => {
     let bottomTheme = "";
     let choseButton: "Ok" | "Cancel" | "Retry" | "None" = "None";
     if((config.msgType === "OKOnly" || config.msgType === "YesOnly")) {
-        bottomCode = `<button evt:click='props.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button>`;
+        bottomCode = `<button evt:click='options.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button>`;
         bottomTheme = "elmerAlertOneButton";
     } else if (["OkCancel", "YesNo"].indexOf(config.msgType)>-1) {
-        bottomCode = `<button evt:click='props.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button><button evt:click='props.emit' class='alert-no ${config.cancelTheme}'>${config.cancelText}</button>`;
+        bottomCode = `<button evt:click='options.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button><button evt:click='options.emit' class='alert-no ${config.cancelTheme}'>${config.cancelText}</button>`;
         bottomTheme = "elmerAlertTwoButton";
     } else if(["OkCancelRetry","YesNoRetry"].indexOf(config.msgType)> -1) {
-        bottomCode = `<button evt:click='props.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button><button evt:click='props.emit' class='alert-no ${config.cancelTheme}'>${config.cancelText}</button><button evt:click='props.emit' class='alert-try ${config.retryTheme}'>${config.retryText}</button>`;
+        bottomCode = `<button evt:click='options.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button><button evt:click='options.emit' class='alert-no ${config.cancelTheme}'>${config.cancelText}</button><button evt:click='props.emit' class='alert-try ${config.retryTheme}'>${config.retryText}</button>`;
         bottomTheme = "elmerAlertThreeButton";
     } else {
-        bottomCode = `<button evt:click='props.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button>`;
+        bottomCode = `<button evt:click='options.emit' class='alert-yes ${config.okTheme}'>${config.okText}</button>`;
         bottomTheme = "elmerAlertOneButton";
     }
     bottomTheme = "elmerAlertButton " + bottomTheme;
 
     return createDialog({
         showMask: true,
-        params: {
+        options: {
             title: config.title || "提示",
             showBottom: true,
             showIcon: false,
@@ -349,7 +354,7 @@ export const eAlert = (options:TypeAlertOptions) => {
                 }
             }
         },
-        htmlCode: `<div class="elmerAlertContent ${noTipTheme}"><div data-type="html">${config.message}</div></div>`,
+        htmlCode: StaticCommon.isEmpty(config.content) ? `<div class="elmerAlertContent ${noTipTheme}"><div>${config.message}</div></div>` : config.content,
         onClose: () => {
             if(choseButton === "Ok") {
                 typeof config.onOk === "function" && config.onOk();

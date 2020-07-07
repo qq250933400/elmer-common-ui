@@ -243,7 +243,7 @@ export class DeskTopWin10 extends Component {
                     let win = dialog.open({
                         attrs: appData,
                         parent,
-                        params: {
+                        options: {
                             title: appData.title,
                             icon: appData.icon,
                             showIcon: true,
@@ -271,7 +271,7 @@ export class DeskTopWin10 extends Component {
                     win = null;
                 } else {
                     openWindow.show({
-                        params: {
+                        options: {
                             zIndex: this.windowMaxZIndex
                         }
                     });

@@ -8,9 +8,6 @@ const menuData:IAdminMenuData[] = [
     { title: "系统设置", id: "1", icon: "fa-cog", url: "<eui-setting-config data='{{props.data}}'/>" },
     { title: "用户分组", id: "2", icon: "fa-vcard", url: "<eui-admin-user-group data='{{props.data}}'/>" },
     { title: "用户管理", id: "3", icon: "fa-user-circle", url: "<SettingUserList data='{{props.data}}'/>" },
-    // { title: "主题设置", id: "4", icon: "fa-dashboard", url: "<span>主题设置</span>" },
-    // { title: "壁纸设置", id: "5", icon: "fa-image", url: "<span>壁纸设置</span>" },
-    // { title: "关于作品", id: "6", icon: "fa-question-circle-o", url: "<span>关于作品</span>" }
 ];
 type TypeSettingState = {
     menuList: IAdminMenuData[];
