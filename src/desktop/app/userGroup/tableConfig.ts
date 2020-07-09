@@ -1,15 +1,22 @@
 import { createOfficeDataViewHeader } from "../../../components/office/widget/dataView";
+import { showLoading, eAlert } from "../../../components";
 
 export const createUserGroupColumns = function(): any {
     return createOfficeDataViewHeader([
         [
             {
-                title: "<div><eui-button theme='eui-button-primary' et:onClick='props.events.onAddGroup'>新增分组</button></div>",
+                title: `<div>
+                    <eui-button theme='eui-button-primary' et:onClick='props.events.onAddGroup'>新增</eui-button>
+                    <eui-button et:onClick='props.events.onRefresh' style="margin-left: 5px;">刷新</eui-button>
+                </div>`,
                 colspan: 6,
                 isCodeTitle: true,
                 className: "UserGroupOperation",
                 events: {
-                    onAddGroup: this.handleOnAddGroup.bind(this)
+                    onAddGroup: (): void => {
+                        this.handleOnAddGroup();
+                    },
+                    onRefresh: this.loadGroupList.bind(this)
                 }
             }
         ],
@@ -37,18 +44,47 @@ export const createUserGroupColumns = function(): any {
             }, {
                 title: "操作",
                 dataKey: "id",
+                style: "width: 200px;",
                 events: {
                     onSetRights: (evt:any) => {
-                        this.setState({
-                            choseGroup: evt.data,
-                            groupName: "(" + evt.data.name + ")",
-                            tabIndex: 1,
-                            timestamp: (new Date()).getTime()
+                        const choseGroupId = this.getValue(this.state, "choseGroup.id");
+                        if(evt.data.id !== choseGroupId) {
+                            const loading = showLoading({title: "获取权限"});
+                            const handler = setTimeout(() => {
+                                this.getGroupModule(evt.data.id).then(() => {
+                                    this.setState({
+                                        choseGroup: evt.data,
+                                        groupName: "(" + evt.data.name + ")",
+                                        tabIndex: 1,
+                                        timestamp: (new Date()).getTime()
+                                    });
+                                    this.dom[this.tabId].switchTab(1);
+                                    loading.dispose();
+                                }).catch(() => {
+                                    loading.dispose();
+                                });
+                            }, 200);
+                        }
+                    },
+                    onEditGroup: (evt) => {
+                        this.handleOnAddGroup(evt.data);
+                    },
+                    onDelGroup: (evt) => {
+                        eAlert({
+                            title: "提示",
+                            message: `请注意删除分组【${evt.data.name}】已经设置好的权限将丢失无法恢复只能重新授权。`,
+                            msgType: "OkCancel",
+                            iconType: "Information",
+                            onOk: () => {
+                                this.delUserGroup(evt.data.id);
+                            }
                         });
                     }
                 },
                 render: (id: any, data:any) => {
-                    return `<eui-button data="{{props.data}}" et:onClick="props.events.onSetRights" theme="eui-button-primary" title="授权"/><eui-button style="margin-left: 5px;" title="删除"/>`;
+                    return `<eui-button data="{{props.data}}" et:onClick="props.events.onSetRights" theme="eui-button-primary" title="授权"/>
+                        <eui-button style="margin-left: 5px;" title="删除" data="{{props.data}}" et:onClick="props.events.onDelGroup"/>
+                        <eui-button style="margin-left: 5px;" title="修改" data="{{props.data}}" et:onClick="props.events.onEditGroup"/>`;
                 }
             }
         ]
@@ -58,30 +94,41 @@ export const createUserGroupColumns = function(): any {
 export const createModuleConfig = function():any {
     const resultData = createOfficeDataViewHeader([[
         {
-            title: "<eui-button et:onClick='props.events.onAuthRightClick' theme='eui-button-primary'>授权</eui-button>",
+            title: "授权",
             dataKey: "id",
             style: "width: 60px;",
-            isCodeTitle: true,
             events: {
-                onAuthRightClick: () => {
-                    console.log("set Right");
+                onAuthRightClick: (evt) => {
+                    this.setGroupRight(evt.data.module, evt.checked);
                 }
             },
-            render: (id: any): any => {
-                const groupModule = this.getValue(this, "state.groupModules");
-                const checked = groupModule && groupModule.indexOf(id) > 0 ? "true" : "false";
-                return `<eui-checkbox checked="{{${checked}}}"/>`;
+            render: (id: any, data:any): any => {
+                const groupRight = this.getValue(this, "state.groupRight");
+                let hasRight = false;
+                if(groupRight && groupRight.length>0) {
+                    for(let i=0;i<groupRight.length;i++) {
+                        const rightItem = groupRight[i];
+                        if(rightItem.module === data.module && rightItem.moduleId == id) {
+                            hasRight = true;
+                            break;
+                        }
+                    }
+                }
+                const checked = hasRight ? "true" : "false";
+                return `<eui-checkbox data-module="{{props.data}}" checked="{{${checked}}}" et:onChange="props.events.onAuthRightClick"/>`;
             }
         },
         {
             title: "模块名称",
             dataKey: "title",
+            style: "text-align:left;",
             render: (title: string, data:any) => {
                 return `<span data-type="html">${data.prefix}${title}</span>`;
             }
         }, {
             title: "路径",
-            dataKey: "url"
+            dataKey: "url",
+            style: "text-align:left;",
         }, {
             title: "图标",
             dataKey: "icon"

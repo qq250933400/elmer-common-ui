@@ -4,3 +4,26 @@
         text-align: left;
     }
 }
+.user-group-input-layout {
+    padding: 20px;
+    .layout-form-item {
+        @userGroupFormItemTitleWidth: 70px;
+        display: block;
+        padding-left: @userGroupFormItemTitleWidth;
+        position: relative;
+        input::-webkit-input-placeholder {
+            color: #aab2bd;
+            font-size: 12px;
+        }
+        >span {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 0;
+            line-height: 33px;
+            text-align:right;
+            width: @userGroupFormItemTitleWidth - 10px;
+            font-size: 15px;
+        }
+    }
+}

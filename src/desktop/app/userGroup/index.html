@@ -5,13 +5,13 @@
             et:onChange="handleOnTabChange"
             et:onBeforeChange="handleOnTabBeforeChange"
             currentIndex="{{state.tabIndex}}"
-            
+            id="{{tabId}}"
         >
             <eui-tab-item title="分组管理" >
-                <eui-office-data-view height="100%;" defineIndex="{{1}}" pager="{{state.pager}}" data="{{state.groupData}}" columns="{{this.columns}}"/>
+                <eui-office-data-view time="{{state.groupTime}}" height="100%;" defineIndex="{{1}}" pager="{{state.pager}}" data="{{state.groupData}}" columns="{{this.columns}}"/>
             </eui-tab-item>
             <eui-tab-item title="分组权限{{state.groupName}}" >
-                <eui-office-data-view attach="{{true}}" id="{{moduleTableId}}" height="100%;" pager="{{state.mpager}}" data="{{state.moduleData}}" columns="{{moduleColumns}}"/>
+                <eui-office-data-view timestamp="{{state.timestamp}}" attach="{{true}}" id="{{moduleTableId}}" height="100%;" pager="{{state.mpager}}" data="{{state.moduleData}}" columns="{{moduleColumns}}"/>
             </eui-tab-item>
         </eui-tab>
     </div>

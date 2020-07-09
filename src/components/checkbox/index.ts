@@ -68,7 +68,17 @@ export default class Checkbox extends Component {
         this.setState({
             checked: checkedValue
         });
-        typeof this.props.onChange === "function" && this.props.onChange(checkedValue);
+        const dataSet = {};
+        Object.keys(this.props).map((attrKey) => {
+            if(/^data\-/i.test(attrKey)) {
+                const dataKeyValue = attrKey.replace(/^data\-/i, "");
+                dataSet[dataKeyValue] = this.props[attrKey];
+            }
+        });
+        typeof this.props.onChange === "function" && this.props.onChange({
+            checked: checkedValue,
+            data:dataSet
+        });
     }
     render(): any {
         return require("./index.html");

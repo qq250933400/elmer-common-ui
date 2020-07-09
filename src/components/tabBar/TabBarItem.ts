@@ -56,7 +56,7 @@ export class TabBarItem extends Component {
         if(this.dom) {
             // tslint:disable-next-line: forin
             for(const key in this.dom) {
-                typeof this.dom[key].$didMount === "function" && this.dom[key].$didMount();
+                typeof this.dom[key].$didMount === "function" && this.dom[key].$didMount(true);
             }
         }
     }

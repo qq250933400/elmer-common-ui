@@ -6,12 +6,13 @@
             et:onBeforeChange="handleOnTabBeforeChange"
             currentIndex="{{state.tabIndex}}"
             timestamp="{{state.timestamp}}"
+            id="{{tabId}}"
         >
             <eui-tab-item title="管理员信息" >
-                    <eui-office-data-view height="100%;" pager="{{state.pager}}" data="{{state.data}}" columns="{{this.columns}}"/>
+                <eui-office-data-view defineIndex="{{1}}" time="{{state.listTime}}" height="100%;" pager="{{state.pager}}" data="{{state.data}}" columns="{{this.columns}}"/>
             </eui-tab-item>
-            <eui-tab-item title="分组权限{{state.groupName}}" >
-                <span>切换分组</span>
+            <eui-tab-item title="分组权限{{state.choseUserName}}" >
+                <eui-office-data-view height="100%;" attach="{{true}}" id="{{groupTablId}}" pager="{{state.gpager}}" data="{{state.groupData}}" columns="{{this.groupColumns}}"/>
             </eui-tab-item>
         </eui-tab>
     </div>

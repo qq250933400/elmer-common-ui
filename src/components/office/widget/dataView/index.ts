@@ -247,7 +247,7 @@ export default class OfficeDataView extends Component {
             pager: myPager
         });
     }
-    $didMount(): void {
+    $didMount(refresh?: boolean): void {
         const outDom:HTMLDivElement = this.dom[this.tableViewId];
         const tableHeadDom:HTMLElement = this.dom[this.tableHeaderId];
         const pagerDom: HTMLDivElement = this.dom[this.tablePagerId];
@@ -262,15 +262,19 @@ export default class OfficeDataView extends Component {
             tableStyle: tableWidthStyle + tableHeightStyle,
             tBodyStyle: "height:" + (tableHeight - tableHeaderHeight) + "px;overflow-y: auto;"
         });
-    }
-    $onPropsChanged(props:TypeOfficeDataViewProps): void {
-        if(JSON.stringify(props.data) !== JSON.stringify(this.state.data)) {
-            const bodyData = this.getBodyData(props.data);
+        if(refresh) {
+            const bodyData = this.getBodyData(this.props.data);
             this.setState({
                 bodyData,
-                data: props.data
             });
         }
+    }
+    $onPropsChanged(props:TypeOfficeDataViewProps): void {
+        const bodyData = this.getBodyData(props.data);
+        this.setState({
+            bodyData,
+            data: props.data
+        });
     }
     private getBodyData(bodyData: any[]):any {
         if(this.props.data && this.props.columns) {

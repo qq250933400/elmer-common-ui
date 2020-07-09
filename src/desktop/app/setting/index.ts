@@ -3,9 +3,8 @@ import { IAdminMenuData } from "../../../components/adminMenu/IAdminMenuData";
 import "../settingConfig/SettingConfig";
 import SettingUserList from "../userList";
 
-
 const menuData:IAdminMenuData[] = [
-    { title: "系统设置", id: "1", icon: "fa-cog", url: "<eui-setting-config data='{{props.data}}'/>" },
+    // { title: "系统设置", id: "1", icon: "fa-cog", url: "<eui-setting-config data='{{props.data}}'/>" },
     { title: "用户分组", id: "2", icon: "fa-vcard", url: "<eui-admin-user-group data='{{props.data}}'/>" },
     { title: "用户管理", id: "3", icon: "fa-user-circle", url: "<SettingUserList data='{{props.data}}'/>" },
 ];

@@ -95,4 +95,17 @@ export class TabBar extends Component {
             });
         }
     }
+    switchTab(tabIndex: number): void {
+        let index = 0;
+        this.setData({
+            currentIndex: tabIndex
+        });
+        this.props.children.map((item:IVirtualElement) => {
+            if(item.tagName === "eui-tab-item") {
+                const domKey = "tabItem_" + index;
+                this.dom[domKey].setCurrentIndex(tabIndex);
+                index += 1;
+            }
+        });
+    }
 }

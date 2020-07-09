@@ -262,7 +262,6 @@ export class WinFormComponent extends Component {
         this.contentDom = this.dom[this.contentID];
         this.bottomDom = this.dom[this.bottomID];
         this.show();
-        console.log(this.domData);
     }
     onFormClick(): void {
         typeof this.props.onFocus === "function" && this.props.onFocus();

@@ -11,7 +11,7 @@ import "./style/icon/less/font-awesome.less";
 // // dd
 // tslint:disable-next-line: ordered-imports
 import { createKeyboardNumber } from "./components/mobile/numberKeyboard";
-
+/*
 window.onload = ()=> {
     const ui = new ElmerUI();
     const indexData = {
@@ -95,3 +95,4 @@ window.onload = ()=> {
     // tslint:disable-next-line:no-console
     console.timeEnd("ElmerRender");
 };
+*/

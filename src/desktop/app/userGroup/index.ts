@@ -1,5 +1,7 @@
 import { autowired, Component, declareComponent, ElmerServiceRequest, IPropCheckRule, PropTypes } from "elmer-ui-core";
-import { eAlert, showToast } from "../../../components";
+import { eAlert, showLoading, showToast } from "../../../components";
+import { commonHandler } from "../../MCommon";
+import { actionUpdateUserGroup } from "../../state/action";
 import "./style.less";
 import { createModuleConfig, createUserGroupColumns } from "./tableConfig";
 
@@ -10,13 +12,17 @@ import { createModuleConfig, createUserGroupColumns } from "./tableConfig";
             return {
                 ...state.usersGroup
             };
-        }
+        },
+        mapDispatchToProps: (dispatch:Function) => ({
+            actionUpdateGroupList: (data:any) => (dispatch(actionUpdateUserGroup(data)))
+        })
     }
 })
 export default class UserGroup extends Component {
     state:any = {
         data: {},
         groupData: [],
+        groupRight: [],
         moduleData: [],
         pager: {
             page: 1,
@@ -28,6 +34,7 @@ export default class UserGroup extends Component {
             totalNums: 0,
             pageSize: 20
         },
+        page: 0,
         tabIndex: 0,
         choseIndex: 0,
         choseGroup: null,
@@ -37,6 +44,9 @@ export default class UserGroup extends Component {
     columns: any[][] = [];
     moduleColumns: any[][] = [];
     moduleTableId: string;
+    tabId: string;
+    @autowired(ElmerServiceRequest)
+    private http:ElmerServiceRequest;
     constructor(props:any) {
         super(props);
         this.state.data = props.data;
@@ -47,17 +57,120 @@ export default class UserGroup extends Component {
         this.moduleColumns = createModuleConfig.call(this);
         this.columns = createUserGroupColumns.call(this);
         this.moduleTableId = this.guid();
+        this.tabId = this.guid();
+        this.http.init(true);
     }
-    handleOnAddGroup(): void {
-        eAlert({
-            message: "<div>show message<a href='javascript:alert(1111);' target='_blank'>hahah</a></div>",
+    handleOnAddGroup(groupData:any): void {
+        let isSupper = groupData && groupData.isSuper === 1;
+        let groupName = groupData ? groupData.name : "";
+        const isSupperDefault = groupData && groupData.isSuper === 1 ? "true" : "false";
+        const dResult = eAlert({
+            content: `<div class="user-group-input-layout">
+                <label class="layout-form-item">
+                    <span>分组名称</span>
+                    <input bind="state.groupName" value="${groupName}" class='eui-input' type='text' placeholder='分组名称不能为空'/>
+                </label>
+                <label class="layout-form-item" style="margin-top: 15px;">
+                    <span></span>
+                    <eui-checkbox title="超级管理员" checked="{{${isSupperDefault}}}" et:onChange="options.events.onCheckChange"/>
+                </label>
+            </div>`,
+            title: "新增用户组",
             msgType: "OkCancel",
             isMobile: false,
+            events: {
+                onCheckChange: (evt:any): void => {
+                    isSupper = evt.checked;
+                }
+            },
+            onBefore: (res) => {
+                if(res.button === "Ok") {
+                    const bindValue = this.getValue(dResult.component, "state.groupName");
+                    groupName = !this.isEmpty(bindValue) ? bindValue : groupName;
+                    if(this.isEmpty(groupName)) {
+                        res.cancel = true;
+                        eAlert({
+                            title: "错误",
+                            msgType: "OKOnly",
+                            iconType: "Error",
+                            message: "分组名称不能为空！"
+                        });
+                    }
+                }
+            },
             onOk: () => {
-                console.log("click ok");
+                let loading = showLoading({
+                    title: "提交数据",
+                    visible: true
+                });
+                this.http.sendRequest({
+                    namespace: "admin",
+                    endPoint: "editGroupInfo",
+                    data: {
+                        groupName,
+                        isSuper: isSupper ? 1 : 0,
+                        id: this.getValue(groupData, "id")
+                    },
+                    complete: () => {
+                        loading.dispose();
+                        loading = null;
+                    }
+                }).then((resp) => {
+                    if(!commonHandler(resp)) {
+                        this.loadGroupList();
+                    }
+                }).catch((err) => {
+                    commonHandler(err);
+                });
             }
         });
-        console.log("show Add Group");
+    }
+    loadGroupList(): void {
+        let loading = showLoading({title: "正在加载"});
+        this.http.sendRequest({
+            namespace: "admin",
+            endPoint: "groupList",
+            data: {
+                page: this.state.page
+            },
+            complete: () => {
+                loading.dispose();
+                loading = null;
+            }
+        }).then((resp) => {
+            if(!commonHandler(resp)) {
+                const groupList = resp.data || [];
+                this.props.actionUpdateGroupList(groupList);
+                this.setState({
+                    groupData: groupList,
+                    groupTime: (new Date()).getTime()
+                });
+            }
+        }).catch((error):void => {
+            commonHandler(error);
+        });
+    }
+    setGroupRight(data:any, isAdd?: boolean): void {
+        const bodyData = {
+            groupId: this.state.choseGroup.id,
+            module: data.module,
+            moduleData: [data.id]
+        };
+        const loading = showLoading({title: "授权设置"});
+        this.http.sendRequest({
+            namespace: "admin",
+            endPoint: isAdd ? "addGroupRight" : "delGroupRight",
+            data: bodyData,
+            complete: () => {
+                loading.dispose();
+            }
+        }).then((resp) => {
+            if(!commonHandler(resp)) {
+                this.loadGroupList();
+            }
+        }).catch((error) => {
+            commonHandler(error);
+        });
     }
     handleOnTabChange(tabIndex: number): void {
         this.state.tabIndex = tabIndex;
@@ -75,13 +188,53 @@ export default class UserGroup extends Component {
     }
     $onPropsChanged(props:any): void {
         const groupData = this.getValue(props, "usersGroup.data") || [];
-        if(JSON.stringify(this.state.groupData) !== JSON.stringify(groupData)) {
-            this.setState({
-                groupData
-            });
-        }
+        const moduleData = this.getValue(props, "adminMudule.data") || [];
+        this.setState({
+            groupData,
+            moduleData
+        });
     }
     render(): any {
         return require("./index.html");
+    }
+    async getGroupModule(groupId: number): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            this.http.sendRequest({
+                namespace: "admin",
+                endPoint: "getGroupRight",
+                data: {
+                    groupId
+                },
+            }).then((resp) => {
+                if(!commonHandler(resp)) {
+                    this.state.groupRight = resp.data || [];
+                    resolve({});
+                } else {
+                    reject({});
+                }
+            }).catch((error) => {
+                commonHandler(error);
+                reject({});
+            });
+        });
+    }
+    delUserGroup(groupId: number): void {
+        const loading = showLoading({title: "删除分组"});
+        this.http.sendRequest({
+            namespace: "admin",
+            endPoint: "deleteUserGroup",
+            data: {
+                id: groupId
+            },
+            complete: () => {
+                loading.dispose();
+            }
+        }).then((resp) => {
+            if(!commonHandler(resp)) {
+                this.loadGroupList();
+            }
+        }).catch((error) => {
+            commonHandler(error);
+        });
     }
 }

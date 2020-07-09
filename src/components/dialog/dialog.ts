@@ -5,6 +5,8 @@ import { TypeWinFormProps } from "./WinForm";
 
 export type TypeCreateDialogFormAttrs = {
     [P in Exclude<keyof TypeWinFormProps, "position" | "onClose"| "onMin" | "onMax" | "onFocus">]?: any;
+} & {
+    events?:any;
 };
 
 export type TypeCreateDailogOptions = {
@@ -103,6 +105,10 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
                 }
             }
             this.renderObj.dispose();
+            this.renderObj = null;
+            Object.keys(result).map((tmpKey) => {
+                delete result[tmpKey];
+            });
             delete this.renderObj;
             delete this.container;
             delete this.myEvents;
@@ -273,6 +279,7 @@ export type TypeAlertOptions = {
     theme?: string;
     zIndex?: number;
     isMobile?: boolean;
+    events?: any;
     onOk?(): void;
     onCancel?(): void;
     onRetry?(): void;
@@ -323,6 +330,7 @@ export const eAlert = (options:TypeAlertOptions) => {
             zIndex: config.zIndex,
             theme: (config.iconType || "") + " eui-Alert " + (config.isMobile ? "eui-Alert-mobile" : ""),
             visible: true,
+            events: config.events,
             // tslint:disable-next-line:object-literal-shorthand only-arrow-functions
             emit: function(evt:IElmerEvent): void {
                 let button = evt.target;
