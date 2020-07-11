@@ -108,7 +108,7 @@ export const createModuleConfig = function():any {
                 if(groupRight && groupRight.length>0) {
                     for(let i=0;i<groupRight.length;i++) {
                         const rightItem = groupRight[i];
-                        if(rightItem.module === data.module && rightItem.moduleId == id) {
+                        if(rightItem.module === data.module && rightItem.moduleId === id) {
                             hasRight = true;
                             break;
                         }
