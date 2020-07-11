@@ -140,7 +140,7 @@ export default class UserGroup extends Component {
         }).then((resp) => {
             if(!commonHandler(resp)) {
                 const groupList = resp.data || [];
-                this.props.actionUpdateGroupList(groupList);
+                this.props.actionUpdateGroupList(resp);
                 this.setState({
                     groupData: groupList,
                     groupTime: (new Date()).getTime()
@@ -166,7 +166,8 @@ export default class UserGroup extends Component {
             }
         }).then((resp) => {
             if(!commonHandler(resp)) {
-                this.loadGroupList();
+                // tslint:disable-next-line: no-floating-promises
+                this.getGroupModule(this.state.choseGroup.id);
             }
         }).catch((error) => {
             commonHandler(error);
@@ -187,12 +188,14 @@ export default class UserGroup extends Component {
         }
     }
     $onPropsChanged(props:any): void {
-        const groupData = this.getValue(props, "usersGroup.data") || [];
-        const moduleData = this.getValue(props, "adminMudule.data") || [];
-        this.setState({
-            groupData,
-            moduleData
-        });
+        const groupData = this.getValue(props, "usersGroup.data");
+        const moduleData = this.getValue(props, "adminMudule.data");
+        if(groupData) {
+            this.setState({
+                groupData,
+                moduleData
+            });
+        }
     }
     render(): any {
         return require("./index.html");

@@ -1,5 +1,5 @@
+import { eAlert, showLoading } from "../../../components";
 import { createOfficeDataViewHeader } from "../../../components/office/widget/dataView";
-import { showLoading, eAlert } from "../../../components";
 
 export const createUserGroupColumns = function(): any {
     return createOfficeDataViewHeader([

@@ -3,11 +3,16 @@ import { defineGlobalConfiguration } from "elmer-ui-core/lib/configuration";
 const userSettingPath = "/admin/usersetting";
 
 defineGlobalConfiguration({
+    env: ENV,
     router: {
         service: {
             config: {
                 admin: {
                     baseUrl: "http://localhost/api/public/index.php",
+                    envUrls: {
+                        Prod: "../../index.php",
+                        Local: "http://localhost/api/public/index.php"
+                    },
                     endPoints: {
                         userGroups: {
                             url: "/admin/users/group",
@@ -58,6 +63,10 @@ defineGlobalConfiguration({
         config: {
             admin: {
                 baseUrl: "http://localhost/api/public/index.php",
+                envUrls: {
+                    Prod: "../../index.php",
+                    Local: "http://localhost/api/public/index.php"
+                },
                 endPoints: {
                     updateWebsiteSetting: {
                         url: "/admin/setting/submitWebsite",

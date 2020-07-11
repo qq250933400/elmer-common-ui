@@ -9,11 +9,12 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "webpack-dev-server --client-log-level none --color --inline --config ./config/webpack.config.dev.js",
-        "build": "webpack --config ./config/webpack.config.prod.js --color --progress -p",
+        "build": "webpack --config ./config/webpack.config.prod.js --color --progress -p env=Prod",
         "lib": "babel ./src -d ./bin",
         "lint": "tslint --project . src/**/*.ts src/**/*.tsx",
         "static": "node ./bin/index.js",
-        "start": "elmer-cli start -t ./src/index.html -e ./src/index.ts"
+        "start": "elmer-cli start -t ./src/index.html -e ./src/index.ts",
+        "prod": "elmer-cli build -t ./src/index.html -e ./src/index.ts env=Prod"
     },
     "repository": {
         "type": "git",
@@ -61,7 +62,7 @@
         "chalk": "^2.4.1",
         "clean-webpack-plugin": "^0.1.19",
         "copy-webpack-plugin": "^5.0.3",
-        "elmer-common": "^0.1.2",
+        "elmer-common": "^0.1.7",
         "elmer-loader": "^1.0.0",
         "elmer-ui-core": "^1.2.14",
         "elmer-validation": "^1.0.7",

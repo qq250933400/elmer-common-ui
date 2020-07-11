@@ -12,11 +12,11 @@ const webpackConfig = merge(common, {
     target: "web",
     devtool: "#source-map", // output mode
     plugins: [
-        new UglifyJSPlugin({
-            uglifyOptions: {
-                ie8: true,
-            }
-        }),
+        // new UglifyJSPlugin({
+        //     uglifyOptions: {
+        //         ie8: true,
+        //     }
+        // }),
         new ProgressBarPlugin({
             format: '  build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed seconds)',
             clear: true

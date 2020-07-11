@@ -4,6 +4,7 @@ const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const webpack = require("webpack");
 const path = require("path");
 const { HtmlParse } = require("elmer-virtual-dom");
+const { getCommand } = require("elmer-common/lib/BaseModule/StaticCommon");
 const parseObj = new HtmlParse();
 // 对babel的配置，内容同.babelrc文件
 const babelOptions = {
@@ -15,7 +16,7 @@ const babelOptions = {
         }]
     ]
 }
-
+const env = getCommand(process.argv, "env");
 module.exports = {
     entry: {
         "./script/main": './src/index.ts',
@@ -24,6 +25,9 @@ module.exports = {
         extensions: ['.ts', '.js', '.json']
     },
     plugins:[
+        new webpack.DefinePlugin({
+            ENV: "\"\'" + env + "\'\""
+        }),
         new htmlWebpackPlugin({
             filename: "index.html",
             template: "./src/index.html",

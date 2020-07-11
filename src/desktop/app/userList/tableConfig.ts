@@ -1,6 +1,6 @@
 import { IElmerEvent } from "elmer-ui-core";
-import { createOfficeDataViewHeader , createOfficeDataViewPager ,TypeOfficeDataViewHeaderItem } from "../../../components/office/widget/dataView";
 import { eAlert } from "../../../components";
+import { createOfficeDataViewHeader , createOfficeDataViewPager ,TypeOfficeDataViewHeaderItem } from "../../../components/office/widget/dataView";
 
 export const createUserColumns = function(): any {
     return createOfficeDataViewHeader([
@@ -36,6 +36,7 @@ export const createUserColumns = function(): any {
         }, {
             title: "操作",
             dataKey: "id",
+            style: "width: 200px;",
             events: {
                 onDelete: (evt:IElmerEvent): void => {
                     const userData = evt.data;

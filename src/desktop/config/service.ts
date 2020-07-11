@@ -7,6 +7,9 @@ import { IServiceConfig, IServiceEndPoint } from "elmer-ui-core/lib/interface/IE
 
 appServiceConfig.defineServiceNamespace("admin", <IServiceConfig<any, any>> {
     baseUrl: "http://127.0.0.1/api/public/index.php/",
+    envUrls: {
+        Prod: "../../index.php"
+    },
     endPoints: {
         updateWebsiteSetting: {
             url: "/admin/setting/submitWebsite",

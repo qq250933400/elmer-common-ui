@@ -34,7 +34,7 @@ declare module "*.html" {
     const content: string;
     export default content;
 }
-
+declare var ENV: any;
 // declare var require: NodeRequire;
 // declare interface NodeRequire extends NodeJS.Require {
 //   <T>(path: string): any;

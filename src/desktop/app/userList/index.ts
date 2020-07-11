@@ -128,7 +128,7 @@ export default class UserList extends Component {
             }
         }).then((resp:any): void => {
             if(!commonHandler(resp)) {
-                this.props.actionUpdateUserList(resp.data || []);
+                this.props.actionUpdateUserList(resp);
                 this.setState({
                     data: resp.data || [],
                     listTime: (new Date()).getTime()
@@ -242,6 +242,20 @@ export default class UserList extends Component {
                 });
             }
         });
+    }
+    $onPropsChanged(props:any):void {
+        const userListData = this.getValue(props,"adminUserList.data") || [];
+        const userGroupData = this.getValue(props, "usersGroup.data") || [];
+        const updateState:any = {};
+        if(JSON.stringify(userListData) !== JSON.stringify(this.state.data)) {
+            updateState.data = userListData;
+        }
+        if(JSON.stringify(userGroupData) !== JSON.stringify(this.state.groupData)) {
+            updateState.groupData = userGroupData;
+        }
+        if(Object.keys(updateState).length > 0) {
+            this.setState(updateState);
+        }
     }
     render():any {
         return require("./index.html");
