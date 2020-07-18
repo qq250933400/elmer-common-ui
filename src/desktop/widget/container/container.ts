@@ -29,6 +29,10 @@ type TypeWebAdminContainerState = TypeWebAdminContainerProps & {
     ],
     model: {
         checkRoute: RouterService
+    },
+    template: {
+        url: "./container.html",
+        fromLoader: true
     }
 })
 export default class WebAdminContainer extends Component {
@@ -86,8 +90,5 @@ export default class WebAdminContainer extends Component {
             updateState.data = props.data;
         }
         this.setState(updateState);
-    }
-    render():any {
-        return require("./container.html");
     }
 }

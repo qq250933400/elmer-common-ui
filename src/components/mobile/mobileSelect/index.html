@@ -9,14 +9,16 @@
                 </div>
                 <a et:click="handleOnOkClick" et:touchstart="handleOnOkClick" class="eui-mobile-select-ok" href="javascript:void(0);">{{okText}}</a>
             </div>
-            <div class="eui-mobile-select-conent-area" passive="passive" et:touchstart="handleOnContentTouchStart" et:touchend="handleOnContentTouchStart">
-                <div id="{{listID}}">
+            <div class="eui-mobile-select-conent-area" passive="{{false}}" et:touchstart="handleOnContentTouchStart" et:touchend="handleOnContentTouchStart">
+                <div id="{{listID}}"
+                    et:touchmove="handleOnListTouchMove" et:mousemove="handleOnListMouseMove"
+                    et:touchend="handleOnListTouchEnd" et:mouseup="handleOnListMouseUp"
+                    passive="{{false}}"
+                >
                     <ul et:touchstart="handleOnListPress" et:mousedown="handleOnListMouseDown"
-                        et:touchmove="handleOnListTouchMove" et:mousemove="handleOnListMouseMove"
-                        et:touchend="handleOnListTouchEnd" et:mouseup="handleOnListMouseUp"
-                        data-key="{{listData.key}}"
+                        data-key="{{index}}"
                         em:for="let listData in this.data"
-                        passive="passive"
+                        passive="{{false}}"
                         >
                         <li em:for="let tmpOption in listData" data-value="{{tmpOption.value}}" data-key="{{tmpOption.key}}" class.disabled="{{tmpOption.disabled}}">{{tmpOption.title}}</li>
                     </ul>

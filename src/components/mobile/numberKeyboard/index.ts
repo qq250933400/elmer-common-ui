@@ -259,7 +259,22 @@ export const createKeyboardNumber = (options:TypeCreateKeyboardNumberOptions): T
             }
         }
     };
-    let htmlCode = require("./createKeyboard.html");
+    let htmlCode = `<eui-keyboard-number
+        id="{{domId}}"
+        visible="{{options.visible}}"
+        title="{{options.title}}"
+        btnCloseText="{{options.btnCloseText}}"
+        btnConfirmText="{{options.btnConfirmText}}"
+        copyRight="{{options.copyRight}}"
+        showClose="{{options.showClose}}"
+        showConfirm="{{options.showConfirm}}"
+        showAnimation="{{options.showAnimation}}"
+        hideAnimation="{{options.hideAnimation}}"
+        visible="{{options.visible}}"
+        et:onChange="options.onChange"
+        et:onClose="onClose"
+        et:onConfirm="options.onConfirm"
+    />`;
     let uiRender = ui.render(div, htmlCode, obj);
     document.body.appendChild(div);
     return owner;

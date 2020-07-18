@@ -1,6 +1,13 @@
 import { autowired,Component, declareComponent, ElmerDOM, IElmerEvent, IPropCheckRule, propTypes } from "elmer-ui-core";
 import "./index.less";
 
+type TypeMouseEventObj = {
+    x?: number;
+    y?: number;
+    obj?: HTMLElement;
+    index?: number;
+};
+
 @declareComponent({
     selector: "MobileSelect"
 })
@@ -105,6 +112,7 @@ export class MobileSelector extends Component {
     private checkedResult: boolean = false;
     private listWidth: string = "100%";
     private showSearch: boolean = true;
+    private mouseEventObj: TypeMouseEventObj;
     @autowired(ElmerDOM)
     private $:ElmerDOM;
     constructor(props: any) {
@@ -146,7 +154,7 @@ export class MobileSelector extends Component {
             });
         }
     }
-    $after():void {
+    $didUpdate():void {
         if(!this.isFirstRender) {
             if(this.visible) {
                 this.setVisible();
@@ -293,58 +301,57 @@ export class MobileSelector extends Component {
     }
     private handleOnMoveEndEvent(target:HTMLElement): void {
         this.isPressed = false;
-        let offsetY = this.$.attr(target, "offsety");
-        let offsetTop = (this.contentHeight - this.itemHeight) / 2;
-        let scrollHeight = target.clientHeight;
-        let key = this.$.attr(target, "data-key");
-        offsetY = !isNaN(offsetY) ? parseFloat(offsetY) : 0;
-        key = !isNaN(key) ? parseInt(key, 10) : 0;
-        if(offsetY>offsetTop) {
-            // 当拖动距离小于第一项顶端，反弹到第一项
-            this.scrollTo(target, offsetTop);
-            this.displayIndexs[key] = 0;
-        } else if(Math.abs(offsetY-offsetTop)>=scrollHeight) {
-            // 当拖动到 最底部设置显示最后一项
-            this.scrollTo(target, offsetTop-(scrollHeight-this.itemHeight));
-            this.displayIndexs[key] = target.children.length - 1;
-        } else {
-            // 在显示区域计算滚动到哪一项目
-            let offsetLen = parseInt(((offsetY-offsetTop)/this.itemHeight).toString(),10);
-            offsetLen = Math.abs(offsetLen);
-            if(offsetLen*this.itemHeight>Math.abs(offsetY-offsetTop)) {
-                offsetLen = offsetLen-1>=0 ? offsetLen-1 : 0;
+        if(this.mouseEventObj.obj) {
+            let offsetY = this.$.attr(this.mouseEventObj.obj, "offsety");
+            let offsetTop = (this.contentHeight - this.itemHeight) / 2;
+            let scrollHeight = this.mouseEventObj.obj.clientHeight;
+            let key = this.$.attr(this.mouseEventObj.obj, "data-key");
+            offsetY = !isNaN(offsetY) ? parseFloat(offsetY) : 0;
+            key = !isNaN(key) ? parseInt(key, 10) : 0;
+            if(offsetY>offsetTop) {
+                // 当拖动距离小于第一项顶端，反弹到第一项
+                this.scrollTo(this.mouseEventObj.obj, offsetTop);
+                this.displayIndexs[key] = 0;
+            } else if(Math.abs(offsetY-offsetTop)>=scrollHeight) {
+                // 当拖动到 最底部设置显示最后一项
+                this.scrollTo(this.mouseEventObj.obj, offsetTop-(scrollHeight-this.itemHeight));
+                this.displayIndexs[key] = this.mouseEventObj.obj.children.length - 1;
             } else {
-                offsetLen = offsetLen + 1 < target.children.length ? offsetLen+1 : target.children.length -1;
+                // 在显示区域计算滚动到哪一项目
+                let offsetLen = parseInt(((offsetY-offsetTop)/this.itemHeight).toString(),10);
+                offsetLen = Math.abs(offsetLen);
+                if(offsetLen*this.itemHeight>Math.abs(offsetY-offsetTop)) {
+                    offsetLen = offsetLen-1>=0 ? offsetLen-1 : 0;
+                } else {
+                    offsetLen = offsetLen + 1 < this.mouseEventObj.obj.children.length ? offsetLen+1 : this.mouseEventObj.obj.children.length -1;
+                }
+                // 滚动到指定项目
+                this.scrollTo(this.mouseEventObj.obj, offsetTop - offsetLen*this.itemHeight);
+                this.displayIndexs[key] = offsetLen;
             }
-            // 滚动到指定项目
-            this.scrollTo(target, offsetTop - offsetLen*this.itemHeight);
-            this.displayIndexs[key] = offsetLen;
-        }
-        const checkedData = [];
-        for(let i=0;i<this.displayIndexs.length;i++) {
-            if(this.sourceData[i]) {
-                checkedData.push(this.sourceData[i][this.displayIndexs[i]]);
+            const checkedData = [];
+            for(let i=0;i<this.displayIndexs.length;i++) {
+                if(this.sourceData[i]) {
+                    checkedData.push(this.sourceData[i][this.displayIndexs[i]]);
+                }
             }
+            typeof this.props.onChanged === "function" && this.props.onChanged({
+                selectedIndex: this.displayIndexs,
+                selectedItems: checkedData
+            });
+            offsetTop = null;
+            scrollHeight = null;
         }
-        typeof this.props.onChanged === "function" && this.props.onChanged({
-            selectedIndex: this.displayIndexs,
-            selectedItems: checkedData
-        });
-        offsetTop = null;
-        scrollHeight = null;
     }
     private handleOnMoveEvent(x:number,y:number, target:HTMLElement): void {
          if(this.isPressed) {
-            let mouseY = this.$.attr(target, "mousey");
-            let offsetY = this.$.attr(target, "offsety");
-            mouseY = !isNaN(mouseY) ? parseFloat(mouseY) : 0;
+            let mouseY = this.mouseEventObj.y;
+            let offsetY = this.$.attr(this.mouseEventObj.obj, "offsety");
             offsetY = !isNaN(offsetY) ? parseFloat(offsetY) : 0;
             let lastY = offsetY + (y-mouseY);
-            this.scrollTo(target, lastY);
-            this.$.attr(target, {
-                mouseX: y,
-                mouseY: y
-            });
+            this.scrollTo(this.mouseEventObj.obj, lastY);
+            this.mouseEventObj.x = x;
+            this.mouseEventObj.y = y;
             this.toTop = y< mouseY;
             lastY = null;
             mouseY = null;
@@ -353,10 +360,12 @@ export class MobileSelector extends Component {
     }
     private handleOnPressEvent(x:number,y:number, target:HTMLElement): void {
         this.isPressed = true;
-        this.$.attr(target, {
-            mouseX: x,
-            mouseY: y
-        });
+        this.mouseEventObj = {
+            x,
+            y,
+            obj: target,
+            index: parseInt(target.getAttribute("data-key"), 10)
+        };
     }
     private scrollTo(dom:HTMLElement, offsetY: number): void {
         let oldOffsetY = this.$.attr(dom, "offsety");

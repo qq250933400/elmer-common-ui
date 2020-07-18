@@ -35,6 +35,8 @@ declare module "*.html" {
     export default content;
 }
 declare var ENV: any;
+
+declare var elmerLoadTemplate: Function;
 // declare var require: NodeRequire;
 // declare interface NodeRequire extends NodeJS.Require {
 //   <T>(path: string): any;

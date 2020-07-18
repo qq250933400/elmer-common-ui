@@ -1,4 +1,5 @@
 import { autowired, Component, declareComponent, ElmerDOM, ElmerServiceRequest, IElmerEvent } from "elmer-ui-core";
+import { createRegionPicker, TypeRegionPicker } from "../components/mobile/mobileSelect/RegionPicker";
 import { createOfficeDataViewHeader } from "../components/office/widget/dataView";
 
 @declareComponent({
@@ -15,32 +16,22 @@ import { createOfficeDataViewHeader } from "../components/office/widget/dataView
     }
 })
 export class IndexComponent extends Component {
-    // tslint:disable-next-line: typedef
-    dataColumns = createOfficeDataViewHeader( [
-        [
-            {title: "表格标题", colspan: 3}
-        ],
-        [
-            {title: "<eui-checkbox help='{{true}}' et:onChange='props.onTitleCheckBoxChange'/>", render: ()=>{
-                return "<eui-checkbox />";
-            },
-            isCodeTitle: true,
-            events: {
-                showProps: true,
-                onTitleCheckBoxChange: (checked) => {
-                    console.log(checked);
-                }
-            }
-        },
-            { title: "标题", dataKey: "title" },
-            { title: "进度", dataKey: "value", type: "Progress" }
-        ]]
-    );
+    region: TypeRegionPicker;
     constructor(props:any) {
         super(props);
+        this.region = createRegionPicker({
+            onSelected: (data) => {
+                console.log(data);
+            }
+        });
+    }
+    onShowRegion(): void {
+        this.region.show();
+    }
+    onRegionChange(evt): void {
+        console.log(evt);
     }
     render():any {
-        // return require("./views/router.html");
-        return "<span>aaa</span>";
+        return  require("./views/index.html");
     }
 }
