@@ -1,4 +1,4 @@
-import { defineGlobalVar, getUI, Component } from "elmer-ui-core";
+import { Component, defineGlobalVar, getUI } from "elmer-ui-core";
 import { IMobileSelectedEvent } from "./IMobileSelect";
 import { RegionData } from "./RegionData";
 

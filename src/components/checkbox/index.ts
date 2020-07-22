@@ -1,4 +1,4 @@
-import { Component, declareComponent, IPropCheckRule, PropTypes, IElmerEvent } from "elmer-ui-core";
+import { Component, declareComponent, IElmerEvent, IPropCheckRule, PropTypes } from "elmer-ui-core";
 import "./index.less";
 
 type TypeCheckProps = {

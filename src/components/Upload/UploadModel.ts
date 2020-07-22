@@ -21,7 +21,7 @@ export class UploadModel extends Common {
                 type: "POST",
                 data: formData,
                 header: {
-                    "content-type": "multipart/form-data"
+                    "Content-Type": "multipart/form-data;charset=utf8"
                 },
                 uploadProgress: (evt: ProgressEvent) => {
                     sData = JSON.parse(JSON.stringify(component.state.fileList || []));

@@ -57,6 +57,15 @@ module.exports = {
                     {loader: 'tslint-loader'}
                 ]
             },
+            // {
+            //     test: /\.json$/i,
+            //     exclude: /node_modules/,
+            //     use: [
+            //         {
+            //             loader: path.resolve("./node_modules/elmer-loader/lib/loader/JsonLoader.js")
+            //         }
+            //     ]
+            // },
             {
                 test: /\.ts(x?)$/,
                 use: [
@@ -89,17 +98,6 @@ module.exports = {
             },
             {
                 test: /\.less$/i,
-                // use: [
-                //     'style-loader',
-                //     'css-loader',
-                //     'postcss-loader',
-                //     {
-                //         loader: 'less-loader',
-                //         options: {
-                //             javascriptEnabled: true,
-                //         },
-                //     },
-                // ]
                 use: ExtractTextWebpackPlugin.extract({
                     fallback: "style-loader",
                     use: [

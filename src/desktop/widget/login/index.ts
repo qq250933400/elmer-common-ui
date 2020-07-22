@@ -183,7 +183,7 @@ export class LoginComponent extends Component {
                     if(typeof this.props.onAfterLogin === "function") {
                         const result = this.props.onAfterLogin(resp);
                         if(result && typeof result.then === "function") {
-                            result.then(()=>{
+                            result.then(()=> {
                                 this.setState({
                                     isLoading: false,
                                     formTheme: ""

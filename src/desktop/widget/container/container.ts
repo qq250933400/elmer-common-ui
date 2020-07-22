@@ -75,10 +75,6 @@ export default class WebAdminContainer extends Component {
         if(this.isEmpty(this.getValue(props.data, "data.hashRouter"))) {
             this.state.data.data.hashRouter = false;
         }
-        if(props.data.type === "ElmerUI") {
-            console.log(props.data.component);
-        }
-
     }
 
     $onPropsChanged(props: TypeWebAdminContainerProps): void {

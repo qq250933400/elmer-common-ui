@@ -10,6 +10,7 @@
         "checkJs": false,
         "module": "commonJs",
         "removeComments": true,
+        "resolveJsonModule": true,
         "target": "es5",
         "lib": [
             "es2015",

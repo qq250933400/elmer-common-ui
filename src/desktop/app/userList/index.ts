@@ -5,7 +5,6 @@ import { commonHandler } from "../../MCommon";
 import { actionUpdateUserList } from "../../state/action";
 import { createUserColumns, createUserGroupColumns } from "./tableConfig";
 
-
 @redux.connect({
     mapStateToProps: (state:any) => ({
         ...(state.usersGroup || {})

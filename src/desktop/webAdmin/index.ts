@@ -1,4 +1,4 @@
-import { Component, declareComponent, IPropCheckRule, PropTypes, IElmerEvent } from "elmer-ui-core";
+import { Component, declareComponent, IElmerEvent, IPropCheckRule, PropTypes } from "elmer-ui-core";
 import WebAdminTop from "./top";
 // tslint:disable-next-line: ordered-imports
 import WebLeftMenu from "./leftMenu";
@@ -72,7 +72,6 @@ export default class WebAdmin extends Component {
             this.state.defaultOpenMenu = openMenu;
         }
         this.state.openMenuList = defaultMenuList;
-        console.log(defaultMenuList);
     }
     handleOnCloseTab(data:any): void {
         const openList = this.state.openMenuList;

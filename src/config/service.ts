@@ -2,7 +2,7 @@ import { defineGlobalConfiguration } from "elmer-ui-core/lib/configuration";
 
 const userSettingPath = "/admin/usersetting";
 
-defineGlobalConfiguration({
+defineGlobalConfiguration<any,any,any,any,any,any,any,any>({
     env: ENV,
     router: {
         service: {

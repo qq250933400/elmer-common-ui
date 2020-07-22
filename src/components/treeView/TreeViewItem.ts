@@ -180,7 +180,7 @@ export class TreeViewItem extends Component {
         evt.nativeEvent.stopPropagation();
         evt.nativeEvent.preventDefault();
         evt.data = this.data;
-        evt.setData = this.updateData.bind(this);console.log(evt, "dblClick")
+        evt.setData = this.updateData.bind(this);
         this.isFunction(this.props.dblClick) && this.props.dblClick(evt);
     }
     render(): string {

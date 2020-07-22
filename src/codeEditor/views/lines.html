@@ -1,0 +1,5 @@
+<ul et:click="onLineClick" et:selectstart="onSelectStart" passive="{{false}}">
+    <li em:for="let item in this.state.data" em:style="item.style" data-index="{{index}}" class="{{item.className}}">
+        <span data-index="{{item.key}}" em:style="this.state.lineSpanStyle">{{item.index}}</span>
+    </li>
+</ul>

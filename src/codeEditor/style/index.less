@@ -1,0 +1,105 @@
+.CodeEditor {
+    @codeLineWidth: 60px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    ul,ul li {
+        margin: 0;
+        padding: 0;
+    }
+    >div {
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+    .CodeEditorLines {
+        display: inline-block;
+        font-size: 0;
+        width: @codeLineWidth;
+        vertical-align: text-top;
+        min-height: 100%;
+        ul {
+            li {
+                padding: 0 10px;
+                padding-right: 20px;
+                text-align: right;
+                span {
+                    display: inline-block;
+                    vertical-align: text-top;
+                }
+            }
+        }
+    }
+    .CodeEditorArea {
+        display: inline-block;
+        font-size: 0;
+        width: calc(~'100% - @{codeLineWidth}');
+        width: -webkit-calc(~'100% - @{codeLineWidth}');
+        width: -moz-calc(~'100% - @{codeLineWidth}');
+        vertical-align: text-top;
+        min-height: 100%;
+        overflow-x: auto;
+        height: auto;
+        .view-line {
+            font-size: 14px;
+            padding: 0 10px;
+            padding-left: 5px;
+            cursor: default;
+            span {
+                display: inline-block;
+                vertical-align: text-top;
+            }
+        }
+    }
+    .CodeEditorArea.editMode {
+        .view-line {
+            cursor: text;
+        }
+    }
+}
+
+.CodeEditorDefault {
+    @codeFocusBack: rgba(27, 165, 245, 0.549);
+    background: #2f2f2f;
+    .CodeEditorLines {
+        background: #222222;
+        ul {
+            li {
+                font-size: 14px;
+                color:#fff;
+                cursor: default;
+            }
+            li.active {
+                background: @codeFocusBack;
+            }
+        }
+    }
+    .CodeEditorArea {
+        .view-line {
+            color: #fff;
+            .view-comment {
+                color: #068c4e;
+            }
+            .view-keyword {
+                color: #20c6e2;
+            }
+            .view-split {
+                color: #838383;
+            }
+            .view-class {
+                color: #e65f5f;
+            }
+            .view-var {
+                color: #6fabef;
+            }
+        }
+        .view-line.active {
+            background: @codeFocusBack;
+        }
+    }
+    
+}

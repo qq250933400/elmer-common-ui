@@ -387,8 +387,6 @@ export class WinFormComponent extends Component {
                 this.state.visible = true;
                 this.state.showForm = true;
             }
-        } else {
-            console.log(this.dom);
         }
     }
     getOwnerDom(): HTMLElement {

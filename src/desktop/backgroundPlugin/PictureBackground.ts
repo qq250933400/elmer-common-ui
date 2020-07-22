@@ -1,7 +1,7 @@
 import { Common } from "elmer-common";
 import { IBackgroundPlugin } from "../IBackgroundPlugin";
 
-export class PictureBackground extends Common implements IBackgroundPlugin{
+export class PictureBackground extends Common implements IBackgroundPlugin {
     canvas: HTMLCanvasElement;
     cvt: CanvasRenderingContext2D;
     private width: number;
@@ -37,7 +37,7 @@ export class PictureBackground extends Common implements IBackgroundPlugin{
             if(blur !== this.blur) {
                 this.blur = blur >= 0 ? blur : 0;
             }
-            if((!this.isEmpty(img) && img !== this.imageLink)){
+            if((!this.isEmpty(img) && img !== this.imageLink)) {
                 this.imageLink = img;
                 this.downloadImage();
             } else {

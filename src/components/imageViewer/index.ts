@@ -1,4 +1,4 @@
-import { Component, declareComponent, IPropCheckRule, PropTypes, IElmerEvent, IElmerMouseEvent } from "elmer-ui-core";
+import { Component, declareComponent, IElmerMouseEvent, IPropCheckRule, PropTypes } from "elmer-ui-core";
 import "./index.less";
 
 export type TypeImageViewerData = {
