@@ -1,5 +1,4 @@
 import { autowired, Component, declareComponent, ElmerDOM, ElmerServiceRequest, IElmerEvent } from "elmer-ui-core";
-import { CodeEditor } from "../codeEditor";
 import { createRegionPicker, TypeRegionPicker } from "../components/mobile/mobileSelect/RegionPicker";
 import { createOfficeDataViewHeader } from "../components/office/widget/dataView";
 
@@ -14,13 +13,7 @@ import { createOfficeDataViewHeader } from "../components/office/widget/dataView
         mapStateToProps: (state:any) => {
             return {};
         }
-    },
-    components: [
-        {
-            selector: "CodeEditor",
-            component: CodeEditor
-        }
-    ]
+    }
 })
 export class IndexComponent extends Component {
     constructor(props:any) {
