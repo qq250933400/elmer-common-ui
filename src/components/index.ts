@@ -30,3 +30,7 @@ export * from "./office/widget/dataView";
 export * from "./mobile/numberKeyboard";
 export * from "./colorPicker";
 export * from "./imageViewer";
+
+// Office widget
+export * from "./office/widget/form";
+export * from "./office/widget/SplitLayout";

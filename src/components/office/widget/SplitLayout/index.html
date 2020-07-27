@@ -1,0 +1,20 @@
+<div class="office-form-split-layout" class.office-form-split-layout-noleft="this.state.hideLeft">
+    <div class="office-form-layout-left">
+        <div>
+            <label>
+                <i class="office-form-layout-left-icon"/>
+                <span>{{state.leftTitle}}</span>
+                <i class="office-form-layout-left-icon-2"/>
+            </label>
+            <div><contextLeft /></div>
+        </div>
+        <a class="javascript:void(0);" et:click="handleOnShowHideClick"><i/></a>
+    </div>
+    <div class="office-form-layout-right">
+        <label>
+            <span>{{state.rightTitle}}</span>
+            <div><contextRightButtons/></div>
+        </label>
+        <div><contextRight /></div>
+    </div>
+</div>

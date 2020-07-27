@@ -1,0 +1,420 @@
+.office-form,
+.office-form>div {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+}
+.icon-save-samll,
+.icon-undo-samll,
+.icon-user-samll,
+.icon-computer-samll,
+.icon-save-large,
+.icon-imglib-large {
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+    }
+}
+.icon-save-samll {
+    &::before {
+        width: 16px;
+        height: 14px;
+        background: url(../../images/blue/save.gif) no-repeat;
+        background-size: 16px 14px;
+        margin-left: -8px;
+        margin-top: -7px;
+    }
+}
+.icon-undo-samll {
+    &::before {
+        width: 12px;
+        height: 12px;
+        background: url(../../images/blue/sx.gif) no-repeat;
+        background-size: 12px 12px;
+        margin-left: -6px;
+        margin-top: -6px;
+    }
+}
+.icon-user-samll {
+    &::before {
+        width: 16px;
+        height: 16px;
+        background: url(../../images/blue/user.gif) no-repeat;
+        background-size: 16px 16px;
+        margin-left: -8px;
+        margin-top: -8px;
+    }
+}
+.icon-computer-samll {
+    &::before {
+        width: 14px;
+        height: 14px;
+        background: url(../../images/blue/computer.gif) no-repeat;
+        background-size: 14px 14px;
+        margin-left: -7px;
+        margin-top: -7px;
+    }
+}
+.icon-save-large {
+    &::before {
+        width: 32px;
+        height: 32px;
+        background: url(../../images/blue/01.gif) no-repeat;
+        background-size: 32px 32px;
+        margin-left: -16px;
+        margin-top: -16px;
+    }
+}
+.icon-imglib-large {
+    &::before {
+        width: 32px;
+        height: 32px;
+        background: url(../../images/blue/02.gif) no-repeat;
+        background-size: 32px 32px;
+        margin-left: -16px;
+        margin-top: -16px;
+    }
+}
+.office-form {
+    color: #15428b;
+    >div {
+        position: relative;
+        background: #bfdbff;
+        overflow: hidden;
+        >header {
+            display: block;
+            height: 60px;
+            position: relative;
+            .office-form-button-start,
+            .office-form-header-content {
+                display: inline-block;
+                font-size: 0;
+                vertical-align: text-top;
+                height: 100%;
+            }
+            .office-form-button-start {
+                width: 52px;
+                background: url(../../images/blue/main_01.gif) no-repeat;
+                &:active {
+                    opacity: 0.7;
+                }
+            }
+            .office-form-header-content {
+                width: calc(~'100% - 52px');
+                width: -webkit-calc(~'100% - 52px');
+                width: -moz-calc(~'100% - 52px');
+                .office-form-header-top {
+                    display: block;
+                    height: 33px;
+                    background: url(../../images/blue/main_04.gif) repeat-x;
+                    position: relative;
+                    table {
+                        font-size: 14px;
+                        height: 100%;
+                        border-collapse: collapse;
+                        border: 0;
+                        width: 100%;
+                        tr,tr td {
+                            padding: 0;
+                            margin: 0;
+                            height: 33px;
+                            border: 0;
+                        }
+                        .office-form-quick-run {
+                            width: 100px;
+                            background: url(../../images/blue/main_02.gif) no-repeat;
+                            .office-form-quick-btn {
+                                display: inline-block;
+                                width: 20px;
+                                height: 20px;
+                                vertical-align: middle;
+                                margin-left: 2px;
+                                position: relative;
+                                &:hover {
+                                    background: url(../../images/blue/b.gif) no-repeat;
+                                    background-size: 20px 20px;
+                                }
+                                &:active {
+                                    opacity: 0.8;
+                                }
+                            }
+                        }
+                        .office-form-quick-down {
+                            width: 10px;
+                            a {
+                                display: block;
+                                height: 80%;
+                                line-height: 23px;
+                                text-align: center;
+                                border-radius: 2px;
+                                >i {
+                                    display: inline-block;
+                                    width: 5px;
+                                    height: 7px;
+                                    background: url(../../images/blue/l.gif);
+                                }
+                            }
+                        }
+                        .office-form-header-title {
+                            text-align: center;
+                        }
+                        .Office-form-header-buttons {
+                            width: 75px;
+                            a {
+                                display: inline-block;
+                                vertical-align: middle;
+                                width: 25px;
+                                height: 25px;
+                                position: relative;
+                                &::before {
+                                    content: "";
+                                    display: block;
+                                    width: 25px;
+                                    height: 25px;
+                                    position: absolute;
+                                    left: 0;
+                                    top: 0;
+                                }
+                                &:hover {
+                                    background: url(../../images/blue/b.gif) no-repeat;
+                                }
+                                &:active {
+                                    opacity: 0.8;
+                                }
+                            }
+                            .header-buttons-close {
+                                &::before {
+                                    background: url(../../images/blue/gb.gif) no-repeat;
+                                }
+                            }
+                            .header-buttons-max {
+                                &::before {
+                                    background: url(../../images/blue/zd.gif) no-repeat;
+                                }
+                            }
+                            .header-buttons-min {
+                                &::before {
+                                    background: url(../../images/blue/zx.gif) no-repeat;
+                                }
+                            }
+                        }
+                    }
+                }
+                .office-form-header-tabs {
+                    display: block;
+                    height: calc(~'100% - 33px');
+                    height: -webkit-calc(~'100% - 33px');
+                    height: -moz-calc(~'100% - 33px');
+                    background: url(../../images/blue/main_07.gif) repeat-x;
+                    width: calc(~'100% - 4px');
+                    width: -webkit-calc(~'100% - 4px');
+                    width: -moz-calc(~'100% - 4px');
+                    >ul,>ul>li {
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+                    >ul {
+                        display: block;
+                        width: calc(~'100% - 60px');
+                        height: 100%;
+                        >li {
+                            display: inline-block;
+                            padding: 0 10px;
+                            height: 25px;
+                            font-size: 12px;
+                            line-height: 18px;
+                            box-sizing: border-box;
+                            border: 5px solid transparent;
+                            margin-top: 1px;
+                            z-index: 2;
+                            cursor: pointer;
+                            position: relative;
+                            >span {
+                                display: block;
+                                width: 100%;
+                                height: 100%;
+                                line-height: 18px;
+                            }
+                        }
+                        >li:hover {
+                            border-image-source: url(../../images/blue/top_bg1.gif);
+                            border-image-slice: 5 fill;
+                        }
+                        >li.active {
+                            border-image-source: url(../../images/blue/top_bg.gif);
+                            border-image-slice: 5 fill;
+                        }
+                    }
+                }
+            }
+        }
+        .office-form-tab-menus {
+            display: block;
+            border-style: solid;
+            border-color: transparent;
+            border-width: 0;
+            box-sizing: border-box;
+            width: calc(~'100% - 4px');
+            width: -webkit-calc(~'100% - 4px');
+            width: -moz-calc(~'100% - 4px');
+            margin-left: 2px;
+            border-image-source: url(../../images/blue/main_11.gif);
+            border-image-slice: 2 fill;
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            z-index: 1;
+            >div {
+                display: block;
+                height: 112px;
+                border: 1px solid #97b5d9;
+                min-height: 70px;
+                padding: 2px;
+                border-radius: 6px;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                position: relative;
+                .office-form-tab-menus-item {
+                    display: block;
+                    min-height: 70px;
+                    position: relative;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    >li {
+                        display: inline-block;
+                        height: 100%;
+                        border: 1px solid #bbcadd;
+                        border-radius: 3px;
+                        margin-left: 5px;
+                        >div {
+                            display: block;
+                            height: 70px;
+                            padding: 5px;
+                            position: relative;
+                            ul,ul li {
+                                list-style: none;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            ul {
+                                display: block;
+                                height: 100%;
+                                li {
+                                    display: inline-block;
+                                    vertical-align: text-top;
+                                    height: 100%;
+                                    width: 60px;
+                                    border: 1px solid transparent;
+                                    border-radius: 5px;
+                                    text-align: center;
+                                    padding-top: 1px;
+                                    font-size: 0;
+                                    cursor: default;
+                                    >i {
+                                        display: block;
+                                        width: 40px;
+                                        height: 40px;
+                                        position: relative;
+                                        margin: 0 auto;
+                                        margin-top: 5px;
+                                    }
+                                    >span {
+                                        display: block;
+                                        text-align: center;
+                                        line-height: 25px;
+                                        height: 25px;
+                                        text-overflow: ellipsis;
+                                        white-space: nowrap;
+                                        overflow: hidden;
+                                        padding: 0 4px;
+                                        font-size: 12px;
+                                    }
+                                }
+                            }
+                        }
+                        >span {
+                            display: block;
+                            height: 30px;
+                            line-height: 30px;
+                            background:#cfe1f9;
+                            padding: 0 5px;
+                            font-size: 12px;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-align: center;
+                            cursor: move;
+                        }
+                        &:hover {
+                            background: rgba(170, 213, 253, 0.39);
+                            border-color: rgba(32, 153, 252, 0.396);
+                            >span {
+                                background: rgba(170, 213, 253, 0.644);
+                            }
+                        }
+                    }
+                    >li:first-child {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+        .office-form-context {
+            display: block;
+            height: calc(~'100% - 178px');
+            height: -webkit-calc(~'100% - 178px');
+            height: -moz-calc(~'100% - 178px');
+            position: relative;
+            .office-form-context-area {
+                display: block;
+                box-sizing: border-box;
+                padding: 4px;
+                height: calc(~'100% - 25px');
+                height: -webkit-calc(~'100% - 25px');
+                height: -moz-calc(~'100% - 25px');
+                position: relative;
+                padding-top: 2px;
+                >div {
+                    display: block;
+                    height: 100%;
+                    position: relative;
+                }
+            }
+            .office-form-status-bar {
+                display: block;
+                height: 25px;
+                width: 100%;
+                background: url(../../images/blue/main_67.gif) repeat-x;
+                .office-form-status-date {
+                    background: url(../../images/blue/main_69.gif) repeat-x;
+                }
+                .office-form-status-right-bottom {
+                    background: url(../../images/blue/main_71.gif) no-repeat;
+                }
+                .office-form-status-split {
+                    background: url(../../images/blue/main_68.gif) no-repeat;
+                }
+                .office-form-status-split-light {
+                    background: url(../../images/blue/main_65.gif) no-repeat;
+                    background-position-y: 4px;
+                }
+            }
+        }
+    }
+    .button,
+    .office-form-quick-down>a,
+    .office-form-tab-menus-buttons>li {
+        &:hover {
+            border-image-source: url(../../images/blue/main_27.gif) !important;
+            border-image-slice: 1 fill !important;
+        }
+        &:active {
+            opacity: 0.7;
+        }
+    }
+}

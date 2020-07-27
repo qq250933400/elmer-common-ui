@@ -1,0 +1,73 @@
+<div class="office-form" et:mouseup="handleOnBodyMouseUp">
+    <div>
+        <header>
+            <a href="javascript:void(0);" class="office-form-button-start" et:click="handleOnStartClick"/>
+            <div class="office-form-header-content">
+                <div class="office-form-header-top">
+                    <table>
+                        <tr>
+                            <td class="office-form-quick-run">
+                                <a
+                                    class="office-form-quick-btn {{app.icon}}"
+                                    title="{{app.title}}"
+                                    em:for="let app in this.state.quickApps"
+                                    et:click="handleOnQuickAppClick"
+                                />
+                            </td>
+                            <td class="office-form-quick-down">
+                                <a href="javascript:void(0);"><i/></a>
+                            </td>
+                            <td class="office-form-header-title">{{props.title}}</td>
+                            <td class="Office-form-header-buttons">
+                                <a title="最小化" class="header-buttons-min" data-type="HeaderButtonMin" et:click="handleOnHeaderButtonClick"/>
+                                <a title="最大化" class="header-buttons-max" data-type="HeaderButtonMax" et:click="handleOnHeaderButtonClick"/>
+                                <a title="关闭" class="header-buttons-close" data-type="HeaderButtonClose" et:click="handleOnHeaderButtonClick"/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="office-form-header-tabs">
+                    <ul>
+                        <li em:for="let tabItem in this.state.tabMenu"
+                            data-key="{{index}}"
+                            class.active="index eq this.state.choseTabIndex"
+                            et:click="handleOnTabClick"
+                            >
+                            <span>{{tabItem.title}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="office-form-tab-menus">
+            <div>
+                <ul class="office-form-tab-menus-item" id="{{tabMenuId}}" et:mousedown="handleOnTabMenuMouseDown" et:mousemove="handleOnTabMenuMouseMove">
+                    <li em:for="let menuItem in this.state.choseTabMenu.menus">
+                        <div>
+                            <ul class="office-form-tab-menus-buttons">
+                                <li em:for="let buttonItem in menuItem.buttons" et:click="handleOnTabMenuButtonClick" et:mousedown="handleOnMenuButtonMouseDown">
+                                    <i class="{{buttonItem.icon}}"/>
+                                    <span>{{buttonItem.title}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <span>{{menuItem.title}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="office-form-context">
+            <div class="office-form-context-area">
+                <div><context /></div>
+            </div>
+            <div class="office-form-status-bar">
+                <StatusBar
+                    statusBarCol1="{{props.statusBarCol1}}"
+                    statusBarCol2="{{props.statusBarCol2}}"
+                    statusBarCol3="{{props.statusBarCol3}}"
+                    statusBarCol4="{{props.statusBarCol4}}"
+                />
+            </div>
+        </div>
+    </div>
+</div>
