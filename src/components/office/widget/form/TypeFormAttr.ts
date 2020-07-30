@@ -1,5 +1,23 @@
 import { IPropCheckRule, PropTypes } from "elmer-ui-core";
 
+export type TypeOfficeFormMenuButton = {
+    title: string;
+    icon: string;
+    id?: string;
+};
+
+export type TypeOfficeFormTabMenuItem = {
+    title: string;
+    id?: string;
+    buttons: TypeOfficeFormMenuButton[];
+};
+
+export type TypeOfficeFormTabItem = {
+    title: string;
+    id?: string;
+    menus: TypeOfficeFormTabMenuItem[];
+};
+
 export type TypeOfficeFormProps = {
     title?: string;
     tabMenu?: TypeOfficeFormTabItem[];
@@ -109,19 +127,4 @@ export const definePropType: TypeOfficeFormPropsRule = {
         ]),
         rule: PropTypes.array.isRequired
     }
-};
-
-export type TypeOfficeFormMenuButton = {
-    title: string;
-    icon: string;
-};
-
-export type TypeOfficeFormTabMenuItem = {
-    title: string;
-    buttons: TypeOfficeFormMenuButton[];
-};
-
-export type TypeOfficeFormTabItem = {
-    title: string;
-    menus: TypeOfficeFormTabMenuItem[];
 };

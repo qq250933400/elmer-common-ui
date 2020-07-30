@@ -67,7 +67,10 @@ export default class Form extends Component {
         typeof this.props.onClick === "function" && this.props.onClick({
             type: "MenuButton",
             data: evt.data.buttonItem,
-            event:evt
+            event:evt,
+            tabIndex: this.state.choseTabIndex,
+            tabMenu: this.state.choseTabMenu,
+            setMenuState: this.updateTabMenuState.bind(this)
         });
     }
     handleOnTabMenuMouseDown(evt:IElmerMouseEvent): void {
@@ -124,5 +127,13 @@ export default class Form extends Component {
     }
     render():any {
         return require("./index.html");
+    }
+    private updateTabMenuState(tabMenuData:any): void {
+        const newMenuData = JSON.parse(JSON.stringify(this.state.tabMenu));
+        newMenuData[this.state.choseTabIndex] = tabMenuData;
+        this.setState({
+            tabMenu: newMenuData,
+            choseTabMenu: tabMenuData
+        });
     }
 }

@@ -45,7 +45,12 @@
                     <li em:for="let menuItem in this.state.choseTabMenu.menus">
                         <div>
                             <ul class="office-form-tab-menus-buttons">
-                                <li em:for="let buttonItem in menuItem.buttons" et:click="handleOnTabMenuButtonClick" et:mousedown="handleOnMenuButtonMouseDown">
+                                <li em:for="let buttonItem in menuItem.buttons"
+                                    et:click="handleOnTabMenuButtonClick"
+                                    et:mousedown="handleOnMenuButtonMouseDown"
+                                    class="{{buttonItem.className}}"
+                                    class.active="buttonItem.checked eq true"
+                                >
                                     <i class="{{buttonItem.icon}}"/>
                                     <span>{{buttonItem.title}}</span>
                                 </li>
