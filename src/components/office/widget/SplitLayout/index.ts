@@ -4,6 +4,7 @@ import "./index.less";
 type TypeOfficeSplitLayoutProps = {
     leftTitle?: string;
     rightTitle?: string;
+    onLayoutChange?: Function;
 };
 
 type TypeOfficeSplitLayoutPropRule = {[P in keyof TypeOfficeSplitLayoutProps]: IPropCheckRule};
@@ -29,6 +30,7 @@ export default class OfficeSplitLayout extends Component {
         leftTitle: "",
         rightTitle: ""
     };
+    props: TypeOfficeSplitLayoutProps;
     constructor(props:TypeOfficeSplitLayoutProps) {
         super(props);
         this.state.leftTitle = props.leftTitle;
@@ -44,6 +46,7 @@ export default class OfficeSplitLayout extends Component {
         this.setState({
             hideLeft: !this.state.hideLeft
         });
+        typeof this.props.onLayoutChange === "function" && this.props.onLayoutChange();
     }
     render():any {
         return require("./index.html");

@@ -6,5 +6,19 @@
             <span data-left="{{offsetLeft}}">{{data.title}}</span>
         </div>
     </label>
-    <eui-tree-view-list et:onUpdateChildren="handleOnListUpdateChildren" valueKey="{{props.valueKey}}" selectedData="{{props.selectedData}}" em:if="this.hasChild" em:show="this.expand" fixedWidth="{{listWidth}}" width="{{width}}" level="{{subLevel}}" treeViewItemTheme="{{theme}} eui-treeview-sub-child" et:onExpandClick="props.onExpandClick" et:onItemDblClick="props.dblClick" et:treeViewItemClick="props.click" em:data="this.data.children"></eui-tree-view-list>
+    <eui-tree-view-list
+        et:onUpdateChildren="handleOnListUpdateChildren"
+        valueKey="{{props.valueKey}}"
+        selectedData="{{props.selectedData}}"
+        em:if="this.hasChild"
+        em:show="this.expand"
+        fixedWidth="{{listWidth}}"
+        width="{{width}}"
+        level="{{subLevel}}"
+        treeViewItemTheme="{{theme}} eui-treeview-sub-child"
+        et:onExpandClick="props.onExpandClick"
+        et:onItemDblClick="props.dblClick"
+        et:treeViewItemClick="props.click"
+        em:data="this.data.children"
+    />
 </div>

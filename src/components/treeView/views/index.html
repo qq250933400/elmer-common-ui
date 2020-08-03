@@ -1,5 +1,16 @@
 <div treeview="true" class="eui-treeview" id="{{id}}">
     <div>
-        <eui-tree-view-list et:onUpdateChildren="handleOnUpdateChildren" valueKey="{{props.valueKey}}" et:onExpandClick="props.onExpandClick" selectedData="{{selectedData}}" width="{{containerWidth}}" level="{{level}}" et:onItemDblClick="handleOnItemDblClick" et:treeViewItemClick="handleOnItemClick.bind(this)" firstChild="firstChild" em:data="this.data"></eui-tree-view-list>
+        <eui-tree-view-list
+            et:onUpdateChildren="handleOnUpdateChildren"
+            valueKey="{{props.valueKey}}"
+            et:onExpandClick="props.onExpandClick"
+            selectedData="{{selectedData}}"
+            width="{{containerWidth}}"
+            level="{{level}}"
+            et:onItemDblClick="handleOnItemDblClick"
+            et:treeViewItemClick="handleOnItemClick"
+            firstChild="firstChild"
+            em:data="this.data"
+        />
     </div>
 </div>

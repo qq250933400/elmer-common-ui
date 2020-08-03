@@ -147,7 +147,7 @@ export class TreeViewItem extends Component {
             typeof this.props.onUpdateChildren === "function" && this.props.onUpdateChildren(this.props.index, this.data);
         }
     }
-    $after(): void {
+    $didMount(): void {
        if(this.expand) {
            // 未展开子元素时无法获取元素宽度，只有在展开后做判断;
             const parent = this.expandDom.parentElement.parentElement;
@@ -173,7 +173,7 @@ export class TreeViewItem extends Component {
         evt.nativeEvent.preventDefault();
         evt.data = this.data;
         evt.setData = this.setData.bind(this);
-        this.isFunction(this.treeViewItemClick) && this.treeViewItemClick(evt, this.data);
+        this.isFunction(this.props.click) && this.props.click(evt, this.data);
     }
     handleOnDblClick(evt:any): void {
         evt.nativeEvent.cancelBubble = true;

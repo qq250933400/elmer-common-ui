@@ -11,15 +11,12 @@ export interface ITreeViewItem {
     data?: any;
     hasExpand?: boolean;
     key?: number;
+    value?: any;
     theme?: string;
 }
 
 @declareComponent({
-    selector: "treeView",
-    template: {
-        url: "./views/index.html",
-        fromLoader: true
-    }
+    selector: "treeView"
 })
 export class TreeView extends Component {
     static propType: any = {
@@ -71,7 +68,7 @@ export class TreeView extends Component {
         evt.nativeEvent.stopPropagation();
         this.changeOnDblClick && this.selectedDataChange(evt, evt.data);
     }
-    $after(): void {
+    $didMount(): void {
         const parent:HTMLElement = this.dom[this.id];
         if(parent && this.containerWidth<=0 && !this.settingWidthToChild) {
             this.setData({
@@ -83,6 +80,9 @@ export class TreeView extends Component {
         this.setData({
             data: newProps.data
         }, true);
+    }
+    render(): any {
+        return require("./views/index.html");
     }
     private selectedDataChange(evt:IElmerEvent, data:any): void {
         if(this.props.isMutil) {
