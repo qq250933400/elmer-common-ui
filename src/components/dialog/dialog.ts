@@ -18,6 +18,7 @@ export type TypeCreateDailogOptions = {
     htmlCode?: string;
     showMask?:boolean;
     attrs?: any;
+    events?: any;
     onClose?:Function;
     onMin?:Function;
     onMax?: Function;
@@ -30,6 +31,8 @@ export type TypeCreateDialogResult = {
     options?: any;
     zIndex?: number;
     hide?:Function;
+    setData?: Function;
+    setState?: Function;
     setZIndex?(index:number,visible?: boolean):void;
     show?(options?: TypeCreateDailogOptions): void;
 };
@@ -87,6 +90,7 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
         formID: ui.getRandomID(),
         removeFromContent: true,
         demoID: ui.getRandomID(),
+        timestamp: (new Date()).getTime(),
         // tslint:disable-next-line: object-literal-shorthand
         onClose : function():void {
             const closeCallBack = this.myEvents.onClose;
@@ -165,7 +169,7 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
     let htmlCode = `<eui-win-form id="{{formID}}" et:onFocus="onFocus" et:onMax="onMax" et:onMin="onMin" et:onClose="onClose" ...="{{options}}" attrs="{{attrs}}" et:emit="options.emit">${cOptions.htmlCode}</eui-win-form>`;
     if(cOptions.showMask) {
         htmlCode = `<div id="{{formID}}" et:onFocus="onFocus" em:show='this.options.visible' class='elmerDialog'>
-            <div><eui-win-form id="{{demoID}}" et:emit="options.emit" attrs="{{attrs}}" et:onMax="onMax" et:onMin="onMin" et:onClose="onClose" ...="{{options}}">
+            <div><eui-win-form timestamp="{{timestamp}}" id="{{demoID}}" et:emit="options.emit" attrs="{{attrs}}" et:onMax="onMax" et:onMin="onMin" et:onClose="onClose" ...="{{options}}">
                 <ChildrenWrapperContent>${cOptions.htmlCode}</ChildrenWrapperContent>
                 <ChildrenWrapperBottom>${cOptions.options.bottom}</ChildrenWrapperBottom>
             </eui-win-form></div></div>`;
@@ -175,6 +179,17 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
     result.component = <any>dialogOwner;
     result.options = cOptions.options;
     result.zIndex = cOptions.options.zIndex;
+    result.setData = (data: any, refresh?: boolean): void => {
+        (dialogOwner as any).setData({
+            ...data,
+            timestamp: (new Date()).getTime()
+        }, refresh);
+        const form = (<any>dialogOwner).dom[dialogOwner.demoID];
+        form.setState({}, true);
+    };
+    result.setState = (state: any, refresh?: boolean): void => {
+        (dialogOwner as any).setState(state, refresh);
+    };
     dialogOwner.renderObj = result.render;
     ui = null;
     cOptions =  null;
@@ -280,6 +295,7 @@ export type TypeAlertOptions = {
     zIndex?: number;
     isMobile?: boolean;
     events?: any;
+    attrs?: any;
     onOk?(): void;
     onCancel?(): void;
     onRetry?(): void;
@@ -319,6 +335,8 @@ export const eAlert = (options:TypeAlertOptions) => {
 
     return createDialog({
         showMask: true,
+        attrs: config.attrs,
+        events: config.events,
         options: {
             title: config.title || "提示",
             showBottom: true,
@@ -379,6 +397,9 @@ export const eAlert = (options:TypeAlertOptions) => {
 
 if(!window["eAlert"]) {
     defineGlobalVar("eAlert", eAlert);
+}
+if(!window["createDialog"]) {
+    defineGlobalVar("createDialog", createDialog);
 }
 
 export default {

@@ -8,7 +8,7 @@
             <div class="{{layoutTheme}}" em:style="this.itemPaddingLeft">
                 <eui-button et:onClick="handleOnBtnSubmit" em:disabled="this.ajaxLoading" em:loading="this.ajaxLoading" style="vertical-align:middle;" theme="eui-button-primary" title="{{props.submitText}}"></eui-button>
                 <eui-button em:if="this.props.showReset" et:onClick="handleOnReset" em:disabled="this.ajaxLoading" style="margin-left: 10px;vertical-align:middle;" title="{{props.resetText}}"></eui-button>
-                <a class.eui-inline-hidden="{{!this.props.showBack}}" href="javascript:void(0);" et:click="handleOnBackClick" class="eui-button eui-button-default" style="margin-left: 10px;vertical-align:middle;" em:disabled="this.ajaxLoading">{{props.backText}}</a>
+                <a if="{{this.props.showBack}}" href="javascript:void(0);" et:click="handleOnBackClick" class="eui-button eui-button-default" style="margin-left: 10px;vertical-align:middle;" em:disabled="this.ajaxLoading">{{props.backText}}</a>
             </div>
         </footer>
     </div>

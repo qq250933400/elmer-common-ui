@@ -62,10 +62,11 @@ export class TreeViewItem extends Component {
         this.icon = this.data.icon;
         this.theme = !this.isEmpty(props.theme) ? props.theme : "";
         this.theme = [this.theme, this.getCheckStatusTheme()].join(" ");
-        this.subLevel = this.level + 1;
-        this.space = this.level*20;
-        this.offsetLeft = this.level*20;
+        this.subLevel = this.props.level + 1;
+        this.space = this.props.level * 20;
+        this.offsetLeft = this.props.level * 20;
         this.data.theme = !this.isEmpty(this.data.theme) ? this.data.theme : "";
+        console.log(this.props.level, this.subLevel, this.data.title);
     }
     getCheckStatusTheme(): string {
         if(this.props.selectedData) {

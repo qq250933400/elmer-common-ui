@@ -50,6 +50,7 @@ export class TreeView extends Component {
     constructor(props:any) {
         super(props);
         this.data = props.data || [];
+        this.changeOnDblClick = props.changeOnDblClick;
     }
     handleOnUpdateChildren(data: any): void {
         this.data = data;

@@ -52,6 +52,7 @@ export class TreeViewList extends Component {
             this.display = "block";
             this.show = true;
         }
+        this.level = props.level;
         this.treeViewItemDblClick = props.onItemDblClick;
     }
     handleOnUpdateChildren(index: any, data:any): void {
