@@ -30,6 +30,7 @@ export class LayoutCol extends Component {
     state:any = {
         theme: ""
     };
+    props:any;
     constructor(props: any) {
         super(props);
         this.state.theme = !this.isEmpty(props.theme) ? props.theme : "";

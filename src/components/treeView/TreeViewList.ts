@@ -1,10 +1,23 @@
 import { Component, declareComponent, propTypes } from "elmer-ui-core";
 import { ITreeViewItem } from "./index";
 
+type TreeviewListProps = {
+    data: any[];
+    fixedWidth: string;
+    level: number;
+    width: number;
+    selectedData: any[];
+    onItemDblClick: Function;
+    onExpandClick: Function;
+    treeViewItemClick: Function;
+    valueKey: string|number;
+    onUpdateChildren: Function;
+};
+
 @declareComponent({
     selector: "treeViewList"
 })
-export class TreeViewList extends Component {
+export class TreeViewList extends Component<TreeviewListProps> {
     static propType: any = {
         data: propTypes.array.isRequired,
         fixedWidth: propTypes.string,

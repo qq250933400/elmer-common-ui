@@ -55,6 +55,7 @@ export class AdminTopMenuComponent extends Component {
         selectedData: null,
         hasExpand: true
     };
+    props:any;
     constructor(props: any) {
         super(props);
         this.state.hasTitle = !this.isEmpty(props.title);

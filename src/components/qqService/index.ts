@@ -2,10 +2,18 @@ import { Component, declareComponent, IElmerEvent, IPropCheckRule, propTypes } f
 import { ElmerUI } from "elmer-ui-core/lib/core/ElmerUI";
 import "./index.less";
 
+type QQServiceProps = {
+    data: any[];
+    workTime: string;
+    workTitle: string;
+    onClick: Function;
+    theme: string;
+}
+
 @declareComponent({
     selector: "qqservice"
 })
-export class QQService extends Component {
+export class QQService extends Component<QQServiceProps> {
     static propType: any = {
         data: <IPropCheckRule>{
             defaultValue: [

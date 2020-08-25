@@ -140,7 +140,7 @@ export default class UserGroup extends Component {
         }).then((resp) => {
             if(!commonHandler(resp)) {
                 const groupList = resp.data || [];
-                this.props.actionUpdateGroupList(resp);
+                (<any>this.props).actionUpdateGroupList(resp);
                 this.setState({
                     groupData: groupList,
                     groupTime: (new Date()).getTime()

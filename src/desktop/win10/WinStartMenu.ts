@@ -2,15 +2,16 @@ import { autowired, Component,declareComponent, ElmerDOM, ElmerUI as UI, IElmerE
 import { DesktopApp, TypeStartMenu, winStartmenuSideButtons } from "../DesktopApp";
 
 type TypeWinStartmenuProps = {
-    data: IPropCheckRule;
-    onClick: IPropCheckRule;
-    onOutClick: IPropCheckRule;
-    theme: IPropCheckRule;
-    menuList: IPropCheckRule;
-    quickStartList: IPropCheckRule;
-    visible: IPropCheckRule;
-    showAnimation: IPropCheckRule;
+    data: any;
+    onClick: Function;
+    onOutClick: Function;
+    theme: string;
+    menuList: any[];
+    quickStartList: any[];
+    visible: boolean;
+    showAnimation: boolean;
 };
+type TypeWinStartmenuPropsRule = {[P in keyof TypeWinStartmenuProps]?: IPropCheckRule};
 type TypeWinStartmenuState = {
     data: DesktopApp[],
     leftSideData: DesktopApp[],
@@ -25,8 +26,8 @@ type TypeWinStartmenuState = {
 @declareComponent({
     selector: "win10-startmenu"
 })
-export class WinStartmenuComponent extends Component {
-    static propType: TypeWinStartmenuProps = {
+export class WinStartmenuComponent extends Component<TypeWinStartmenuProps> {
+    static propType: TypeWinStartmenuPropsRule = {
         data: {
             defaultValue: [],
             description: "All menu data",

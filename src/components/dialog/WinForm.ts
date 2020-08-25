@@ -4,29 +4,31 @@ import "./style/form.less";
 type AnimationEndType = "ShowForm" | "CloseForm" | "Minimize" | "None" | "Maximize";
 
 export type TypeWinFormProps = {
-    bottom: IPropCheckRule;
-    bottomTheme: IPropCheckRule;
-    icon: IPropCheckRule;
-    onClose: IPropCheckRule;
-    onMin: IPropCheckRule;
-    onMax: IPropCheckRule;
-    onFocus: IPropCheckRule;
-    showBottom: IPropCheckRule;
-    showBarMax: IPropCheckRule;
-    showBarMin: IPropCheckRule;
-    showBarClose: IPropCheckRule;
-    showIcon: IPropCheckRule;
-    maxBarTheme:IPropCheckRule;
-    theme: IPropCheckRule;
-    title: IPropCheckRule;
-    titleTheme: IPropCheckRule;
-    width: IPropCheckRule;
-    height: IPropCheckRule;
-    visible: IPropCheckRule;
-    zIndex: IPropCheckRule;
-    position: IPropCheckRule;
-    emit:IPropCheckRule;
+    bottom: string;
+    bottomTheme: string;
+    icon: string;
+    onClose: Function;
+    onMin: Function;
+    onMax: Function;
+    onFocus: Function;
+    showBottom: boolean;
+    showBarMax: boolean;
+    showBarMin: boolean;
+    showBarClose: boolean;
+    showIcon: boolean;
+    maxBarTheme: string;
+    theme: string;
+    title: string;
+    titleTheme: string;
+    width: number;
+    height: number;
+    visible: boolean;
+    zIndex: number;
+    position: string;
+    emit: Function;
 };
+
+type TypeWinFormPropsRule = {[P in keyof TypeWinFormProps]?:IPropCheckRule};
 
 type TypeWinFormState = {
     [P in Exclude<keyof TypeWinFormProps, "position" | "onFocus" | "onClose" | "onMin" | "onMax">]?: any;
@@ -53,8 +55,8 @@ type TypeWinFormState = {
 @declareComponent({
     selector: "WinForm"
 })
-export class WinFormComponent extends Component {
-    static propType: TypeWinFormProps = {
+export class WinFormComponent extends Component<TypeWinFormProps> {
+    static propType: TypeWinFormPropsRule = {
         bottom: {
             defaultValue: "",
             description: "Set html code to form bottom area",

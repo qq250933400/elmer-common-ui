@@ -55,6 +55,7 @@ export class ButtonComponent extends Component {
             rule: propTypes.any
         }
     };
+    props:any;
     state: any = {
         hasTitle: false,
         buttonType: "button"

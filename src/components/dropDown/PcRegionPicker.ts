@@ -69,6 +69,7 @@ export class PcRegionPicker extends Component {
         hasFocus: false,
         selectedTab: "0"
     };
+    props:any;
     displayData: any [] = [];
     provinceData: any[] = RegionData.categoryProvince;
     cityData: any[] = [];

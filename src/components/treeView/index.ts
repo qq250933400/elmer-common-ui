@@ -3,6 +3,15 @@ import "./styles/index.less";
 import "./TreeViewItem";
 import "./TreeViewList";
 
+type TreeViewProps = {
+    data: any[];
+    onChange: Function;
+    onExpandClick: Function;
+    changeOnDblClick: boolean;
+    isMutil: boolean;
+    valueKey: string|number;
+};
+
 export interface ITreeViewItem {
     title: string;
     id?: string;
@@ -18,7 +27,7 @@ export interface ITreeViewItem {
 @declareComponent({
     selector: "treeView"
 })
-export class TreeView extends Component {
+export class TreeView extends Component<TreeViewProps> {
     static propType: any = {
         data: propTypes.array,
         onChange: propTypes.func,

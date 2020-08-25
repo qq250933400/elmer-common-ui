@@ -1,10 +1,19 @@
 import { Component, declareComponent, IElmerEvent,IPropCheckRule, propTypes } from "elmer-ui-core";
 import "./index.less";
 
+type PagerProps = {
+    onChange: Function;
+    theme: string;
+    totalCount: number;
+    page: number;
+    pageSize: number;
+    summeryVisible: boolean;
+};
+
 @declareComponent({
     selector: "pager"
 })
-export class PagerComponent extends Component {
+export class PagerComponent extends Component<PagerProps> {
     static propType:any = {
         onChange: <IPropCheckRule>{
             description: "切换页面事件",

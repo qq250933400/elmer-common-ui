@@ -11,16 +11,17 @@ type ToolBarState = {
 };
 
 type ToolBarProps = {
-    activeId: IPropCheckRule;
-    data: IPropCheckRule;
-    onClick: IPropCheckRule;
+    activeId: string;
+    data: any;
+    onClick: Function;
 };
+type ToolBarPropsRule = {[P in keyof ToolBarProps]?: IPropCheckRule};
 
 @declareComponent({
     selector: "win10-toolbar"
 })
-export class Win10ToolBarComponent extends Component {
-    static propType:ToolBarProps = {
+export class Win10ToolBarComponent extends Component<ToolBarProps, ToolBarState> {
+    static propType:ToolBarPropsRule = {
         activeId: {
             description: "Current App ID",
             rule: <any>propTypes.string

@@ -30,6 +30,7 @@ export class ContentMenu extends Component {
             rule: propTypes.boolean
         }
     };
+    props:any;
     private data: any[] = [];
     private visible: boolean = false;
     constructor(props:any) {

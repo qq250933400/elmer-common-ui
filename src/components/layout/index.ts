@@ -27,6 +27,7 @@ export class LayoutComponent extends Component {
         theme: "",
         timeId: ""
     };
+    props:any;
     constructor(props: LayoutProps) {
         super(props);
         this.state.theme = !this.isEmpty(props.theme) ? props.theme : "";

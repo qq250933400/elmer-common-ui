@@ -1,13 +1,28 @@
 import { autowired,Component,declareComponent,ElmerServiceRequest, IElmerEvent, propTypes } from "elmer-ui-core";
 import { UploadModel } from "./UploadModel";
 
+type TypeUploadComponentProps = {
+    theme: string;
+    style: string;
+    listType: any;
+    multi: boolean;
+    domain: string;
+    action: string;
+    formName: string;
+    handleSuccess: Function;
+    handleFail: Function;
+    accept: string;
+    valueName: string;
+    fileList: any[];
+};
+
 @declareComponent({
     selector: "Upload",
     model: {
         obj: UploadModel
     }
 })
-export class UploadComponent extends Component {
+export class UploadComponent extends Component<TypeUploadComponentProps> {
     static propType: any = {
         theme: {
             defaultValue: "",
@@ -207,6 +222,6 @@ export class UploadComponent extends Component {
             fileType = checkFileName.substr(lIndex+1).toLowerCase();
         }
         const fileTypeIcon = !this.isEmpty(this.fileTypeIcons[fileType]) ? this.fileTypeIcons[fileType] : "/assets/fileType/icon_file_none.png";
-        return this.props.domain + fileTypeIcon;
+        return (<any>this.props).domain + fileTypeIcon;
     }
 }

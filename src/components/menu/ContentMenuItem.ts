@@ -2,6 +2,15 @@ import { Component, declareComponent, IElmerEvent, IPropCheckRule, propTypes } f
 import { EnumContentMenuItemType } from "./EContentMenu";
 import "./style.less";
 
+type ContentMenuItemProps = {
+    click: Function;
+    data: any;
+    icon: string;
+    value: any;
+    title: string|number;
+    type: string;
+}
+
 @declareComponent({
     selector: "contentMenuItem",
     template: {
@@ -9,7 +18,7 @@ import "./style.less";
         fromLoader: true
     }
 })
-export class ContentMenuItem extends Component {
+export class ContentMenuItem extends Component<ContentMenuItemProps> {
     static propType: any = {
         click: <IPropCheckRule>{
             defaultValue: null,

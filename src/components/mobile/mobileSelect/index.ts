@@ -1,6 +1,23 @@
 import { autowired,Component, declareComponent, ElmerDOM, IElmerEvent, IPropCheckRule, propTypes } from "elmer-ui-core";
 import "./index.less";
 
+type MobileSelectProps = {
+    cancelText: string;
+    data: any[];
+    defaultValue: any[];
+    okText: string;
+    onCancel: Function;
+    onChanged: Function;
+    onClose: Function;
+    onOk: Function;
+    placeHolder: any;
+    title: string;
+    visible: boolean;
+    zIndex: number;
+    showSearch: boolean;
+    searchPlaceHolder: string;
+};
+
 type TypeMouseEventObj = {
     x?: number;
     y?: number;
@@ -11,7 +28,7 @@ type TypeMouseEventObj = {
 @declareComponent({
     selector: "MobileSelect"
 })
-export class MobileSelector extends Component {
+export class MobileSelector extends Component<MobileSelectProps> {
     static propType:any ={
         cancelText: <IPropCheckRule>{
             defaultValue: "取消",

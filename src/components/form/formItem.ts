@@ -81,6 +81,7 @@ export class FormItemComponent extends Component {
         endDate: "",
         showStartDate: false
     };
+    props:any;
     private ajaxLoading: boolean = false;
     private domID: string = this.getRandomID();
     private ue: any = null;

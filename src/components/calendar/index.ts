@@ -98,6 +98,7 @@ export class CalendarComponent extends Component {
             rule: propTypes.func
         }
     };
+    props:any;
     style: string = "";
     week: string  = "Monday";
     year: string  = "2019";

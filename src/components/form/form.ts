@@ -87,6 +87,7 @@ export class FormComponent extends Component {
             rule: propTypes.boolean.isRequired
         }
     };
+    props:any;
     private layoutTheme: string = "eui-form-inline";
     private inlineMode: boolean = false;
     private labelWidth: string = "";

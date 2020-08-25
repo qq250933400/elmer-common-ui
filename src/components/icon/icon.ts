@@ -23,6 +23,7 @@ export class Icon extends Component {
         }
     };
     iconTheme: string = iconTypes[0];
+    props:any;
     constructor(props: any) {
         super(props);
         this.iconTheme = props.type || iconTypes[0];

@@ -1,10 +1,19 @@
 import { Component, declareComponent, IPropCheckRule, propTypes } from "elmer-ui-core";
 import "./index.less";
 
+type TableProps = {
+    theme: string;
+    columns: any[];
+    data: any;
+    startIndex: number;
+    noDataText: string;
+    owner: any;
+}
+
 @declareComponent({
     selector: "table"
 })
-export class TableComponent extends Component {
+export class TableComponent extends Component<TableProps> {
     static propType: any = {
         theme: <IPropCheckRule> {
             defaultValue: "",

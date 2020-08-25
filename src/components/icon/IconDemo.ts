@@ -16,6 +16,7 @@ export class IconDemo extends Component {
         }
     };
     data: any[] = [];
+    props:any;
     constructor(props:any) {
         super(props);
         iconTypes.map((tmpIconType:string) => {

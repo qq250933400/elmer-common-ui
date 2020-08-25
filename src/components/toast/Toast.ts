@@ -1,10 +1,27 @@
 import { Component, declareComponent, IPropCheckRule, propTypes } from "elmer-ui-core";
 import "./index.less";
 
+type ToastProps = {
+    autoClose: boolean;
+    closeAnimation: string;
+    duration: number;
+    handler: any;
+    iconVisible: boolean;
+    leftTime: number;
+    message: string | number;
+    onClose: Function;
+    showAnimation: string;
+    style: string;
+    theme: string;
+    timeVisible: boolean;
+    visible: boolean;
+    icon: string;
+}
+
 @declareComponent({
     selector: "toast"
 })
-export class Toast extends Component {
+export class Toast extends Component<ToastProps> {
     static propType:any = {
         autoClose: propTypes.boolean,
         closeAnimation: <IPropCheckRule>{

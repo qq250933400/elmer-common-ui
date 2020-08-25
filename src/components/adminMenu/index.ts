@@ -3,15 +3,17 @@ import { IAdminMenuData } from "./IAdminMenuData";
 import "./index.less";
 
 type TypeAdminMenuProps = {
-    disabled: IPropCheckRule;
-    theme: IPropCheckRule;
-    isExpand: IPropCheckRule;
-    style: IPropCheckRule;
-    onChange: IPropCheckRule;
-    onModeChange: IPropCheckRule;
-    data: IPropCheckRule;
-    selectedData: IPropCheckRule;
+    disabled: boolean;
+    theme: string;
+    isExpand: boolean;
+    style: string;
+    onChange: Function;
+    onModeChange: Function;
+    onClick: Function;
+    data: any;
+    selectedData: any;
 };
+type TypeAdminMenuPropsRules = {[P in keyof TypeAdminMenuProps]: IPropCheckRule};
 type TypeAdminMenuState = {
     hasTitle: boolean;
     icon: string;
@@ -25,8 +27,8 @@ type TypeAdminMenuState = {
 @declareComponent({
     selector: "adminMenu"
 })
-export class AdminMenuComponent extends Component {
-    static propType:TypeAdminMenuProps = {
+export class AdminMenuComponent extends Component<TypeAdminMenuProps> {
+    static propType:TypeAdminMenuPropsRules = {
         disabled: <IPropCheckRule>{
             defaultValue: false,
             description: "是否可用",
@@ -48,6 +50,10 @@ export class AdminMenuComponent extends Component {
             rule: propTypes.string
         },
         onChange: <IPropCheckRule> {
+            description: "单击事件",
+            rule: propTypes.func
+        },
+        onClick: {
             description: "单击事件",
             rule: propTypes.func
         },

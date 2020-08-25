@@ -26,6 +26,7 @@ export class LayoutRow extends Component {
         theme: "",
         setHeight: ""
     };
+    props:any;
     constructor(props: any) {
         super(props);
         this.state.theme = !this.isEmpty(props.theme) ? props.theme : "";

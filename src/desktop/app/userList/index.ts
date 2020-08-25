@@ -127,7 +127,7 @@ export default class UserList extends Component {
             }
         }).then((resp:any): void => {
             if(!commonHandler(resp)) {
-                this.props.actionUpdateUserList(resp);
+                (<any>this.props).actionUpdateUserList(resp);
                 this.setState({
                     data: resp.data || [],
                     listTime: (new Date()).getTime()

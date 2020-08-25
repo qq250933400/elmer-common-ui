@@ -1,10 +1,12 @@
 import { Component, declareComponent, IElmerEvent } from "elmer-ui-core";
-import { IAdminMenuData, eAlert } from "../components";
+import { eAlert, IAdminMenuData } from "../components";
 
 @declareComponent({
     selector: "admin"
 })
 export class AdminComponent extends Component {
+    state:any;
+    props:any;
     allCount: number = 1500;
     page: number = 1;
     data: any[] = [

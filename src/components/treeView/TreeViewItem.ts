@@ -1,10 +1,23 @@
 import { autowired, Component, declareComponent, ElmerDOM, IElmerEvent, propTypes } from "elmer-ui-core";
 import { ITreeViewItem } from "./index";
 
+type TreeviewItemProps = {
+    data:any;
+    width: number;
+    selectedData: any[];
+    onExpandClick: Function;
+    dblClick:Function;
+    level: number;
+    valueKey: string|number;
+    click: Function;
+    index: any;
+    onUpdateChildren: Function;
+};
+
 @declareComponent({
     selector: "treeViewItem"
 })
-export class TreeViewItem extends Component {
+export class TreeViewItem extends Component<TreeviewItemProps> {
     static propType: any = {
         width: propTypes.number.isRequired,
         selectedData: propTypes.array,
@@ -66,7 +79,6 @@ export class TreeViewItem extends Component {
         this.space = this.props.level * 20;
         this.offsetLeft = this.props.level * 20;
         this.data.theme = !this.isEmpty(this.data.theme) ? this.data.theme : "";
-        console.log(this.props.level, this.subLevel, this.data.title);
     }
     getCheckStatusTheme(): string {
         if(this.props.selectedData) {
