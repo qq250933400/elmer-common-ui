@@ -1,6 +1,6 @@
 {
     "name": "elmer-common-ui",
-    "version": "1.0.16",
+    "version": "1.0.17",
     "types": "./src/global.d.ts",
     "description": "ui components",
     "typings": "lib/index.d.ts",
@@ -64,7 +64,7 @@
         "copy-webpack-plugin": "^5.0.3",
         "elmer-common": "^0.1.8",
         "elmer-loader": "^1.0.0",
-        "elmer-ui-core": "^1.2.27",
+        "elmer-ui-core": "^1.2.30",
         "elmer-validation": "^1.0.7",
         "elmer-virtual-dom": "^1.0.7",
         "eslint-plugin-typescript": "^0.12.0",
