@@ -91,6 +91,7 @@ export const createDialog = (options:TypeCreateDailogOptions): TypeCreateDialogR
         removeFromContent: true,
         demoID: ui.getRandomID(),
         timestamp: (new Date()).getTime(),
+        events: options.events,
         // tslint:disable-next-line: object-literal-shorthand
         onClose : function():void {
             const closeCallBack = this.myEvents.onClose;

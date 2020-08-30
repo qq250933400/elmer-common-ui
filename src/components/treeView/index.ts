@@ -90,6 +90,7 @@ export class TreeView extends Component<TreeViewProps> {
         this.setData({
             data: newProps.data
         }, true);
+        console.log(newProps);
     }
     render(): any {
         return require("./views/index.html");

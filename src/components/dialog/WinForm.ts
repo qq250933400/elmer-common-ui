@@ -253,7 +253,7 @@ export class WinFormComponent extends Component<TypeWinFormProps> {
     render(): any {
         return require("./views/winForm.html");
     }
-    $after(): void {
+    $didUpdate(): void {
         this.addEvent(this, document.body, "mousemove", this.onbodyMouseMove.bind(this));
         this.addEvent(this, document.body, "mouseup", this.onbodyMouseUp.bind(this));
     }
