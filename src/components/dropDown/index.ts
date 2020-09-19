@@ -20,6 +20,7 @@ type TypeDropDownPropsCheckRule = {
     onChange: IPropCheckRule;
     style: IPropCheckRule;
     showValue: IPropCheckRule;
+    tag:any;
 };
 type TypeDropDownProps = {[P in keyof TypeDropDownPropsCheckRule]: any};
 @declareComponent({
@@ -81,6 +82,9 @@ export class ElmerDropDown extends Component {
             defaultValue: false,
             description: "是否显示value值在title后面",
             rule: propTypes.bool
+        },
+        tag: {
+            rule: propTypes.any
         }
     };
     state: any = {
@@ -156,11 +160,13 @@ export class ElmerDropDown extends Component {
             });
             typeof this.props.onChanged === "function" && this.props.onChanged(evt.data.item, {
                 id: this.props.id,
-                name: this.props.name
-            });
+                name: this.props.name,
+                tag: this.props.tag
+            }, this.props.tag);
             typeof this.props.onChange === "function" && this.props.onChange(evt.data.item, {
                 id: this.props.id,
-                name: this.props.name
+                name: this.props.name,
+                tag: this.props.tag
             });
         }
     }

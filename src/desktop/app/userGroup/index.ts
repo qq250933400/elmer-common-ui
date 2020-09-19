@@ -187,7 +187,7 @@ export default class UserGroup extends Component {
             return false;
         }
     }
-    $onPropsChanged(props:any): void {
+    $willReceiveProps(props:any): void {
         const groupData = this.getValue(props, "usersGroup.data");
         const moduleData = this.getValue(props, "adminMudule.data");
         if(groupData) {

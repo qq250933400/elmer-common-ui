@@ -1,10 +1,14 @@
 import { Component, declareComponent, IPropCheckRule, propTypes } from "elmer-ui-core";
 import { iconTypes } from "./iconTypes";
 
+type TypeIconProps = {
+    onClick: Function;
+};
+
 @declareComponent({
     selector: "icon"
 })
-export class Icon extends Component {
+export class Icon extends Component<TypeIconProps> {
     static propTypes: any = {
         type: <IPropCheckRule> {
             defaultValue: iconTypes[0],
@@ -23,7 +27,6 @@ export class Icon extends Component {
         }
     };
     iconTheme: string = iconTypes[0];
-    props:any;
     constructor(props: any) {
         super(props);
         this.iconTheme = props.type || iconTypes[0];
