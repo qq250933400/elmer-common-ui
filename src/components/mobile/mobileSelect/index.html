@@ -5,7 +5,7 @@
                 <a et:click="handleOnCancelClick" et:touchstart="handleOnCancelClick" class="eui-mobile-select-cancel" href="javascript:void(0);">{{cancelText}}</a>
                 <span em:show="!this.showSearch" >{{title}}</span>
                 <div class="eui-mobile-select-search" et:touchstart="handleOnSearchTouch">
-                    <input et:touchstart="handleOnSearchInputTouch" et:click="handleOnSearchClick" et:change="handleSearch" et:keypress="handleOnSearchKeyPress" aria-placeholder="{{searchPlaceHolder}}" placeholder="{{searchPlaceHolder}}" em:if="this.showSearch" type="search" />
+                    <input et:touchstart="handleOnSearchInputTouch" et:click="handleOnSearchClick" et:input="handleSearch" et:propertychange="handleSearch" aria-placeholder="{{searchPlaceHolder}}" placeholder="{{searchPlaceHolder}}" em:if="this.showSearch" type="search" />
                 </div>
                 <a et:click="handleOnOkClick" et:touchstart="handleOnOkClick" class="eui-mobile-select-ok" href="javascript:void(0);">{{okText}}</a>
             </div>
