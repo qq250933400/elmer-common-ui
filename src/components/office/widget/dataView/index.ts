@@ -81,6 +81,7 @@ type TypeOfficeDataViewState = {
     bodyData?: TypeOfficeDataViewBodyItem[],
     headerData?: TypeOfficeDataViewHeaderItem[],
     jumpNums?: string;
+    updateTime?: string;
 };
 
 export const createOfficeDataViewPager = (data:TypeOfficeDataViewPager) => (data);
@@ -158,13 +159,14 @@ export default class OfficeDataView extends Component {
     tablePagerId: string;
     tableHeaderId: string;
     tableBodyId: string;
+    private bodyHeight: number = 0;
     private isInitSize: boolean = false;
     private defaultPagerPosition: string = "页码 {{page}}/{{totalPage}} 每页 {{pageSize}} 共 {{totalNums}} 条数据";
 
     constructor(props:TypeOfficeDataViewProps) {
         super(props);
         this.state.className = props.className;
-        this.state.tableStyle = !this.isEmpty(props.tableWidth) ? "width:" + props.tableWidth +";": "width:100%;";
+        this.state.tableStyle = !this.isEmpty(props.tableWidth) ? "min-width:" + props.tableWidth +";": "width:100%;";
         this.state.outStyle = this.getOutStyle();
         this.tableId = this.getRandomID();
         this.tableViewId = this.getRandomID();
@@ -174,6 +176,7 @@ export default class OfficeDataView extends Component {
         this.state.bodyData = this.getBodyData(props.data);
         this.state.headerData = <any>props.columns;
         this.state.data = props.data;
+        this.state.updateTime = (new Date()).getTime().toString();
         if(props.pager) {
             this.state.pager = props.pager;
             if(!this.isEmpty(props.pager.position)) {
@@ -184,7 +187,7 @@ export default class OfficeDataView extends Component {
             this.state.pager.page = props.pager.page > 0 ? props.pager.page : 1;
             if(props.pager.totalNums <= sourceLength) {
                 this.state.pager.totalNums = sourceLength;
-                this.state.pager.totalPage = Math.ceil(sourceLength / this.state.pager.pageSize);
+                this.state.pager.totalPage = this.state.pager.totalPage > 0 ? this.state.pager.totalPage : Math.ceil(sourceLength / this.state.pager.pageSize);
             }
             this.state.pager.position = this.getPagerPosition(this.state.pager);
         } else {
@@ -208,73 +211,144 @@ export default class OfficeDataView extends Component {
     }
     onFirstClick(): void {
         const myPager:TypeOfficeDataViewPager = JSON.parse(JSON.stringify(this.state.pager));
-        myPager.page = 1;
-        myPager.position = this.getPagerPosition(myPager);
-        this.setState({
-            pager: myPager
-        });
+        if(myPager.page !== 1) {
+            myPager.page = 1;
+            myPager.position = this.getPagerPosition(myPager);
+            const evtData = {
+                pagination: myPager,
+                update: true
+            };
+            typeof this.props.onPageChange === "function" && this.props.onPageChange(evtData);
+            if(evtData.update) {
+                this.setState({
+                    pager: myPager,
+                    bodyData: [],
+                    data: []
+                });
+            }
+        }
     }
     onPrevClick():void {
         const myPager:TypeOfficeDataViewPager = JSON.parse(JSON.stringify(this.state.pager));
+        const savePage = myPager.page;
         myPager.page = myPager.page - 1 > 0 ? myPager.page - 1 : 1;
-        myPager.position = this.getPagerPosition(myPager);
-        this.setState({
-            pager: myPager
-        });
+        if(myPager.page !== savePage) {
+            myPager.position = this.getPagerPosition(myPager);
+            const evtData = {
+                pagination: myPager,
+                update: true
+            };
+            typeof this.props.onPageChange === "function" && this.props.onPageChange(evtData);
+            if(evtData.update) {
+                this.setState({
+                    pager: myPager,
+                    bodyData: [],
+                    data: []
+                });
+            }
+        }
     }
     onNextClick():void {
         const myPager:TypeOfficeDataViewPager = JSON.parse(JSON.stringify(this.state.pager));
+        const savePage = myPager.page;
         myPager.page = myPager.page + 1 <= myPager.totalPage ? myPager.page + 1 : myPager.totalPage;
-        myPager.position = this.getPagerPosition(myPager);
-        this.setState({
-            pager: myPager
-        });
+        if(myPager.page !== savePage) {
+            myPager.position = this.getPagerPosition(myPager);
+            const evtData = {
+                pagination: myPager,
+                update: true
+            };
+            typeof this.props.onPageChange === "function" && this.props.onPageChange(evtData);
+            if(evtData.update) {
+                this.setState({
+                    pager: myPager,
+                    bodyData: [],
+                    data: []
+                });
+            }
+        }
     }
     onLastClick(): void {
         const myPager:TypeOfficeDataViewPager = JSON.parse(JSON.stringify(this.state.pager));
-        myPager.page = myPager.totalPage;
-        myPager.position = this.getPagerPosition(myPager);
-        this.setState({
-            pager: myPager
-        });
+        const savePage = myPager.page;
+        if(savePage !== myPager.totalPage) {
+            myPager.page = myPager.totalPage;
+            myPager.position = this.getPagerPosition(myPager);
+            const evtData = {
+                pagination: myPager,
+                update: true
+            };
+            typeof this.props.onPageChange === "function" && this.props.onPageChange(evtData);
+            if(evtData.update) {
+                this.setState({
+                    pager: myPager,
+                    bodyData: [],
+                    data: []
+                });
+            }
+        }
     }
     OnGotoClick(): void {
         const jump = this.isNumeric(this.state.jumpNums) ? parseInt(this.state.jumpNums, 10) : 1;
         const myPager:TypeOfficeDataViewPager = JSON.parse(JSON.stringify(this.state.pager));
-        myPager.page = jump;
-        myPager.position = this.getPagerPosition(myPager);
-        this.setState({
-            pager: myPager
-        });
+        if(myPager.page !== jump) {
+            myPager.page = jump;
+            myPager.position = this.getPagerPosition(myPager);
+            const evtData = {
+                pagination: myPager,
+                update: true
+            };
+            typeof this.props.onPageChange === "function" && this.props.onPageChange(evtData);
+            if(evtData.update) {
+                this.setState({
+                    pager: myPager,
+                    bodyData: [],
+                    data: []
+                });
+            }
+        }
     }
-    $didMount(refresh?: boolean): void {
+    $didMount(): void {
         const outDom:HTMLDivElement = this.dom[this.tableViewId];
         const tableHeadDom:HTMLElement = this.dom[this.tableHeaderId];
         const pagerDom: HTMLDivElement = this.dom[this.tablePagerId];
-        const tableWidthStyle = !this.isEmpty(this.props.tableWidth) ? "width:" + this.props.tableWidth +";": "width:100%;";
+        const tableWidthStyle = !this.isEmpty(this.props.tableWidth) ? "min-width:" + this.props.tableWidth +";": "width:100%;";
         const outHeight = outDom.clientHeight;
         const pagerHeight = pagerDom.clientHeight;
         const tableHeight = outHeight - pagerHeight;
         const tableHeaderHeight = tableHeadDom.clientHeight;
         const tableHeightStyle = "";// "height:" + tableHeight + "px;";
-        this.initHeaderStyle();
-        this.setState({
-            tableStyle: tableWidthStyle + tableHeightStyle,
-            tBodyStyle: "height:" + (tableHeight - tableHeaderHeight) + "px;overflow-y: auto;"
-        });
-        if(refresh) {
-            const bodyData = this.getBodyData(this.props.data);
-            this.setState({
-                bodyData,
+        const updateState:any = {};
+        this.bodyHeight = tableHeight - tableHeaderHeight;
+        updateState.tableStyle = tableWidthStyle + tableHeightStyle;
+        updateState.tBodyStyle = "height:" + (tableHeight - tableHeaderHeight) + "px;overflow-y: auto;";
+        if(this.props.data && tableHeight - tableHeaderHeight > this.props.data.length * 30) {
+            updateState.bodyData = this.getBodyData(this.props.data);
+        }
+        this.setState(updateState);
+    }
+    $willReceiveProps(props:TypeOfficeDataViewProps): void {
+        const bodyData = this.getBodyData(props.data);
+        const updateState = {
+            bodyData,
+            data: props.data,
+            updateTime: (new Date()).getTime()
+        };
+        if(props.pager && props.pager.pageSize > 0) {
+            this.state.pager = createOfficeDataViewPager({
+                position: this.getPagerPosition({
+                    page: props.pager.page,
+                    pageSize: props.pager.pageSize,
+                    totalNums: props.pager.totalNums,
+                    totalPage: props.pager.totalPage,
+                }),
+                page: props.pager.page,
+                pageSize: props.pager.pageSize,
+                totalNums: props.pager.totalNums,
+                totalPage: props.pager.totalPage,
             });
         }
-    }
-    $onPropsChanged(props:TypeOfficeDataViewProps): void {
-        const bodyData = this.getBodyData(props.data);
-        this.setState({
-            bodyData,
-            data: props.data
-        });
+        this.setState(updateState);
     }
     private getBodyData(bodyData: any[]):any {
         if(this.props.data && this.props.columns) {
@@ -344,8 +418,9 @@ export default class OfficeDataView extends Component {
                         }
                         updateBodyData.push(bodyLineData);
                     }
-                    if(bodyData.length < this.state.pager.pageSize) {
-                        for(let i=bodyData.length;i<this.state.pager.pageSize;i++) {
+                    if(bodyData.length * 30 < this.bodyHeight) {
+                        const maxLen = Math.ceil((this.bodyHeight - bodyData.length * 30) / 30) + 1;
+                        for(let i=0;i<maxLen;i++) {
                             const bodyLine = [];
                             for(let col = 0; col < defineHeader.length; col++) {
                                 bodyLine.push({
@@ -390,15 +465,12 @@ export default class OfficeDataView extends Component {
         }
         this.state.columnSizeData = result;
     }
-    private initHeaderStyle():void {
-        const bodyDom:HTMLElement = this.dom[this.tableBodyId];
-    }
     private getPagerPosition(pagerData: TypeOfficeDataViewPager):string {
         let pStr = this.defaultPagerPosition || "";
-        pStr = pStr.replace(/\{\{page\}\}/g, this.getValue(pagerData, "page"));
-        pStr = pStr.replace(/\{\{pageSize\}\}/g, this.getValue(pagerData, "pageSize"));
-        pStr = pStr.replace(/\{\{totalNums\}\}/g, this.getValue(pagerData, "totalNums"));
-        pStr = pStr.replace(/\{\{totalPage\}\}/g, this.getValue(pagerData, "totalPage"));
+        pStr = pStr.replace(/\{\{page\}\}/g, this.getValue(pagerData, "page") || "");
+        pStr = pStr.replace(/\{\{pageSize\}\}/g, this.getValue(pagerData, "pageSize") || "");
+        pStr = pStr.replace(/\{\{totalNums\}\}/g, this.getValue(pagerData, "totalNums") || "");
+        pStr = pStr.replace(/\{\{totalPage\}\}/g, this.getValue(pagerData, "totalPage") || "");
 
         return pStr;
     }

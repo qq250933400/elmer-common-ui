@@ -69,6 +69,11 @@ export class FormItemComponent extends Component {
             description: "tabIndex",
             rule: propTypes.number
         },
+        zIndex: <IPropCheckRule> {
+            defaultValue: 0,
+            description: "tabIndex",
+            rule: propTypes.number
+        },
         onChange: <IPropCheckRule> {
             description: "部分组件值修改触发事件",
             rule: propTypes.func
@@ -79,7 +84,8 @@ export class FormItemComponent extends Component {
         calendarStyle: "position:fixed;display:none;",
         startDate: "",
         endDate: "",
-        showStartDate: false
+        showStartDate: false,
+        itemStyle: ""
     };
     props:any;
     private ajaxLoading: boolean = false;
@@ -94,6 +100,9 @@ export class FormItemComponent extends Component {
         this.state.value = props.value;
         this.labelWidth = props.labelWidth;
         this.itemPaddingLeft = props.itemPaddingLeft;
+        if(this.props.zIndex > 0) {
+            this.state.itemStyle = `z-index: ${props.zIndex};`;
+        }
         if(props.type === EnumFormItemTypes.DatePeriod || props.type === EnumFormItemTypes.Date) {
             if(this.isObject(props.value)) {
                 this.state.startDate = props.value.startDate || "";
@@ -244,7 +253,11 @@ export class FormItemComponent extends Component {
     $after(): void {
         if(this.props.type === EnumFormItemTypes.Editor && !this.ue) {
             if(UM) {
-                this.ue = UM.getEditor(this.domID);
+                const config:any = {};
+                if(this.props.data && this.props.data.toolbars) {
+                    config.toolbars = this.props.data.toolbars;
+                }
+                this.ue = UM.getEditor(this.domID, config);
                 if(this.isObject(this.props.data) && !this.isEmpty(this.props.data.height)) {
                     this.ue.setHeight(this.props.data.height);
                 }

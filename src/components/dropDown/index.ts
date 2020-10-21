@@ -16,6 +16,7 @@ type TypeDropDownPropsCheckRule = {
     data: IPropCheckRule;
     placeholder: IPropCheckRule;
     tabIndex: IPropCheckRule;
+    zIndex: IPropCheckRule;
     onChanged?: IPropCheckRule;
     onChange: IPropCheckRule;
     style: IPropCheckRule;
@@ -66,6 +67,10 @@ export class ElmerDropDown extends Component {
             description: "tabIndex",
             rule: propTypes.number.isRequired
         },
+        zIndex: <IPropCheckRule> {
+            description: "zIndex",
+            rule: propTypes.number
+        },
         onChanged:<IPropCheckRule> {
             description: "Change事件,即将弃用的方法",
             rule: propTypes.func
@@ -101,6 +106,9 @@ export class ElmerDropDown extends Component {
         super(props);
         this.state.dataList = props.data || [];
         this.state.style = props.style || "";
+        if(this.props.zIndex > 0) {
+            this.state.style += "z-index:" + props.zIndex + ";";
+        }
         if(!this.isEmpty(props.value)) {
             const listData = props.data || [];
             for(const tmpData of listData) {

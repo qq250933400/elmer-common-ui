@@ -8,6 +8,7 @@ type TypeTabBarProps = {
     onBeforeChange?: Function;
     currentIndex?: number;
     children?: IVirtualElement[];
+    visible?: boolean;
 };
 
 type TypeTabBarPropsRule = {[P in keyof TypeTabBarProps]: IPropCheckRule};
@@ -29,6 +30,9 @@ export class TabBar extends Component {
         currentIndex: <IPropCheckRule> {
             defaultValue: 0,
             rule: PropTypes.number.isRequired
+        },
+        visible: <IPropCheckRule> {
+            rule: PropTypes.bool
         }
     };
     index: number = 0;
@@ -47,7 +51,7 @@ export class TabBar extends Component {
         };
     }
     setIndex(index:number): void {
-        this.index = index​​;
+        this.index = index;
     }
     handleOnTabClick(evt: IElmerEvent): void {
         const beforeResult = typeof this.props.onBeforeChange === "function" ? this.props.onBeforeChange() : undefined;
@@ -67,15 +71,17 @@ export class TabBar extends Component {
         let index = 0;
         this.props.children.map((item:IVirtualElement) => {
             if(item.tagName === "eui-tab-item") {
-                item.props.index = index;
-                item.props.currentIndex = this.currentIndex;
-                item.props.id = "tabItem_" + index;
-                item.props.attach = true;
-                tabData.push({
-                    index,
-                    title: item.props.title
-                });
-                index += 1;
+                if(item.props.visible === undefined || item.props.visible) {
+                    item.props.index = index;
+                    item.props.currentIndex = this.currentIndex;
+                    item.props.id = "tabItem_" + index;
+                    item.props.attach = true;
+                    tabData.push({
+                        index,
+                        title: item.props.title
+                    });
+                    index += 1;
+                }
             }
         });
         this.tabTitle = tabData;
@@ -88,9 +94,11 @@ export class TabBar extends Component {
             let index = 0;
             this.props.children.map((item:IVirtualElement) => {
                 if(item.tagName === "eui-tab-item") {
-                    const domKey = "tabItem_" + index;
-                    this.dom[domKey].setCurrentIndex(newProps.currentIndex);
-                    index += 1;
+                    if(item.props.visible === undefined || item.props.visible) {
+                        const domKey = "tabItem_" + index;
+                        this.dom[domKey].setCurrentIndex(newProps.currentIndex);
+                        index += 1;
+                    }
                 }
             });
         }
@@ -102,9 +110,11 @@ export class TabBar extends Component {
         });
         this.props.children.map((item:IVirtualElement) => {
             if(item.tagName === "eui-tab-item") {
-                const domKey = "tabItem_" + index;
-                this.dom[domKey].setCurrentIndex(tabIndex);
-                index += 1;
+                if(item.props.visible === undefined || item.props.visible) {
+                    const domKey = "tabItem_" + index;
+                    this.dom[domKey].setCurrentIndex(tabIndex);
+                    index += 1;
+                }
             }
         });
     }

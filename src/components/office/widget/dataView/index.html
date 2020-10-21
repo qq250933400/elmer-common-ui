@@ -12,7 +12,7 @@
                             em:style="subItem.style"
                             >
                             <span em:if="subItem.isCodeTitle neq true">{{subItem.title}}</span>
-                            <eui-run-code em:events="subItem.events" if="{{subItem.isCodeTitle}}" code="{{subItem.title}}" data="{{subItem}}"/>
+                            <eui-run-code em:events="subItem.events" if="{{subItem.isCodeTitle}}" code="{{subItem.title}}" data="{{subItem}}" time="{{state.updateTime}}"/>
                         </td>
                     </tr>
                 </thead>
@@ -20,7 +20,7 @@
                     <tr em:for="let bItem in this.state.bodyData">
                         <td em:for="let bSubItem in bItem" colspan="{{bSubItem.colspan}}" rowspan="{{bSubItem.rowspan}}" em:style="bSubItem.style" class="{{bSubItem.className}}">
                             <span em:if="bSubItem.type eq 'Text'">{{bSubItem.value}}</span>
-                            <eui-run-code em:events="bSubItem.events" code="{{bSubItem.value}}" data="{{bSubItem.data}}" em:if="bSubItem.type eq 'Code'"/>
+                            <eui-run-code em:events="bSubItem.events" code="{{bSubItem.value}}" data="{{bSubItem.data}}" time="{{state.updateTime}}" em:if="bSubItem.type eq 'Code'"/>
                         </td>
                     </tr>
                 </tbody>

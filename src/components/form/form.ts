@@ -139,7 +139,9 @@ export class FormComponent extends Component {
         if(/^(http|https)\:\/\//.test(this.props.action) || /^(\.\.\/)|(\.\/)/.test(this.props.action)) {
             request.url = this.props.action;
         } else {
-            request.endPoint = this.props.action;
+            const NEData = (this.props.action || "").split(".");
+            request.namespace = NEData[0];
+            request.endPoint = NEData[1];
         }
         const submitData = this.getFormData();
         typeof this.props.beforeSubmit === "function" && this.props.beforeSubmit(submitData);
