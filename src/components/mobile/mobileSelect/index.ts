@@ -7,7 +7,7 @@ type MobileSelectProps = {
     defaultValue: any[];
     okText: string;
     onCancel: Function;
-    onChanged: Function;
+    onChange: Function;
     onClose: Function;
     onOk: Function;
     placeHolder: any;
@@ -17,7 +17,7 @@ type MobileSelectProps = {
     showSearch: boolean;
     searchPlaceHolder: string;
 };
-
+type MobileSelectPropsRule = {[P in keyof MobileSelectProps]:IPropCheckRule};
 type TypeMouseEventObj = {
     x?: number;
     y?: number;
@@ -29,7 +29,7 @@ type TypeMouseEventObj = {
     selector: "MobileSelect"
 })
 export class MobileSelector extends Component<MobileSelectProps> {
-    static propType:any ={
+    static propType:MobileSelectPropsRule ={
         cancelText: <IPropCheckRule>{
             defaultValue: "取消",
             description: "取消按钮文本",
@@ -54,8 +54,7 @@ export class MobileSelector extends Component<MobileSelectProps> {
             description: "取消事件",
             rule: propTypes.func
         },
-        onChanged: <IPropCheckRule>{
-            defaultValue: null,
+        onChange: <IPropCheckRule> {
             description: "选择变化触发事件",
             rule: propTypes.func
         },
@@ -115,8 +114,6 @@ export class MobileSelector extends Component<MobileSelectProps> {
     private maskHiddenAnimation: string = "euiMobileSelectMaskHiddenAni";
     private contentHiddenAnimation: string = "euiMobileSelectHiddenAni";
     private onClose:Function;
-    private onOk: Function;
-    private onCancel: Function;
     private data: any[] = [];
     private sourceData: any[] = [];
     private contentHeight: number = 0;
@@ -124,12 +121,11 @@ export class MobileSelector extends Component<MobileSelectProps> {
     private selectedIndexs: number[] = [];
     private displayIndexs: number[] = [];
     private isPressed: boolean = false;
-    private isTouchEvent: boolean = false;
-    private toTop: boolean  = false;
-    private checkedResult: boolean = false;
     private listWidth: string = "100%";
     private showSearch: boolean = true;
     private mouseEventObj: TypeMouseEventObj;
+    private mouseEventElement:HTMLElement;
+    private onChangeData: any = {};
     @autowired(ElmerDOM)
     private $:ElmerDOM;
     constructor(props: any) {
@@ -137,8 +133,6 @@ export class MobileSelector extends Component<MobileSelectProps> {
         this.cancelText = props.cancelText;
         this.visible = props.visible;
         this.onClose = props.onClose;
-        this.onOk = props.onOk;
-        this.onCancel = props.onCancel;
         this.data = props.data || [];
         this.okText = props.okText;
         this.showSearch = props.showSearch;
@@ -149,7 +143,7 @@ export class MobileSelector extends Component<MobileSelectProps> {
         this.sourceData = this.data;
         this.title = props.title || "";
     }
-    $onPropsChanged(newProps: any): void {
+    $willReceiveProps(newProps: any): void {
         if(newProps.visible !== this.visible) {
             this.visible = newProps.visible;
             this.setVisible();
@@ -178,29 +172,31 @@ export class MobileSelector extends Component<MobileSelectProps> {
             }
         }
     }
+    $didMount(): void {
+        this.$.on(document.body, "mousedown", this.handleOnBodyMouseDown.bind(this));
+        this.$.on(document.body, "touchstart", this.handleOnBodyTouchStart.bind(this));
+        this.$.on(document.body, "mouseup", this.handleOnBodyMouseUp.bind(this));
+        this.$.on(document.body, "touchend", this.handleOnBodyTouchEnd.bind(this));
+        this.$.on(document.body, "mousemove", this.handleOnBodyMouseMove.bind(this));
+        this.$.on(document.body, "touchmove", this.handleOnBodyTouchMove.bind(this));
+    }
+    $dispose(): void {
+        this.$.removeEvent(document.body, "mousedown", this.handleOnBodyMouseDown.bind(this));
+        this.$.removeEvent(document.body, "touchstart", this.handleOnBodyTouchStart.bind(this));
+        this.$.removeEvent(document.body, "mouseup", this.handleOnBodyMouseUp.bind(this));
+        this.$.removeEvent(document.body, "touchend", this.handleOnBodyTouchEnd.bind(this));
+        this.$.removeEvent(document.body, "mousemove", this.handleOnBodyMouseMove.bind(this));
+        this.$.removeEvent(document.body, "touchmove", this.handleOnBodyTouchMove.bind(this));
+    }
     render(): string {
         return require("./index.html");
     }
+    handleOnListMouseDown(evt:IElmerEvent): void {
+        this.isPressed = true;
+        this.mouseEventElement = evt.target;
+    }
     handleOnSearchTouch(event:IElmerEvent): void {
         (<HTMLElement>event.target.firstChild).focus();
-    }
-    handleOnSearchInputTouch(event:IElmerEvent): void {
-        (<TouchEvent>event.nativeEvent).cancelBubble = true;
-        (<TouchEvent>event.nativeEvent).stopPropagation();
-    }
-    handleOnContentTouchStart(event:IElmerEvent): void {
-        if(this.visible) {
-            (<TouchEvent>event.nativeEvent).cancelBubble = true;
-            (<TouchEvent>event.nativeEvent).preventDefault();
-            (<TouchEvent>event.nativeEvent).stopPropagation();
-        }
-    }
-    handleOnMaskTouchStart(event:IElmerEvent): void {
-        if(this.visible) {
-            (<Event>event.nativeEvent).cancelBubble = true;
-            (<Event>event.nativeEvent).preventDefault();
-            (<Event>event.nativeEvent).stopPropagation();
-        }
     }
     handleOnSearchClick(event:Event): void {
         (<any>event.target).focus();
@@ -248,14 +244,12 @@ export class MobileSelector extends Component<MobileSelectProps> {
     }
     handleOnCancelClick(): void {
         this.visible = false;
-        this.checkedResult = false;
         this.setVisible();
         typeof this.props.onCancel === "function" && this.props.onCancel();
     }
     handleOnOkClick(): void {
         this.visible = false;
         this.selectedIndexs = this.displayIndexs || [];
-        this.checkedResult = true;
         this.setVisible();
         const checkedData = [];
         for(let i=0;i<this.displayIndexs.length;i++) {
@@ -270,7 +264,6 @@ export class MobileSelector extends Component<MobileSelectProps> {
     }
     handleOnMaskClick(): void {
         this.visible = false;
-        this.checkedResult = false;
         this.setVisible();
     }
     handleOnContentClick(event:IElmerEvent): void {
@@ -286,35 +279,23 @@ export class MobileSelector extends Component<MobileSelectProps> {
         }
         dom = null;
     }
-    handleOnListMouseDown(event:IElmerEvent): void {
-        !this.isTouchEvent && this.handleOnPressEvent((<MouseEvent>event.nativeEvent).clientX, (<MouseEvent>event.nativeEvent).clientY, event.target);
+    handleOnBodyMouseDown(event:MouseEvent): void {
+        this.mouseEventElement && this.visible && this.handleOnPressEvent(event.clientX, event.clientY, this.mouseEventElement);
     }
-    handleOnListPress(event: IElmerEvent): void {
-        this.isTouchEvent = true;
-        (<TouchEvent>event.nativeEvent).cancelBubble = true;
-        this.handleOnPressEvent((<TouchEvent>event.nativeEvent).touches[0].clientX, (<TouchEvent>event.nativeEvent).touches[0].clientY, event.target);
-        if(this.visible) {
-            (<TouchEvent>event.nativeEvent).cancelBubble = true;
-            (<TouchEvent>event.nativeEvent).preventDefault();
-            (<TouchEvent>event.nativeEvent).stopPropagation();
-        }
+    handleOnBodyTouchStart(event:TouchEvent): void {
+        this.mouseEventElement && this.visible && this.handleOnPressEvent(event.touches[0].clientX, event.touches[0].clientY, this.mouseEventElement);
     }
-    handleOnListMouseMove(event:IElmerEvent): void {
-        !this.isTouchEvent && this.handleOnMoveEvent((<MouseEvent>event.nativeEvent).clientX, (<MouseEvent>event.nativeEvent).clientY,event.target);
+    handleOnBodyMouseMove(event:MouseEvent): void {
+        this.mouseEventElement && this.visible && this.handleOnMoveEvent(event.clientX, event.clientY, this.mouseEventElement);
     }
-    handleOnListTouchMove(event:IElmerEvent): void {
-        this.handleOnMoveEvent((<TouchEvent>event.nativeEvent).touches[0].clientX, (<TouchEvent>event.nativeEvent).touches[0].clientY,event.target);
+    handleOnBodyTouchMove(event:TouchEvent): void {
+        this.mouseEventElement && this.visible && this.handleOnMoveEvent(event.touches[0].clientX, event.touches[0].clientY, this.mouseEventElement);
     }
-    handleOnListMouseUp(event:MouseEvent,{}:any,target:any): void {
-        !this.isTouchEvent && this.handleOnMoveEndEvent(target);
+    handleOnBodyMouseUp(event:MouseEvent,{}:any,target:any): void {
+        this.mouseEventElement && this.visible &&  this.handleOnMoveEndEvent(target);
     }
-    handleOnListTouchEnd(event:IElmerEvent): void {
-        this.handleOnMoveEndEvent(event.target);
-        if(this.visible) {
-            (<TouchEvent>event.nativeEvent).cancelBubble = true;
-            (<TouchEvent>event.nativeEvent).preventDefault();
-            (<TouchEvent>event.nativeEvent).stopPropagation();
-        }
+    handleOnBodyTouchEnd(event:IElmerEvent): void {
+        this.mouseEventElement && this.visible && this.handleOnMoveEndEvent(event.target);
     }
     private handleOnMoveEndEvent(target:HTMLElement): void {
         this.isPressed = false;
@@ -352,10 +333,11 @@ export class MobileSelector extends Component<MobileSelectProps> {
                     checkedData.push(this.sourceData[i][this.displayIndexs[i]]);
                 }
             }
-            typeof this.props.onChanged === "function" && this.props.onChanged({
+            this.onChangeData = {
                 selectedIndex: this.displayIndexs,
                 selectedItems: checkedData
-            });
+            };
+            typeof this.props.onChange === "function" && this.props.onChange(this.onChangeData);
             offsetTop = null;
             scrollHeight = null;
         }
@@ -369,7 +351,6 @@ export class MobileSelector extends Component<MobileSelectProps> {
             this.scrollTo(this.mouseEventObj.obj, lastY);
             this.mouseEventObj.x = x;
             this.mouseEventObj.y = y;
-            this.toTop = y< mouseY;
             lastY = null;
             mouseY = null;
             offsetY = null;

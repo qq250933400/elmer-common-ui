@@ -21,18 +21,32 @@ export class IndexComponent extends Component {
     constructor(props:any) {
         super(props);
         const listData = [];
+        const sData = [];
         for(let i=0;i<50;i++) {
             listData.push({
                 title: "测试项目" + i,
                 value: "for test item" + i
             });
+            sData.push({
+                title: "第二" + i,
+                value: "second" + i
+            });
         }
         this.listData.push(listData);
+        this.listData.push(sData);
     }
     onMobileSelectClick(): void {
         this.setData({
             showSelect: true
         });
+    }
+    onSelectClose(): void {
+        this.setData({
+            showSelect: false
+        });
+    }
+    onSelectChange(evt:any): void {
+        console.log(evt);
     }
     render():any {
         return  require("./views/index.html");

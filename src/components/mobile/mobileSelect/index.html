@@ -1,21 +1,19 @@
 <div id="{{domID}}" class="eui-mobile-select" et:animationEnd="handleOnMaskAnimationEnd">
     <div et:click="handleOnMaskClick">
         <div et:click="handleOnContentClick"  id="{{contentID}}" class="eui-mobile-select-content">
-            <div class="eui-mobile-select-header">
+            <div class="eui-mobile-select-header" et:touchstart="handleOnSearchTouch">
                 <a et:click="handleOnCancelClick" et:touchstart="handleOnCancelClick" class="eui-mobile-select-cancel" href="javascript:void(0);">{{cancelText}}</a>
                 <span em:show="!this.showSearch" >{{title}}</span>
-                <div class="eui-mobile-select-search" et:touchstart="handleOnSearchTouch">
-                    <input et:touchstart="handleOnSearchInputTouch" et:click="handleOnSearchClick" et:input="handleSearch" et:propertychange="handleSearch" aria-placeholder="{{searchPlaceHolder}}" placeholder="{{searchPlaceHolder}}" em:if="this.showSearch" type="search" />
+                <div class="eui-mobile-select-search">
+                    <input et:click="handleOnSearchClick" et:input="handleSearch" et:propertychange="handleSearch" aria-placeholder="{{searchPlaceHolder}}" placeholder="{{searchPlaceHolder}}" em:if="this.showSearch" type="search" />
                 </div>
                 <a et:click="handleOnOkClick" et:touchstart="handleOnOkClick" class="eui-mobile-select-ok" href="javascript:void(0);">{{okText}}</a>
             </div>
-            <div class="eui-mobile-select-conent-area" passive="{{false}}" et:touchstart="handleOnContentTouchStart" et:touchend="handleOnContentTouchStart">
+            <div class="eui-mobile-select-conent-area" passive="{{false}}" >
                 <div id="{{listID}}"
-                    et:touchmove="handleOnListTouchMove" et:mousemove="handleOnListMouseMove"
-                    et:touchend="handleOnListTouchEnd" et:mouseup="handleOnListMouseUp"
                     passive="{{false}}"
                 >
-                    <ul et:touchstart="handleOnListPress" et:mousedown="handleOnListMouseDown"
+                    <ul et:touchstart="handleOnListMouseDown" et:mousedown="handleOnListMouseDown"
                         data-key="{{index}}"
                         em:for="let listData in this.data"
                         passive="{{false}}"

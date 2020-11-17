@@ -152,7 +152,7 @@ export const createRegionPicker = (options?:IMobileRegionPickerOption): TypeRegi
         obj.data = updateData;
     };
     initData(); // 初始化默认选择内容
-    ui.render(parent, "<eui-mobile-select title='{{config.title}}' defaultValue='{{defaultIndex}}' data='{{data}}' visible='{{visible}}' et:onOk='handleOnOK' et:onClose='handleOnClose' et:onChanged='handleOnChanged'/>", obj);
+    ui.render(parent, "<eui-mobile-select title='{{config.title}}' defaultValue='{{defaultIndex}}' data='{{data}}' visible='{{visible}}' et:onOk='handleOnOK' et:onClose='handleOnClose' et:onChange='handleOnChanged'/>", obj);
     document.body.appendChild(parent);
     return obj;
 };
