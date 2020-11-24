@@ -111,6 +111,19 @@ export class PagerComponent extends Component<PagerProps> {
             this.pageCount =  pageCount;
         }
     }
+    onFirstClick(): void {
+        this.page = 1;
+        this.initData(true);
+        typeof this.props.onChange === "function" && this.props.onChange(this.page, this.pageSize);
+    }
+    onLastClick(): void {
+        const allCount = this.allCount > 0 ? this.allCount : 1;
+        const pageSize = this.pageSize > 0 ? this.pageSize : 10;
+        const pageCount = Math.ceil(allCount / pageSize);
+        this.page = pageCount;
+        this.initData(true);
+        typeof this.props.onChange === "function" && this.props.onChange(this.page, this.pageSize);
+    }
     onChangeItem(evt:IElmerEvent): void {
         const data = evt.data.item;
         if (!isNaN(data.value) && this.page !== data.value) {
