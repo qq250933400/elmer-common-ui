@@ -54,9 +54,9 @@ export class TabBar extends Component {
         this.index = index;
     }
     handleOnTabClick(evt: IElmerEvent): void {
-        const beforeResult = typeof this.props.onBeforeChange === "function" ? this.props.onBeforeChange() : undefined;
+        const index = evt.data.myTabTitle.key;
+        const beforeResult = typeof this.props.onBeforeChange === "function" ? this.props.onBeforeChange(index) : undefined;
         if(beforeResult === undefined || beforeResult) {
-            const index = evt.data.myTabTitle.key;
             this.setData({
                 currentIndex: index
             }, true);
