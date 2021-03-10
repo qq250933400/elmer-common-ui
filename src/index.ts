@@ -12,6 +12,9 @@ import "./style/icon/less/font-awesome.less";
 // window.onload = ()=> {
 //     const ui = new ElmerUI();
 //     const indexData = {
+//         onCheck(): void {
+//             console.log("Haha");
+//         }
 //     };
 //     let wResizeListen = new WindowResizeListen();
 //     let htmlCode = require("./app/views/router.html");

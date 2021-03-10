@@ -48,6 +48,9 @@ export class IndexComponent extends Component {
     onSelectChange(evt:any): void {
         console.log(evt);
     }
+    onCheck(): void {
+        console.log("Haha");
+    }
     render():any {
         return  require("./views/index.html");
     }

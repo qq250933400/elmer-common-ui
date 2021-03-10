@@ -13,5 +13,8 @@
                 "modules": "commonjs"
             }
         ]
+    ],
+    "plugins": [
+        "transform-class-properties"
     ]
 }

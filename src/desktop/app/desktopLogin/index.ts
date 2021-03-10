@@ -12,7 +12,7 @@ export class DesktopLogin extends Component {
     onAfterLogin(resp:any): Promise<any> {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve();
+                resolve({});
             }, 3200);
         });
     }

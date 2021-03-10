@@ -17,6 +17,7 @@ import "./tabBar";
 import "./table/table";
 import "./treeView";
 import "./Upload";
+import "./radio";
 
 export * from "./dialog";
 export * from "./loading";
