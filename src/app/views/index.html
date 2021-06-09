@@ -1,5 +1,10 @@
 <eui-button title="手机端下拉框" et:onClick="onMobileSelectClick"/>
 <eui-pager />
-<eui-mobile-select help="{{true}}" et:onChange="onSelectChange" et:onClose="onSelectClose" visible="{{showSelect}}" data="{{listData}}" showSearch="{{true}}"/>
+<eui-mobile-select help="{{true}}" et:onOk="onSelectChange" et:onClose="onSelectClose" visible="{{showSelect}}" data="{{listData}}" showSearch="{{true}}"/>
 <eui-radio et:onChange="onCheck" id="App1" name="Group"><span>none</span></eui-radio>
 <eui-radio id="App2" name="Group"><span>App2</span></eui-radio>
+<div>
+    <label em:for="let item in this.state.selectedItems">
+        <span>{{item.value}}-{{item.label}}</span>
+    </label>
+</div>

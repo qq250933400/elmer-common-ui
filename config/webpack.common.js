@@ -38,7 +38,7 @@ module.exports = {
                 removeComments:true //是否压缩时 去除注释
             }
         }),
-        new ExtractTextWebpackPlugin('css/style[chunkhash:8].css', {
+        new ExtractTextWebpackPlugin('css/style.css', {
             allChunks: false
         }),
         new webpack.DefinePlugin({

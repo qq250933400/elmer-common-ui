@@ -38,8 +38,8 @@ const webpackConfig = merge(common, {
     // 设置出口文件地址与文件名
     output: {
         path: path.resolve('dist'),
-        filename: '[name].[chunkhash:8].bundle.min.js',
-        chunkFilename: '[name].[id].[chunkhash:8].js',
+        filename: '[name].bundle.min.js',
+        chunkFilename: '[name].[id].js',
         publicPath: "",
         globalObject: "this",
     },

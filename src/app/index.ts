@@ -27,13 +27,9 @@ export class IndexComponent extends Component {
                 title: "测试项目" + i,
                 value: "for test item" + i
             });
-            sData.push({
-                title: "第二" + i,
-                value: "second" + i
-            });
         }
         this.listData.push(listData);
-        this.listData.push(sData);
+        // this.listData.push(sData);
     }
     onMobileSelectClick(): void {
         this.setData({
@@ -47,6 +43,9 @@ export class IndexComponent extends Component {
     }
     onSelectChange(evt:any): void {
         console.log(evt);
+        this.setState({
+            selectedItems: evt.selectedItems
+        });
     }
     onCheck(): void {
         console.log("Haha");

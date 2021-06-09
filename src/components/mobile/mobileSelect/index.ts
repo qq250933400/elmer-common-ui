@@ -253,8 +253,8 @@ export class MobileSelector extends Component<MobileSelectProps> {
         this.setVisible();
         const checkedData = [];
         for(let i=0;i<this.displayIndexs.length;i++) {
-            if(this.sourceData[i]) {
-                checkedData.push(this.sourceData[i][this.displayIndexs[i]]);
+            if(this.data[i]) {
+                checkedData.push(this.data[i][this.displayIndexs[i]]);
             }
         }
         typeof this.props.onOk === "function" && this.props.onOk({
@@ -329,8 +329,8 @@ export class MobileSelector extends Component<MobileSelectProps> {
             }
             const checkedData = [];
             for(let i=0;i<this.displayIndexs.length;i++) {
-                if(this.sourceData[i]) {
-                    checkedData.push(this.sourceData[i][this.displayIndexs[i]]);
+                if(this.data[i]) {
+                    checkedData.push(this.data[i][this.displayIndexs[i]]);
                 }
             }
             this.onChangeData = {
@@ -357,13 +357,24 @@ export class MobileSelector extends Component<MobileSelectProps> {
          }
     }
     private handleOnPressEvent(x:number,y:number, target:HTMLElement): void {
-        this.isPressed = true;
-        this.mouseEventObj = {
-            x,
-            y,
-            obj: target,
-            index: parseInt(target.getAttribute("data-key"), 10)
-        };
+        const cLen = target.children.length;
+        if(cLen > 0) {
+            const itemWidth = Math.ceil(target.clientWidth / cLen);
+            let itemIndex = 0;
+            for(let i=0;i<cLen;i++) {
+                if(i*itemWidth <= x && x < (i+1)*itemWidth) {
+                    itemIndex = i;
+                    break;
+                }
+            }
+            this.isPressed = true;
+            this.mouseEventObj = {
+                x,
+                y,
+                obj: target.children[itemIndex] as any,
+                index: itemIndex
+            };
+        }
     }
     private scrollTo(dom:HTMLElement, offsetY: number): void {
         let oldOffsetY = this.$.attr(dom, "offsety");
